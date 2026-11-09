@@ -2,207 +2,299 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>Evaluacion Integral Policial | 554 Preguntas</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800&family=Source+Sans+3:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 :root{
   --navy:#0a1628;--navy-mid:#132340;--navy-light:#1c3258;
-  --gold:#c9a84c;--gold-bright:#e4c35a;--gold-dim:#8a7234;
-  --neon-green:#39ff14;--neon-green-soft:#00e676;
-  --green:#27ae60;--green-dark:#1e8449;
-  --neon-red:#ff1744;--neon-red-soft:#ff5252;
-  --red:#c0392b;--red-dark:#922b21;
-  --white:#fff;--gray-50:#f8f9fa;--gray-100:#eef0f2;
-  --gray-200:#dde1e6;--gray-300:#bcc3cc;--gray-500:#6c757d;
-  --gray-700:#3d4654;--gray-900:#1a1e26;
-  --r:6px;
+  --gold:#c9a84c;--gold-b:#e4c35a;--gold-d:#8a7234;
+  --ng:#39ff14;--ng2:#00e676;
+  --green:#27ae60;--gd:#1e8449;
+  --nr:#ff1744;--nr2:#ff5252;
+  --red:#c0392b;--rd:#922b21;
+  --w:#fff;--g50:#f8f9fa;--g100:#eef0f2;
+  --g200:#dde1e6;--g300:#bcc3cc;--g500:#6c757d;
+  --g700:#3d4654;--g900:#1a1e26;
+  --r:8px;
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
 }
-*{margin:0;padding:0;box-sizing:border-box;}
-html,body{height:100%;overflow:hidden;}
-body{font-family:'Source Sans 3','Segoe UI',sans-serif;background:var(--gray-100);color:var(--gray-900);display:flex;flex-direction:column;}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+html{height:100%;}
+body{font-family:'Source Sans 3','Segoe UI',sans-serif;background:var(--g100);
+  color:var(--g900);display:flex;flex-direction:column;height:100%;
+  overflow:hidden;}
 
-/* HEADER */
-.hdr{background:linear-gradient(135deg,var(--navy) 0%,var(--navy-mid) 60%,var(--navy-light) 100%);
+/* ── HEADER ── */
+.hdr{background:linear-gradient(135deg,var(--navy),var(--navy-mid) 60%,var(--navy-light));
   color:#fff;display:flex;align-items:center;justify-content:space-between;
-  padding:0 20px;height:54px;flex-shrink:0;box-shadow:0 3px 12px rgba(0,0,0,.3);position:relative;z-index:20;}
+  padding:0 16px;height:52px;flex-shrink:0;
+  box-shadow:0 3px 12px rgba(0,0,0,.35);position:relative;z-index:20;}
 .hdr::after{content:'';position:absolute;bottom:0;left:0;right:0;height:3px;
-  background:linear-gradient(90deg,var(--gold),var(--gold-bright),var(--gold));}
-.hbrand{display:flex;align-items:center;gap:12px;}
-.hshield{font-size:28px;}
-.htitle{font-family:'Barlow Condensed','Impact',sans-serif;font-size:20px;font-weight:700;letter-spacing:2px;text-transform:uppercase;}
-.hsub{font-size:11px;opacity:.7;letter-spacing:1px;text-transform:uppercase;}
-.hctrl{display:flex;gap:6px;align-items:center;}
-.hbtn{background:rgba(255,255,255,.08);border:1px solid rgba(201,168,76,.3);color:var(--gold-bright);
-  padding:5px 12px;border-radius:var(--r);cursor:pointer;font-size:11px;font-weight:600;
-  letter-spacing:.4px;transition:all .2s;text-transform:uppercase;}
-.hbtn:hover{background:rgba(201,168,76,.15);border-color:var(--gold);}
-.hmenu{font-size:24px;cursor:pointer;padding:4px 8px;color:var(--gold-bright);user-select:none;}
+  background:linear-gradient(90deg,var(--gold),var(--gold-b),var(--gold));}
+.hbrand{display:flex;align-items:center;gap:10px;min-width:0;}
+.htitle{font-family:'Barlow Condensed',sans-serif;font-size:18px;font-weight:700;
+  letter-spacing:1.5px;text-transform:uppercase;white-space:nowrap;}
+.hsub{font-size:10px;opacity:.65;letter-spacing:.8px;text-transform:uppercase;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:220px;}
+.hctrl{display:flex;gap:4px;align-items:center;flex-shrink:0;}
+.hbtn{background:rgba(255,255,255,.1);border:1px solid rgba(201,168,76,.4);
+  color:var(--gold-b);padding:5px 10px;border-radius:6px;cursor:pointer;
+  font-size:11px;font-weight:600;letter-spacing:.3px;transition:all .2s;
+  text-transform:uppercase;white-space:nowrap;}
+.hbtn:hover{background:rgba(201,168,76,.2);}
+.hmenu{font-size:22px;cursor:pointer;padding:4px 6px;color:var(--gold-b);
+  user-select:none;line-height:1;}
 
-/* STATS */
-.stats{background:#fff;border-bottom:1px solid var(--gray-200);
-  display:flex;justify-content:center;gap:36px;padding:9px 24px;flex-shrink:0;
-  box-shadow:0 1px 3px rgba(0,0,0,.1);}
-.stat{text-align:center;}
-.sv{font-family:'Barlow Condensed',sans-serif;font-size:22px;font-weight:700;line-height:1;}
-.sv.vq{color:var(--navy);} .sv.vok{color:var(--green);} .sv.vfail{color:var(--red);} .sv.vpts{color:var(--gold-dim);}
-.sl{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:1.5px;color:var(--gray-500);margin-top:2px;}
+/* ── STATS BAR ── */
+.stats{background:#fff;border-bottom:1px solid var(--g200);
+  display:flex;justify-content:center;gap:0;flex-shrink:0;}
+.stat{text-align:center;padding:8px 16px;border-right:1px solid var(--g100);flex:1;
+  max-width:120px;}
+.stat:last-child{border-right:none;}
+.sv{font-family:'Barlow Condensed',sans-serif;font-size:20px;font-weight:700;line-height:1;}
+.sv.vq{color:var(--navy);} .sv.vok{color:var(--green);}
+.sv.vfail{color:var(--red);} .sv.vpts{color:var(--gold-d);}
+.sl{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:1px;
+  color:var(--g500);margin-top:1px;}
 
-/* MAIN */
+/* ── MAIN CONTAINER ── */
 .main{flex:1;display:flex;overflow:hidden;position:relative;}
 
-/* HOME */
-.homescreen{flex:1;overflow-y:auto;padding:32px;background:var(--gray-100);display:flex;flex-direction:column;align-items:center;gap:24px;}
+/* ── HOME SCREEN ── */
+.homescreen{flex:1;overflow-y:auto;padding:20px 16px 32px;background:var(--g100);
+  display:flex;flex-direction:column;align-items:center;gap:20px;}
 .homescreen.hidden{display:none;}
-.home-title{font-family:'Barlow Condensed',sans-serif;font-size:28px;font-weight:800;color:var(--navy);text-align:center;letter-spacing:1px;text-transform:uppercase;}
-.home-sub{font-size:14px;color:var(--gray-500);text-align:center;max-width:600px;line-height:1.6;}
-.home-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;width:100%;max-width:900px;}
-.home-card{background:#fff;border-radius:12px;padding:28px 24px;cursor:pointer;
-  transition:all .25s;border:2px solid var(--gray-200);text-align:center;
-  box-shadow:0 2px 8px rgba(0,0,0,.08);}
-.home-card:hover{transform:translateY(-4px);box-shadow:0 8px 24px rgba(0,0,0,.14);border-color:var(--gold);}
+.home-title{font-family:'Barlow Condensed',sans-serif;font-size:24px;font-weight:800;
+  color:var(--navy);text-align:center;letter-spacing:1px;text-transform:uppercase;}
+.home-sub{font-size:13px;color:var(--g500);text-align:center;line-height:1.5;}
+.home-cards{display:grid;grid-template-columns:1fr 1fr;gap:12px;width:100%;max-width:800px;}
+.home-card{background:#fff;border-radius:12px;padding:20px 14px;cursor:pointer;
+  transition:all .2s;border:2px solid var(--g200);text-align:center;
+  box-shadow:0 2px 8px rgba(0,0,0,.07);active-color:var(--navy);}
+.home-card:active{transform:scale(.97);}
+.home-card:hover{transform:translateY(-3px);box-shadow:0 6px 20px rgba(0,0,0,.12);border-color:var(--gold);}
 .home-card.featured{border-color:var(--gold);background:linear-gradient(135deg,#fffdf0,#fff9e6);}
-.hcard-icon{font-size:48px;margin-bottom:12px;}
-.hcard-title{font-family:'Barlow Condensed',sans-serif;font-size:20px;font-weight:800;color:var(--navy);text-transform:uppercase;letter-spacing:1px;margin-bottom:6px;}
-.hcard-desc{font-size:13px;color:var(--gray-500);line-height:1.5;margin-bottom:12px;}
-.hcard-badge{display:inline-block;padding:4px 12px;border-radius:20px;font-size:12px;font-weight:700;background:var(--navy);color:var(--gold-bright);}
-.topic-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;width:100%;max-width:900px;}
-.tbtn{background:#fff;border:2px solid;border-radius:10px;padding:16px 20px;cursor:pointer;
-  transition:all .2s;display:flex;align-items:center;gap:12px;text-align:left;
-  box-shadow:0 2px 6px rgba(0,0,0,.07);}
-.tbtn:hover{transform:translateY(-2px);box-shadow:0 6px 16px rgba(0,0,0,.12);}
-.tbtn-icon{font-size:28px;flex-shrink:0;}
-.tbtn-name{font-family:'Barlow Condensed',sans-serif;font-size:16px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;flex:1;}
-.tbtn-count{font-size:11px;color:var(--gray-500);font-weight:600;}
+.hcard-icon{font-size:36px;margin-bottom:8px;}
+.hcard-title{font-family:'Barlow Condensed',sans-serif;font-size:17px;font-weight:800;
+  color:var(--navy);text-transform:uppercase;letter-spacing:.8px;margin-bottom:5px;}
+.hcard-desc{font-size:11px;color:var(--g500);line-height:1.4;margin-bottom:10px;}
+.hcard-badge{display:inline-block;padding:3px 10px;border-radius:16px;font-size:11px;
+  font-weight:700;background:var(--navy);color:var(--gold-b);}
 
-/* QUESTION */
+/* TOPIC GRID 2x2 */
+.topic-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;width:100%;max-width:800px;}
+.tbtn{background:#fff;border:2px solid;border-radius:10px;padding:14px 12px;cursor:pointer;
+  transition:all .2s;display:flex;align-items:center;gap:10px;text-align:left;
+  box-shadow:0 2px 6px rgba(0,0,0,.06);}
+.tbtn:active{transform:scale(.97);}
+.tbtn-icon{font-size:24px;flex-shrink:0;}
+.tbtn-name{font-family:'Barlow Condensed',sans-serif;font-size:14px;font-weight:700;
+  text-transform:uppercase;letter-spacing:.4px;flex:1;line-height:1.2;}
+.tbtn-count{font-size:10px;color:var(--g500);font-weight:600;white-space:nowrap;}
+
+/* BANCO button on home */
+.banco-btn{width:100%;max-width:800px;background:#fff;border:2px solid var(--navy);
+  border-radius:10px;padding:14px 20px;cursor:pointer;display:flex;align-items:center;
+  gap:12px;transition:all .2s;box-shadow:0 2px 6px rgba(0,0,0,.07);}
+.banco-btn:active{transform:scale(.98);}
+.banco-btn-text{font-family:'Barlow Condensed',sans-serif;font-size:16px;font-weight:700;
+  color:var(--navy);text-transform:uppercase;letter-spacing:.5px;}
+.banco-btn-sub{font-size:12px;color:var(--g500);}
+
+/* ── QUESTION WRAPPER ── */
 .qwrap{flex:1;display:flex;flex-direction:column;overflow:hidden;}
 .qwrap.hidden{display:none;}
-.qmode-label{background:var(--navy-mid);color:var(--gold-bright);padding:7px 20px;
-  font-family:'Barlow Condensed',sans-serif;font-size:13px;font-weight:700;letter-spacing:1px;text-transform:uppercase;
-  display:flex;align-items:center;justify-content:space-between;flex-shrink:0;}
-.progbar{padding:5px 20px;background:var(--gray-50);border-bottom:1px solid var(--gray-200);flex-shrink:0;}
-.progbar-inner{height:7px;background:var(--gray-200);border-radius:4px;overflow:hidden;}
-.progbar-fill{height:100%;background:linear-gradient(90deg,var(--neon-green-soft),var(--neon-green));border-radius:4px;transition:width .4s ease;}
-.prog-label{font-size:11px;color:var(--gray-500);font-weight:600;margin-bottom:4px;text-align:right;}
-.qpanel{flex:1;display:flex;flex-direction:column;padding:16px;overflow-y:auto;background:var(--gray-100);}
-.qcard{background:#fff;border:1px solid var(--gray-200);border-radius:10px;
-  flex:1;display:flex;flex-direction:column;box-shadow:0 4px 12px rgba(0,0,0,.12);
+.qmode-bar{background:var(--navy-mid);color:var(--gold-b);padding:8px 16px;
+  font-family:'Barlow Condensed',sans-serif;font-size:12px;font-weight:700;
+  letter-spacing:.8px;text-transform:uppercase;display:flex;justify-content:space-between;
+  align-items:center;flex-shrink:0;}
+.progbar{padding:5px 16px;background:var(--g50);border-bottom:1px solid var(--g200);
+  flex-shrink:0;}
+.progbar-inner{height:6px;background:var(--g200);border-radius:3px;overflow:hidden;}
+.progbar-fill{height:100%;background:linear-gradient(90deg,var(--ng2),var(--ng));
+  border-radius:3px;transition:width .4s;}
+.prog-lbl{font-size:10px;color:var(--g500);font-weight:600;margin-bottom:3px;text-align:right;}
+.qpanel{flex:1;overflow-y:auto;padding:12px;-webkit-overflow-scrolling:touch;}
+.qcard{background:#fff;border:1px solid var(--g200);border-radius:10px;
+  display:flex;flex-direction:column;box-shadow:0 3px 10px rgba(0,0,0,.1);
   overflow:hidden;position:relative;}
-.qsrc{padding:6px 20px;background:var(--gray-50);border-bottom:1px solid var(--gray-200);
-  font-size:11px;font-weight:600;color:var(--gray-500);text-transform:uppercase;letter-spacing:1px;
-  display:flex;align-items:center;gap:10px;}
-.qtopicbadge{padding:2px 10px;border-radius:10px;font-size:10px;font-weight:700;
-  letter-spacing:.5px;text-transform:uppercase;color:#fff;}
-.qtext{padding:22px 26px;font-size:15.5px;line-height:1.75;color:var(--gray-900);
-  flex-shrink:0;border-bottom:2px solid var(--gold);}
-.qopts{padding:14px 26px 20px;flex:1;overflow-y:auto;}
+.qsrc{padding:5px 14px;background:var(--g50);border-bottom:1px solid var(--g200);
+  font-size:10px;font-weight:700;color:var(--g500);text-transform:uppercase;
+  letter-spacing:.8px;display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
+.qtbadge{padding:2px 8px;border-radius:8px;font-size:9px;font-weight:700;
+  text-transform:uppercase;color:#fff;white-space:nowrap;}
+.qtext{padding:16px 16px 12px;font-size:15px;line-height:1.65;color:var(--g900);
+  border-bottom:2px solid var(--gold);}
+.qopts{padding:12px 12px 16px;}
 
-/* OPTIONS - click to auto-answer */
-.opt{display:flex;align-items:flex-start;gap:12px;padding:13px 16px;margin-bottom:9px;
-  cursor:pointer;border-radius:8px;transition:all .2s;border:2px solid var(--gray-200);background:#fff;}
-.opt:hover:not(.answered){background:#f0f4ff;border-color:var(--navy-light);transform:translateX(3px);}
-.opt.selected{background:#e8eef8;border-color:var(--navy);}
-.opt.correct{background:#e1ffe1;border-color:var(--neon-green-soft);box-shadow:0 0 18px rgba(57,255,20,.35);cursor:default;}
-.opt.incorrect{background:#ffe1e1;border-color:var(--neon-red-soft);box-shadow:0 0 18px rgba(255,23,68,.35);cursor:default;}
-.opt.wascorrect{background:#e1ffe1;border-color:var(--neon-green-soft);opacity:.8;cursor:default;}
+/* OPTIONS - big tap targets for mobile */
+.opt{display:flex;align-items:flex-start;gap:10px;padding:14px 14px;margin-bottom:8px;
+  cursor:pointer;border-radius:10px;transition:all .18s;
+  border:2px solid var(--g200);background:#fff;
+  min-height:52px;-webkit-tap-highlight-color:transparent;}
+.opt:active:not(.answered){transform:scale(.98);background:#f0f4ff;}
+.opt:hover:not(.answered){background:#f0f4ff;border-color:var(--navy-light);}
+.opt.correct{background:#e1ffe1;border-color:var(--ng2);
+  box-shadow:0 0 16px rgba(57,255,20,.3);cursor:default;}
+.opt.incorrect{background:#ffe1e1;border-color:var(--nr2);
+  box-shadow:0 0 16px rgba(255,23,68,.3);cursor:default;}
+.opt.wascorrect{background:#e1ffe1;border-color:var(--ng2);opacity:.8;cursor:default;}
 .opt.answered{cursor:default;}
-.ocirc{width:24px;height:24px;border:2px solid var(--gray-300);border-radius:50%;
+.ocirc{width:26px;height:26px;border:2px solid var(--g300);border-radius:50%;
   flex-shrink:0;margin-top:1px;display:flex;align-items:center;justify-content:center;
-  transition:all .2s;font-size:13px;font-weight:700;color:#fff;}
-.opt.selected .ocirc{border-color:var(--navy);background:var(--navy);}
-.opt.correct .ocirc{border-color:var(--neon-green-soft);background:var(--neon-green-soft);}
+  font-size:14px;font-weight:700;color:#fff;transition:all .18s;}
+.opt.correct .ocirc{background:var(--ng2);border-color:var(--ng2);}
 .opt.correct .ocirc::after{content:'\2713';}
-.opt.incorrect .ocirc{border-color:var(--neon-red-soft);background:var(--neon-red-soft);}
+.opt.incorrect .ocirc{background:var(--nr2);border-color:var(--nr2);}
 .opt.incorrect .ocirc::after{content:'\2717';}
-.opt.wascorrect .ocirc{border-color:var(--neon-green-soft);background:var(--neon-green-soft);}
+.opt.wascorrect .ocirc{background:var(--ng2);border-color:var(--ng2);}
 .opt.wascorrect .ocirc::after{content:'\2713';}
-.otxt{font-size:14px;line-height:1.5;color:var(--gray-700);}
-.opt.selected .otxt{color:var(--navy);font-weight:600;}
-.opt.correct .otxt{color:var(--green-dark);font-weight:700;}
-.opt.incorrect .otxt{color:var(--red-dark);font-weight:600;text-decoration:line-through;}
-.opt.wascorrect .otxt{color:var(--green-dark);font-weight:600;}
+.otxt{font-size:14px;line-height:1.45;color:var(--g700);flex:1;}
+.opt.correct .otxt{color:var(--gd);font-weight:700;}
+.opt.incorrect .otxt{color:var(--rd);font-weight:600;text-decoration:line-through;}
+.opt.wascorrect .otxt{color:var(--gd);font-weight:600;}
 
 /* RESULT OVERLAY */
 .roverlay{display:none;position:absolute;inset:0;z-index:5;
-  justify-content:center;align-items:center;flex-direction:column;animation:rpop .4s ease;}
+  justify-content:center;align-items:center;flex-direction:column;
+  animation:rpop .35s ease;}
 .roverlay.show{display:flex;}
-.roverlay.rcorrect{background:radial-gradient(circle,rgba(57,255,20,.22) 0%,rgba(0,230,118,.12) 70%,transparent 100%);}
-.roverlay.rincorrect{background:radial-gradient(circle,rgba(255,23,68,.18) 0%,rgba(255,82,82,.09) 70%,transparent 100%);}
-@keyframes rpop{0%{opacity:0;transform:scale(.4)} 60%{transform:scale(1.09)} 100%{opacity:1;transform:scale(1)}}
-.rico{font-size:92px;margin-bottom:8px;animation:bounce .55s ease;}
-@keyframes bounce{0%{transform:translateY(-30px);opacity:0} 55%{transform:translateY(10px)} 75%{transform:translateY(-6px)} 100%{transform:translateY(0);opacity:1}}
-.rtxt{font-family:'Barlow Condensed',sans-serif;font-size:48px;font-weight:800;letter-spacing:4px;text-transform:uppercase;animation:glow 1.5s ease infinite alternate;}
-.rtxt.rg{color:var(--neon-green);}
-.rtxt.rr{color:var(--neon-red);}
-@keyframes glow{from{text-shadow:0 0 10px currentColor,0 0 20px currentColor} to{text-shadow:0 0 28px currentColor,0 0 55px currentColor,0 0 90px currentColor}}
-.rsub{font-family:'Barlow Condensed',sans-serif;font-size:17px;font-weight:600;color:var(--gray-500);margin-top:8px;letter-spacing:1px;}
+.roverlay.rcorrect{background:radial-gradient(circle,rgba(57,255,20,.22) 0%,rgba(0,230,118,.12) 70%,transparent);}
+.roverlay.rincorrect{background:radial-gradient(circle,rgba(255,23,68,.2) 0%,rgba(255,82,82,.1) 70%,transparent);}
+@keyframes rpop{0%{opacity:0;transform:scale(.4)} 60%{transform:scale(1.07)} 100%{opacity:1;transform:scale(1)}}
+.rico{font-size:80px;margin-bottom:6px;animation:bounce .5s ease;}
+@keyframes bounce{0%{transform:translateY(-25px);opacity:0} 55%{transform:translateY(8px)} 75%{transform:translateY(-5px)} 100%{transform:translateY(0);opacity:1}}
+.rtxt{font-family:'Barlow Condensed',sans-serif;font-size:42px;font-weight:800;
+  letter-spacing:4px;text-transform:uppercase;animation:glow 1.5s ease infinite alternate;}
+.rtxt.rg{color:var(--ng);}
+.rtxt.rr{color:var(--nr);}
+@keyframes glow{from{text-shadow:0 0 10px currentColor,0 0 20px currentColor}
+  to{text-shadow:0 0 25px currentColor,0 0 50px currentColor,0 0 80px currentColor}}
+.rsub{font-family:'Barlow Condensed',sans-serif;font-size:15px;font-weight:600;
+  color:var(--g500);margin-top:6px;letter-spacing:1px;}
 .cbox{position:absolute;inset:0;overflow:hidden;pointer-events:none;z-index:6;}
-.conf{position:absolute;width:10px;height:10px;top:-10px;animation:cfall 2s ease-in forwards;}
-@keyframes cfall{0%{transform:translateY(0) rotate(0deg);opacity:1} 100%{transform:translateY(110vh) rotate(720deg);opacity:0}}
+.conf{position:absolute;width:9px;height:9px;top:-10px;animation:cfall 2s ease-in forwards;}
+@keyframes cfall{0%{transform:translateY(0) rotate(0deg);opacity:1}
+  100%{transform:translateY(110vh) rotate(720deg);opacity:0}}
 
-/* BOTTOM NAV */
-.bottom{background:#fff;padding:11px 24px;
-  display:flex;justify-content:center;align-items:center;gap:14px;
-  border-top:1px solid var(--gray-200);flex-shrink:0;
-  box-shadow:0 -2px 8px rgba(0,0,0,.06);}
-.btn{padding:10px 24px;font-family:'Barlow Condensed',sans-serif;font-size:16px;font-weight:600;letter-spacing:.8px;
-  text-transform:uppercase;border:2px solid var(--gray-200);border-radius:var(--r);
-  cursor:pointer;transition:all .2s;background:#fff;color:var(--gray-700);}
-.btn:hover{transform:translateY(-2px);box-shadow:0 4px 12px rgba(0,0,0,.12);}
-.btnnav{padding:10px 14px;font-size:19px;color:var(--navy);}
-.btnhome{background:var(--gray-50);border-color:var(--gray-300);color:var(--gray-700);font-size:13px;padding:8px 16px;}
-.btnres{background:var(--navy);color:var(--gold-bright);border-color:var(--navy);}
+/* ── BOTTOM NAV (mobile friendly) ── */
+.bottom{background:#fff;padding:10px 12px;padding-bottom:calc(10px + var(--safe-bottom));
+  display:flex;justify-content:center;align-items:center;gap:8px;
+  border-top:2px solid var(--g200);flex-shrink:0;
+  box-shadow:0 -3px 12px rgba(0,0,0,.08);}
+.btn{font-family:'Barlow Condensed',sans-serif;font-size:15px;font-weight:700;
+  letter-spacing:.5px;text-transform:uppercase;border:2px solid var(--g200);
+  border-radius:8px;cursor:pointer;transition:all .18s;background:#fff;
+  color:var(--g700);padding:11px 16px;min-height:46px;display:flex;
+  align-items:center;justify-content:center;gap:5px;}
+.btn:active{transform:scale(.96);}
+.btnnav{padding:11px 18px;font-size:18px;color:var(--navy);flex-shrink:0;}
+.btnhome{background:var(--g50);border-color:var(--g300);color:var(--g700);
+  padding:11px 14px;flex-shrink:0;}
+.btnres{background:var(--navy);color:var(--gold-b);border-color:var(--navy);flex:1;max-width:180px;}
 
-/* SIDEBAR */
-.sidebar{width:200px;background:#fff;border-left:3px solid var(--navy);
+/* ── SIDEBAR ── */
+.sidebar{width:190px;background:#fff;border-left:3px solid var(--navy);
   display:flex;flex-direction:column;flex-shrink:0;
-  transition:margin-right .3s cubic-bezier(.4,0,.2,1);z-index:10;
-  box-shadow:-4px 0 16px rgba(0,0,0,.08);}
-.sidebar.collapsed{margin-right:-200px;}
-.sbhead{background:var(--navy);color:var(--gold-bright);padding:10px 14px;
-  font-family:'Barlow Condensed',sans-serif;font-size:14px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;
-  display:flex;justify-content:space-between;align-items:center;flex-shrink:0;cursor:default;}
-.sbbody{flex:1;overflow-y:auto;}
-.sbi{padding:7px 12px;font-size:12px;cursor:pointer;border-bottom:1px solid var(--gray-100);
-  transition:all .15s;display:flex;justify-content:space-between;align-items:center;color:var(--gray-700);}
-.sbi:hover{background:var(--gray-50);}
+  transition:margin-right .28s cubic-bezier(.4,0,.2,1);z-index:10;
+  box-shadow:-4px 0 16px rgba(0,0,0,.1);}
+.sidebar.collapsed{margin-right:-190px;}
+.sbhead{background:var(--navy);color:var(--gold-b);padding:10px 12px;
+  font-family:'Barlow Condensed',sans-serif;font-size:13px;font-weight:700;
+  letter-spacing:1.2px;text-transform:uppercase;
+  display:flex;justify-content:space-between;align-items:center;flex-shrink:0;}
+.sbbody{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;}
+.sbi{padding:9px 12px;font-size:12px;cursor:pointer;
+  border-bottom:1px solid var(--g100);transition:all .15s;
+  display:flex;justify-content:space-between;align-items:center;color:var(--g700);}
+.sbi:active{background:var(--g50);}
 .sbi.active{background:#e8eef8;color:var(--navy);font-weight:700;border-left:3px solid var(--gold);}
 .sbi.ok{background:#d4ffd4;color:#0a6b2e;}
 .sbi.fail{background:#ffd4d4;color:#8b1a1a;}
-.sbico{font-size:11px;font-weight:700;}
-.toggle{position:absolute;right:200px;top:50%;transform:translateY(-50%);
-  width:22px;height:48px;background:var(--navy);color:var(--gold-bright);
+.sbico{font-size:12px;font-weight:700;}
+.toggle{position:absolute;right:190px;top:50%;transform:translateY(-50%);
+  width:22px;height:48px;background:var(--navy);color:var(--gold-b);
   display:flex;align-items:center;justify-content:center;
   cursor:pointer;border-radius:8px 0 0 8px;font-size:12px;z-index:11;
-  transition:right .3s cubic-bezier(.4,0,.2,1);user-select:none;}
+  transition:right .28s cubic-bezier(.4,0,.2,1);}
 .toggle.collapsed{right:0;}
 
-/* MODAL */
+/* ── BANCO DE PREGUNTAS ── */
+.banco{flex:1;display:flex;flex-direction:column;overflow:hidden;}
+.banco.hidden{display:none;}
+.banco-top{background:#fff;padding:12px 16px;border-bottom:2px solid var(--g200);
+  flex-shrink:0;display:flex;flex-direction:column;gap:10px;}
+.banco-title{font-family:'Barlow Condensed',sans-serif;font-size:18px;font-weight:800;
+  color:var(--navy);text-transform:uppercase;letter-spacing:1px;}
+.banco-search{display:flex;gap:8px;}
+.search-inp{flex:1;padding:10px 14px;border:2px solid var(--g200);border-radius:8px;
+  font-size:14px;font-family:'Source Sans 3',sans-serif;outline:none;
+  transition:border-color .2s;}
+.search-inp:focus{border-color:var(--navy);}
+.banco-filters{display:flex;gap:6px;overflow-x:auto;padding-bottom:2px;}
+.bfilter{padding:5px 12px;border-radius:16px;font-size:11px;font-weight:700;
+  border:2px solid var(--g200);background:#fff;cursor:pointer;white-space:nowrap;
+  transition:all .2s;text-transform:uppercase;letter-spacing:.4px;}
+.bfilter.active{color:#fff;border-color:transparent;}
+.banco-list{flex:1;overflow-y:auto;padding:12px;-webkit-overflow-scrolling:touch;}
+.bq{background:#fff;border-radius:10px;padding:14px;margin-bottom:10px;
+  border-left:4px solid var(--g300);box-shadow:0 1px 4px rgba(0,0,0,.07);}
+.bq-num{font-size:10px;font-weight:700;color:var(--g500);text-transform:uppercase;
+  letter-spacing:.8px;margin-bottom:4px;}
+.bq-topic{display:inline-block;padding:2px 8px;border-radius:6px;font-size:9px;
+  font-weight:700;color:#fff;text-transform:uppercase;margin-left:6px;}
+.bq-text{font-size:13.5px;color:var(--g900);line-height:1.5;margin-bottom:8px;font-weight:500;}
+.bq-answer{font-size:12.5px;line-height:1.4;padding:8px 12px;border-radius:6px;
+  display:flex;align-items:flex-start;gap:7px;}
+.bq-answer.correct{background:#e1ffe1;color:var(--gd);}
+.bq-chk{font-weight:700;font-size:14px;flex-shrink:0;margin-top:1px;}
+.bq-opts{margin-top:6px;}
+.bq-opt{font-size:12px;color:var(--g700);padding:2px 0;display:flex;gap:6px;}
+.bq-opt.cor{color:var(--gd);font-weight:700;}
+.bq-opt-lbl{font-size:11px;font-weight:700;width:16px;flex-shrink:0;}
+.banco-count{text-align:center;font-size:12px;color:var(--g500);padding:6px;}
+
+/* ── MODAL ── */
 .moverlay{display:none;position:fixed;inset:0;background:rgba(10,22,40,.8);
   z-index:100;justify-content:center;align-items:center;backdrop-filter:blur(4px);}
 .moverlay.show{display:flex;}
-.modal{background:#fff;border-radius:16px;padding:36px 44px;max-width:520px;width:92%;
-  text-align:center;box-shadow:0 8px 32px rgba(0,0,0,.2);border-top:4px solid var(--gold);}
-.modal h2{font-family:'Barlow Condensed',sans-serif;font-size:22px;font-weight:700;color:var(--navy);margin-bottom:16px;text-transform:uppercase;letter-spacing:1px;}
-.bscore{font-family:'Barlow Condensed',sans-serif;font-size:64px;font-weight:800;margin:14px 0;line-height:1;}
+.modal{background:#fff;border-radius:16px;padding:28px 24px;max-width:480px;width:92%;
+  text-align:center;box-shadow:0 8px 32px rgba(0,0,0,.2);border-top:4px solid var(--gold);
+  max-height:88vh;overflow-y:auto;}
+.modal h2{font-family:'Barlow Condensed',sans-serif;font-size:20px;font-weight:700;
+  color:var(--navy);margin-bottom:14px;text-transform:uppercase;letter-spacing:1px;}
+.bscore{font-family:'Barlow Condensed',sans-serif;font-size:60px;font-weight:800;
+  margin:12px 0;line-height:1;}
 .bscore.pass{color:var(--green);} .bscore.fail{color:var(--red);}
-.modal p{font-size:14px;color:var(--gray-500);margin:5px 0;}
-.modal .btn{margin:8px 5px 0;}
-.topic-results{margin:12px 0;text-align:left;}
+.modal p{font-size:13px;color:var(--g500);margin:4px 0;}
+.modal .btn{margin:7px 4px 0;}
+.topic-results{margin:10px 0;text-align:left;}
 .topic-row{display:flex;justify-content:space-between;align-items:center;
-  padding:6px 12px;border-radius:6px;margin-bottom:4px;font-size:13px;}
-.topic-row span:first-child{font-weight:600;}
+  padding:6px 10px;border-radius:6px;margin-bottom:3px;font-size:12px;}
 
-@media(max-width:768px){
+/* ── RESPONSIVE ── */
+@media(max-width:480px){
+  .home-cards{grid-template-columns:1fr;}
+  .topic-grid{grid-template-columns:1fr;}
+  .htitle{font-size:15px;letter-spacing:1px;}
+  .hsub{display:none;}
+  .hbtn{font-size:10px;padding:4px 8px;}
+  .stat{padding:7px 10px;}
+  .sv{font-size:18px;}
+  .sl{font-size:8px;}
+  .rtxt{font-size:34px;}
+  .rico{font-size:66px;}
   .sidebar{width:170px;}.sidebar.collapsed{margin-right:-170px;}
   .toggle{right:170px;}.toggle.collapsed{right:0;}
-  .stats{gap:14px;padding:7px 10px;}.sv{font-size:17px;}
-  .qtext{padding:14px 16px;font-size:14px;}
-  .rtxt{font-size:30px;}.rico{font-size:60px;}
-  .topic-grid{grid-template-columns:1fr;}
-  .home-cards{grid-template-columns:1fr;}
+  .banco-filters{gap:4px;}
+  .bfilter{font-size:10px;padding:4px 9px;}
+}
+@media(min-width:769px){
+  .home-cards{grid-template-columns:1fr 1fr;}
+  .topic-grid{grid-template-columns:1fr 1fr;}
+  .qtext{font-size:16px;}
+  .otxt{font-size:15px;}
 }
 </style>
 </head>
@@ -211,24 +303,23 @@ body{font-family:'Source Sans 3','Segoe UI',sans-serif;background:var(--gray-100
 <!-- HEADER -->
 <div class="hdr">
   <div class="hbrand">
-    <span class="hshield">&#x1F6E1;</span>
+    <span style="font-size:26px">&#x1F6E1;</span>
     <div>
       <div class="htitle">Evaluacion Integral Policial</div>
-      <div class="hsub">Mediacion &bull; Mandatorios &bull; Competencias &bull; Estandares &bull; Desarrollado por <strong>GHOST1D</strong></div>
+      <div class="hsub">Mediacion &bull; Mandatorios &bull; Competencias &bull; Desarrollado por <strong>GHOST1D</strong></div>
     </div>
   </div>
   <div class="hctrl">
     <button class="hbtn" id="hbtnhome" onclick="goHome()">&#x1F3E0; Inicio</button>
-    <button class="hbtn" id="hbtnshuffle" onclick="shuffleQs()" style="display:none">&#x1F500; Mezclar</button>
-    <button class="hbtn" id="hbtnreset"   onclick="resetAll()"  style="display:none">&#x21BB; Reiniciar</button>
-    <button class="hbtn" id="hbtnres"     onclick="showResults()" style="display:none">&#x1F4CA; Resultados</button>
+    <button class="hbtn" id="hbtnshuffle" onclick="shuffleQs()" style="display:none">&#x1F500;</button>
+    <button class="hbtn" id="hbtnreset"   onclick="resetAll()"  style="display:none">&#x21BB;</button>
     <span class="hmenu" onclick="toggleSB()">&#x2630;</span>
   </div>
 </div>
 
 <!-- STATS -->
 <div class="stats" id="statsbar" style="display:none">
-  <div class="stat"><div class="sv vq"><span id="scur">1</span> / <span id="stot">0</span></div><div class="sl">Pregunta</div></div>
+  <div class="stat"><div class="sv vq"><span id="scur">1</span>/<span id="stot">0</span></div><div class="sl">Pregunta</div></div>
   <div class="stat"><div class="sv vok" id="sok">0</div><div class="sl">Aciertos</div></div>
   <div class="stat"><div class="sv vfail" id="sfail">0</div><div class="sl">Fallos</div></div>
   <div class="stat"><div class="sv vpts" id="spts">0</div><div class="sl">Puntos</div></div>
@@ -237,29 +328,28 @@ body{font-family:'Source Sans 3','Segoe UI',sans-serif;background:var(--gray-100
 <!-- MAIN -->
 <div class="main">
 
-  <!-- HOME SCREEN -->
+  <!-- HOME -->
   <div class="homescreen" id="homescreen">
     <div class="home-title">&#x1F6E1; Centro de Estudios Policial</div>
-    <div class="home-sub">554 preguntas de los cursos mandatorios &bull; Selecciona el modo de estudio</div>
+    <div class="home-sub">554 preguntas &bull; Cursos mandatorios &bull; Selecciona el modo</div>
+
     <div class="home-cards">
       <div class="home-card featured" onclick="startMode('general')">
         <div class="hcard-icon">&#x1F4DA;</div>
         <div class="hcard-title">Test General</div>
-        <div class="hcard-desc">Todas las preguntas de todos los temas en orden aleatorio. Ideal para repasar todo el material.</div>
+        <div class="hcard-desc">Todas las preguntas aleatorias de todos los temas.</div>
         <span class="hcard-badge">554 preguntas</span>
       </div>
       <div class="home-card" onclick="startMode('final')">
         <div class="hcard-icon">&#x1F3AF;</div>
         <div class="hcard-title">Prueba Final</div>
-        <div class="hcard-desc">Simulacro de examen con 36 preguntas aleatorias: 9 por cada tema. Eval&#xFA;a tu preparaci&#xF3;n total.</div>
-        <span class="hcard-badge" style="background:#c0392b">36 preguntas &bull; 9 por tema</span>
+        <div class="hcard-desc">Simulacro: 36 preguntas, 9 por cada tema.</div>
+        <span class="hcard-badge" style="background:#c0392b">36 pregs &bull; 9/tema</span>
       </div>
     </div>
-    <div style="font-family:'Barlow Condensed',sans-serif;font-size:16px;font-weight:700;color:var(--navy);text-transform:uppercase;letter-spacing:1px;margin-top:8px;">
+
+    <div style="font-family:'Barlow Condensed',sans-serif;font-size:15px;font-weight:700;color:var(--navy);text-transform:uppercase;letter-spacing:.8px;">
       &#x1F4AA; Refuerza un tema espec&#xED;fico
-    </div>
-    <div style="font-size:13px;color:var(--gray-500);margin-top:-12px;margin-bottom:4px;">
-      36 preguntas aleatorias del tema seleccionado
     </div>
     <div class="topic-grid">
       <button class="tbtn" onclick="startTopicMode('Atencion al Ciudadano')" style="border-color:#1565c0;color:#1565c0">
@@ -283,19 +373,28 @@ body{font-family:'Source Sans 3','Segoe UI',sans-serif;background:var(--gray-100
         <span class="tbtn-count">144 pregs.</span>
       </button>
     </div>
+
+    <!-- BANCO button -->
+    <button class="banco-btn" onclick="showBanco()">
+      <span style="font-size:28px">&#x1F4D6;</span>
+      <div>
+        <div class="banco-btn-text">&#x1F50D; Banco de Preguntas</div>
+        <div class="banco-btn-sub">Busca cualquier pregunta con su respuesta correcta</div>
+      </div>
+    </button>
   </div>
 
   <!-- QUESTION WRAPPER -->
   <div class="qwrap hidden" id="qwrap">
-    <div class="qmode-label">
+    <div class="qmode-bar">
       <span id="modelabel">Test</span>
-      <span style="opacity:.6;font-size:11px">Haz clic en una opci&#xF3;n para responder</span>
+      <span style="opacity:.6;font-size:10px">Toca una opci&#xF3;n para responder</span>
     </div>
     <div class="progbar" id="progbar" style="display:none">
-      <div class="prog-label" id="proglabel"></div>
+      <div class="prog-lbl" id="proglbl"></div>
       <div class="progbar-inner"><div class="progbar-fill" id="progfill" style="width:0%"></div></div>
     </div>
-    <div class="qpanel">
+    <div class="qpanel" id="qpanel">
       <div class="qcard" id="qcard">
         <div class="qsrc" id="qsrc"></div>
         <div class="qtext" id="qtext"></div>
@@ -310,12 +409,40 @@ body{font-family:'Source Sans 3','Segoe UI',sans-serif;background:var(--gray-100
     </div>
   </div>
 
-  <!-- SIDEBAR TOGGLE -->
+  <!-- BANCO DE PREGUNTAS -->
+  <div class="banco hidden" id="banco">
+    <div class="banco-top">
+      <div style="display:flex;align-items:center;justify-content:space-between;">
+        <div class="banco-title">&#x1F4D6; Banco de Preguntas</div>
+        <button class="btn btnhome" style="font-size:12px;padding:6px 12px;" onclick="goHome()">&#x2190; Inicio</button>
+      </div>
+      <div class="banco-search">
+        <input class="search-inp" id="searchInp" type="text"
+          placeholder="&#x1F50D; Buscar pregunta o respuesta..."
+          oninput="filterBanco()" autocomplete="off" autocorrect="off" spellcheck="false">
+      </div>
+      <div class="banco-filters" id="bancoFilters">
+        <button class="bfilter active" data-topic="" onclick="setBFilter(this,'')">Todos</button>
+        <button class="bfilter" data-topic="Atencion al Ciudadano"
+          style="border-color:#1565c0;color:#1565c0" onclick="setBFilter(this,'Atencion al Ciudadano')">Atenci&#xF3;n</button>
+        <button class="bfilter" data-topic="Derechos Humanos"
+          style="border-color:#6a1b9a;color:#6a1b9a" onclick="setBFilter(this,'Derechos Humanos')">D. Humanos</button>
+        <button class="bfilter" data-topic="Procedimientos Policiales"
+          style="border-color:#00695c;color:#00695c" onclick="setBFilter(this,'Procedimientos Policiales')">Procedimientos</button>
+        <button class="bfilter" data-topic="Uso de la Fuerza"
+          style="border-color:#b71c1c;color:#b71c1c" onclick="setBFilter(this,'Uso de la Fuerza')">Uso Fuerza</button>
+      </div>
+    </div>
+    <div class="banco-count" id="bancoCount"></div>
+    <div class="banco-list" id="bancoList"></div>
+  </div>
+
+  <!-- SIDEBAR -->
   <div class="toggle" id="tog" onclick="toggleSB()">&#x25C0;</div>
   <div class="sidebar" id="sb">
     <div class="sbhead">
       <span>Cuestiones</span>
-      <span style="cursor:pointer;opacity:.6;font-size:12px" title="Verde=Acierto Rojo=Fallo">?</span>
+      <span style="opacity:.6;font-size:11px;cursor:default">?</span>
     </div>
     <div class="sbbody" id="sblist"></div>
   </div>
@@ -324,8 +451,8 @@ body{font-family:'Source Sans 3','Segoe UI',sans-serif;background:var(--gray-100
 <!-- BOTTOM NAV -->
 <div class="bottom" id="bottombar" style="display:none">
   <button class="btn btnhome" onclick="goHome()" title="Inicio">&#x1F3E0;</button>
-  <button class="btn btnnav"  onclick="prevQ()" title="Anterior">&#x25C0;</button>
-  <button class="btn btnnav"  onclick="nextQ()" title="Siguiente">&#x25B6;</button>
+  <button class="btn btnnav"  onclick="prevQ()">&#x25C0;</button>
+  <button class="btn btnnav"  onclick="nextQ()">&#x25B6;</button>
   <button class="btn btnres"  onclick="showResults()">&#x1F4CA; Resultados</button>
 </div>
 
@@ -338,8 +465,10 @@ body{font-family:'Source Sans 3','Segoe UI',sans-serif;background:var(--gray-100
     <div class="topic-results" id="rtopics"></div>
     <br>
     <button class="btn" onclick="closeR()">Cerrar</button>
-    <button class="btn" style="background:#fce4e1;border-color:#c0392b;color:#922b21" onclick="closeR();resetAll()">Reiniciar</button>
-    <button class="btn" style="background:#e8f4fd;border-color:#1565c0;color:#1565c0" onclick="closeR();goHome()">Inicio</button>
+    <button class="btn" style="background:#fce4e1;border-color:#c0392b;color:#922b21"
+      onclick="closeR();resetAll()">Reiniciar</button>
+    <button class="btn" style="background:#e8f4fd;border-color:#1565c0;color:#1565c0"
+      onclick="closeR();goHome()">Inicio</button>
   </div>
 </div>
 
@@ -388,7 +517,7 @@ const QS=[
   {q:"7.De acuerdo con la guía 3EC-GU-0001 práctica del sistema táctico básico policial, entre los elementos del servicio diseñados en el cinturón multipropósitos se encuentra el:",opts:["bastón policial","bolso multipropósito","porta celular","navaja multipropósito"],src:"Test Validacion N1",tp:"Uso de la Fuerza",c:0},
   {q:"De acuerdo al portafolio de servicios, son dependencias desconcentradas del área de resolución de conflictos de la inspección general de la Policía Nacional, cuya misión es la operacionalización del procedimiento de conciliación extrajudicial en derecho y mediación como mecanismo alternativo de solución de desacuerdos y conflictos, este servicio corresponde a los centros de:",opts:["conciliación y mediación policial","diálogo policial","entrenamiento y conciliación","reflexión policial"],src:"Test Validacion N1",tp:"Atencion al Ciudadano",c:0},
   {q:"Es un derecho que *garantiza a toda persona la libertad de expresar y difundir su pensamiento y opiniones*, esta descripción se refiere al derecho a la:",opts:["dignidad humana, al honor y a la intimidad","libertad de expresión y pensamiento","libertad personal y a circular libremente","vida, a la supervivencia y al desarrollo"],src:"Test Validacion N1",tp:"Procedimientos Policiales",c:0},
-  {q:"De acuerdo con la guía 3EC-GU-0001 práctica del sistema táctico básico policial, en el modelo para el uso diferenciado y proporcional de la fuerza ‘’que le permite al policía tener un criterio valorativo de actuación frente a los procedimientos policiales”los principios básicos para el uso diferenciado de la fuerza corresponden a la:",opts:["necesidad, proporcionalidad, temporalidad, legalidad","necesidad, legalidad, proporcionalidad, racionalidad","proporcionalidad, resistencia, racionalidad, necesida","D. racionalidad, legalidad, necesidad, uso de la fuerza"],src:"Test Validacion N1",tp:"Uso de la Fuerza",c:0},
+  {q:"De acuerdo con la guía 3EC-GU-0001 práctica del sistema táctico básico policial, en el modelo para el uso diferenciado y proporcional de la fuerza ‘’que le permite al policía tener un criterio valorativo de actuación frente a los procedimientos policiales”los principios básicos para el uso diferenciado de la fuerza corresponden a la:",opts:["necesidad, proporcionalidad, temporalidad, legalidad","necesidad, legalidad, proporcionalidad, racionalidad","proporcionalidad, resistencia, racionalidad, necesida","D. racionalidad, legalidad, necesidad, uso de la fuerza"],src:"Test Validacion N1",tp:"Uso de la Fuerza",c:1},
   {q:"Conforme al portafolio de servicios de la Policía Nacional, es importante cumplir con los requisitos y características establecidos durante el proceso de inscripción para ingresar a la Policía Nacional, porque:",opts:["asegura que los candidatos cumplan con las competencias requeridas por la institución","facilita a la organización de eventos, cumpliendo con los requisitos requeridos por la institución","certifica la participación de las personas a esta incorporación","obtiene descuentos con el tema de la inscripción a la institución"],src:"Test Validacion N1",tp:"Atencion al Ciudadano",c:0},
   {q:"Son los medios virtuales, telefónicos y presenciales definidos por la institución, donde se interactúa de manera directa con los ciudadanos en busca de brindar información de los servicios ofertados bajo los preceptos de eficiencia, eficacia y calidad en el servicio, esto hace referencia a los:",opts:["canales de atención","canales digitales","correos electrónicos","redes sociales"],src:"Test Validacion N1",tp:"Procedimientos Policiales",c:0},
   {q:"Conforme a la atención presencial preferencial, a las personas que presentan deficiencias físicas, sensoriales, mentales o sensoriales a largo plazo, y cuya participación plena y efectiva en la sociedad se ve limitada debido a diversas barreras, se les denomina:",opts:["ciudadanos con diversidad funcional","individuos con talentos especiales","personas con deteriorios funcionales","personas en condición de discapacidad"],src:"Test Validacion N1",tp:"Procedimientos Policiales",c:0},
@@ -458,7 +587,7 @@ const QS=[
   {q:"¿Cuáles son los recursos establecidos en el modelo para el uso diferenciado y proporcionado de la fuerza, representados en la pirámide?",opts:["1. Presencia Policial, 2. Comunicación y disuasión, 3. Fuerza física, 4. Armas, municiones, elementos y dispositivos menos letales, 5. Armas de fuego","1. Legalidad. 2. Temporalidad. 3 racionalidad. 4. Proporcionalidad. 5. Necesidad","1. Uso de la Fuerza. 2. Armas menos letales. 3. Armas de Fuego. 4. Agentes Químicos. 5. Animales Entrenados","1. Presencia Policial, 2. Comunicación y disuasión, 3. Fuerza letal, 4. Armas, municiones, elementos y dispositivos menos letales, 5. Armas de fuego"],src:"Mandatorios",tp:"Uso de la Fuerza",c:0},
   {q:"El sistema táctico básico policial es un método de intervención policial conformado de técnicas y tácticas policiales. Es importante que en el momento de implementar el uso de la fuerza deban tener en cuenta unos principios básicos que son:",opts:["Necesidad, legalidad, proporcionalidad y racionalidad","Agilidad, conducción y control","Conducción, necesidad, control y legalida","d. Todas las anteriores"],src:"Mandatorios",tp:"Uso de la Fuerza",c:0},
   {q:"Es el medio material, necesario, proporcional y racional, empleado por el personal uniformado de la Policía Nacional, como último recurso físico para proteger la vida e integridad física de las personas incluida la de ellos mismos, sin mandamiento previo y escrito, para prevenir, impedir o superar la amenaza o perturbación de la convivencia y la seguridad pública, de conformidad con la ley",opts:["Uso de la Fuerza","Modelo del uso diferenciado y proporcionado de la fuerza","Tortura","Todas las descritas"],src:"Mandatorios",tp:"Procedimientos Policiales",c:0},
-  {q:"Hace referencia, a la capacidad de decidir cuál es el nivel de fuerza que se debe aplicar según el escenario al que se enfrenta, esta definición a cuál de los principios hace referencia:",opts:["Legalidad","Racionalidad","Proporcionalida","d. Necesidad"],src:"Mandatorios",tp:"Uso de la Fuerza",c:0},
+  {q:"Hace referencia, a la capacidad de decidir cuál es el nivel de fuerza que se debe aplicar según el escenario al que se enfrenta, esta definición a cuál de los principios hace referencia:",opts:["Legalidad","Racionalidad","Proporcionalida","d. Necesidad"],src:"Mandatorios",tp:"Uso de la Fuerza",c:1},
   {q:"Hace referencia, a la utilización en la medida de lo posible de medios preventivos y disuasivos antes de recurrir al uso de la fuerza y armas de fuego. Podrán utilizar la fuerza y armas de fuego solamente cuando los demás medios resulten ineficaces o no garanticen de ninguna manera el logro del resultado previsto",opts:["Legalidad","Racionalidad","Proporcionalida","d. Necesidad"],src:"Mandatorios",tp:"Uso de la Fuerza",c:0},
   {q:"Al hacer uso de la fuerza debe cumplirse con las leyes y normas adoptadas por el estado colombiano y la reglamentación y disposiciones institucionales, lo anterior corresponde al principio de:",opts:["Legalidad","Racionalidad","Proporcionalida","d. Necesidad"],src:"Mandatorios",tp:"Uso de la Fuerza",c:0},
   {q:"Al hacer uso de la fuerza, armas, municiones, elementos y dispositivos menos letales y armas de fuego, los funcionarios de la Policía Nacional deben hacerlo de manera moderada y actuar en proporción a la gravedad de la amenaza y el objetivo legítimo que se quiere lograr, escogiendo entre los medios eficaces, aquellos que causen el menor daño a la integridad de las personas y sus bienes. Lo anterior corresponde al principio de:",opts:["Legalidad","Racionalidad","Proporcionalida","d. Necesidad"],src:"Mandatorios",tp:"Uso de la Fuerza",c:0},
@@ -466,13 +595,13 @@ const QS=[
   {q:"Cuales son los niveles de resistencia relacionados en el modelo diferenciado y proporcionado en el uso de la fuerza?",opts:["Pasiva, agresiva","pasiva, activa","facil","dificil"],src:"Mandatorios",tp:"Uso de la Fuerza",c:0},
   {q:"El uso de la fuerza, es un medio de policía:",opts:["Alternativo","Material","Inmaterial","Quinestésico"],src:"Mandatorios",tp:"Uso de la Fuerza",c:0},
   {q:"En la resolución Nro. 02903 del 2017, en su artículo 11 me ensaña una gráfica modelo para el uso diferenciado y proporcionado de la fuerza de la siguiente maner",opts:["a. Cuadricular","Piramidal","Circular","Tipo Diamante"],src:"Mandatorios",tp:"Uso de la Fuerza",c:0},
-  {q:"¿Cuántos principios hacen parte del uso de la fuerza?",opts:["Dos","Seis","Cuatro","Todos los anteriores"],src:"Mandatorios",tp:"Uso de la Fuerza",c:0},
+  {q:"¿Cuántos principios hacen parte del uso de la fuerza?",opts:["Dos","Seis","Cuatro","Todos los anteriores"],src:"Mandatorios",tp:"Uso de la Fuerza",c:2},
   {q:"En qué momento se debe hacer uso de la fuerz",opts:["a. Para prevenir la inminente o actual comisión de comportamientos contrarios a la convivencia","Para hacer cumplir las medidas contempladas en el código Nacional de Seguridad y Convivencia Ciudadana","Para defenderse o defender a otra persona de una violencia actual o inminente contra su integrida","d. Todas las anteriores"],src:"Mandatorios",tp:"Procedimientos Policiales",c:0},
   {q:"¿Cuándo se permite el uso de armas de fuego por parte de los funcionarios de Policía Nacional de Colombia?",opts:["Para dispersar manifestaciones pacíficas","Para proteger la propiedad privada","Como último recurso en defensa propia o de terceros","Siempre que consideren necesario sin restricciones"],src:"Mandatorios",tp:"Uso de la Fuerza",c:0},
   {q:"¿cuál es el primer nivel de la pirámide de recursos del modelo diferenciado y proporcionado del uso de la fuerza?",opts:["Presencia policial","Comunicación y disuasión","Armas naturales fuerza física","Armas, municiones elementos y dispositivo menos letales"],src:"Mandatorios",tp:"Uso de la Fuerza",c:0},
   {q:"De acuerdo al Código de conducta para funcionarios encargados de hacer cumplir la ley, los funcionarios encargados de hacer cumplir la ley podrán usar la fuerza sólo cuando sea estrictamente necesario y en la medida que lo requiera el desempeño de sus tareas",opts:["Falso","Verdadero"],src:"Mandatorios",tp:"Derechos Humanos",c:0},
   {q:"Los funcionarios encargados de hacer cumplir la ley, en el desempeño de sus funciones, utilizarán en la medida de lo posible medios no violentos antes de recurrir al empleo de la fuerza y de armas de fuego. Podrán utilizar la fuerza y armas de fuego solamente cuando otros medios resulten ineficaces o no garanticen de ninguna manera el logro del resultado previsto",opts:["Falso","Verdadero"],src:"Mandatorios",tp:"Uso de la Fuerza",c:0},
-  {q:"Teniendo en cuenta la misión institucional, el uso de la fuerza en la Policía Nacional estará enmarcado en los principios de necesidad, legalidad proporcionalidad y racionalidad, bajo este precepto podemos definir el principio de proporcionalidad como la capacidad de decidir cuál es el nivel de fuerza que se debe aplicar según el escenario al que se enfrenta, de acuerdo con las leyes y normas vigentes",opts:["Falso","Verdadero"],src:"Mandatorios",tp:"Uso de la Fuerza",c:0},
+  {q:"Teniendo en cuenta la misión institucional, el uso de la fuerza en la Policía Nacional estará enmarcado en los principios de necesidad, legalidad proporcionalidad y racionalidad, bajo este precepto podemos definir el principio de proporcionalidad como la capacidad de decidir cuál es el nivel de fuerza que se debe aplicar según el escenario al que se enfrenta, de acuerdo con las leyes y normas vigentes",opts:["Falso","Verdadero"],src:"Mandatorios",tp:"Uso de la Fuerza",c:1},
   {q:"“Ley 1801 ARTÍCULO 22. Titular del uso de la fuerza policial. La utilización de la fuerza legítima corresponde de manera exclusiva, en el marco de este Código, a los miembros de la fuerza pública, de conformidad con el marco jurídico vigente, salvo en aquellos casos en los que de manera excepcional se requiera la asistencia”",opts:["Falso","Verdadero"],src:"Mandatorios",tp:"Uso de la Fuerza",c:0},
   {q:"Es el dominio visual sobre una persona o vehículo, a fin de impedir la realización de un acto ilícito o contrario a la convivenci",opts:["a. Fuerza física","Presencia policial","Contacto visual","Fuerza reactiva"],src:"Mandatorios",tp:"Procedimientos Policiales",c:0},
   {q:"De acuerdo a lo establecido en el artículo 157 de la resolución 00912 de 2009, lo elementos principales para la prestación del servicio de policía, son:",opts:["Uniforme reglamentario","Placa de identificación policial y Radio Portátil","Arma de dotación y su respectiva dotación","Todas las Anteriores"],src:"Mandatorios",tp:"Procedimientos Policiales",c:0},
@@ -550,7 +679,7 @@ const QS=[
   {q:"8 El principio de necesidad implica que el uso de la fuerza: Debe aplicarse de manera preventiva ante cualquier riesgo potencial. Se justifica únicamente cuando han fallado o no son viables otros medios menos lesivos",opts:["Es obligatorio para garantizar la autoridad institucional","Puede emplearse para acelerar el procedimiento"],src:"Test de Competencias",tp:"Uso de la Fuerza",c:0},
   {q:"9 Según el principio de proporcionalidad, la fuerza empleada debe: Superar siempre el nivel de resistencia presentada",opts:["Mantenerse constante durante todo el procedimiento","Ajustarse al nivel de amenaza y resistencia existente","Aplicarse de forma uniforme en todos los casos"],src:"Test de Competencias",tp:"Uso de la Fuerza",c:0},
   {q:"10 El modelo para el uso diferenciado y proporcional de la fuerza establece que la actuación policial debe: Aplicar el mismo nivel de fuerza en todos los procedimientos. Escalar o desescalar el uso de la fuerza según la conducta y el riesgo presentado",opts:["Priorizar siempre el uso de medios menos letales","Utilizar la fuerza únicamente con autorización superior"],src:"Test de Competencias",tp:"Uso de la Fuerza",c:0},
-  {q:"11 Según el Decreto 1231 de 2024, los principios básicos del uso de la fuerza buscan principalmente: Garantizar la eficacia operativa sin limitaciones",opts:["Respaldar la autoridad institucional del uniformado","Proteger los derechos humanos y los bienes jurídicamente tutelados","Reducir la duración de los procedimientos policiales"],src:"Test de Competencias",tp:"Uso de la Fuerza",c:0},
+  {q:"11 Según el Decreto 1231 de 2024, los principios básicos del uso de la fuerza buscan principalmente: Garantizar la eficacia operativa sin limitaciones",opts:["Respaldar la autoridad institucional del uniformado","Proteger los derechos humanos y los bienes jurídicamente tutelados","Reducir la duración de los procedimientos policiales"],src:"Test de Competencias",tp:"Uso de la Fuerza",c:1},
   {q:"12 Durante una intervención, un ciudadano intenta zafarse empujando al uniformado, sin agredirlo directamente. Conforme a la defensa personal policial, la actuación correcta es: Utilizar de inmediato el arma de fuego",opts:["Aplicar técnicas de control corporal para neutralizar la resistencia","Retirarse del lugar y solicitar apoyo judicial","Esperar a que la persona ataque"],src:"Test de Competencias",tp:"Uso de la Fuerza",c:0},
   {q:"13 Las posiciones tácticas en la intervención policial tienen como finalidad principal: Mostrar autoridad frente a la comunidad",opts:["Facilitar la comunicación verbal con el ciudadano","Reducir riesgos y permitir una respuesta controlada ante amenazas","Acelerar el procedimiento operativo"],src:"Test de Competencias",tp:"Procedimientos Policiales",c:0},
   {q:"14 Una persona capturada ofrece resistencia activa durante su traslado. De acuerdo con la técnica de conducción, el uniformado debe: Incrementar la fuerza hasta lograr obediencia inmediata. Aplicar técnicas de conducción que controlen el movimiento sin causar lesiones innecesarias",opts:["Suspender el procedimiento","Utilizar medios menos letales de manera automática"],src:"Test de Competencias",tp:"Uso de la Fuerza",c:0},
@@ -562,7 +691,7 @@ const QS=[
   {q:"21 Durante un procedimiento policial en una zona urbana, el uniformado observa a una persona intervenida, varios transeúntes alrededor, vehículos en movimiento y accesos laterales sin visibilidad. Conforme a la valoración táctica de la zona problema, la identificación correcta de amenazas y riesgos implica que el uniformado: Centre su atención únicamente en la persona intervenida, por ser el riesgo principal. Evalúe de forma integral al intervenido, el entorno, los terceros y las posibles rutas de aproximación o escape",opts:["Priorice la protección de los bienes materiales del sector","Espere a que se manifieste una agresión para identificar el riesgo real"],src:"Test de Competencias",tp:"Uso de la Fuerza",c:0},
   {q:"22 En medio de una intervención, el uniformado mantiene contacto visual con el intervenido, pero pierde control sobre el perímetro, no observa a los acompañantes y desconoce los accesos laterales",opts:["De acuerdo con la guía práctica del sistema táctico básico policial, se puede afirmar que: Existe control de la situación porque el intervenido no ha agredido","El control se mantiene mientras haya comunicación verbal efectiva","El control solo se pierde cuando hay uso de la fuerza","No existe control de la situación, ya que el dominio del entorno y de los riesgos es incompleto"],src:"Test de Competencias",tp:"Procedimientos Policiales",c:0},
   {q:"23 Un uniformado percibe aumento del riesgo por factores del entorno, pero experimenta presión emocional y estrés durante el procedimiento",opts:["Conforme al proceso de pensamiento y control emocional, la actuación correcta es: Actuar de forma inmediata para demostrar autoridad y evitar pérdida de control","Ignorar las emociones, ya que no influyen en la toma de decisiones","Regular la respuesta emocional, reevaluar la situación y ajustar la intervención de manera racional y táctica","Suspender el procedimiento hasta recibir órdenes superiores"],src:"Test de Competencias",tp:"Procedimientos Policiales",c:0},
-  {q:"Durante un procedimiento policial, un ciudadano es reducido y presenta dificultades respiratorias visibles. ¿Cuál debe ser la actuación prioritaria del uniformado conforme al derecho a la vida?",opts:["Continuar el procedimiento hasta que llegue el superior jerárquico","Garantizar la atención médica inmediata y suspender cualquier acción que ponga en riesgo la vida","Trasladarlo de inmediato a la estación sin evaluar su estado de salud","Mantenerlo inmovilizado para evitar que huya"],src:"Test de Competencias",tp:"Derechos Humanos",c:0},
+  {q:"Durante un procedimiento policial, un ciudadano es reducido y presenta dificultades respiratorias visibles. ¿Cuál debe ser la actuación prioritaria del uniformado conforme al derecho a la vida?",opts:["Continuar el procedimiento hasta que llegue el superior jerárquico","Garantizar la atención médica inmediata y suspender cualquier acción que ponga en riesgo la vida","Trasladarlo de inmediato a la estación sin evaluar su estado de salud","Mantenerlo inmovilizado para evitar que huya"],src:"Test de Competencias",tp:"Derechos Humanos",c:1},
   {q:"27 Durante una manifestación pacífica, la actuación correcta del servicio de policía es: Dispersar la reunión de forma preventiva para evitar alteraciones del orden. Permitir la manifestación y garantizar la seguridad de los participantes, interviniendo solo si se presentan hechos violentos",opts:["Identificar y retener a los organizadores sin orden judicial","Priorizar el uso de la fuerza para restablecer el tránsito vehicular"],src:"Test de Competencias",tp:"Procedimientos Policiales",c:0},
   {q:"28 El enfoque diferencial frente a los grupos étnicos implica que la Policía Nacional debe: Aplicar el mismo procedimiento sin considerar diferencias culturales. Reconocer y respetar su identidad cultural, usos y costumbres, siempre que no vulneren derechos fundamentales",opts:["Delegar la atención exclusivamente a autoridades tradicionales","Priorizar el orden público sobre cualquier consideración cultural"],src:"Test de Competencias",tp:"Derechos Humanos",c:0},
   {q:"29 Durante un procedimiento, una persona manifiesta una identidad de género diversa. ¿Cuál es la actuación correcta del uniformado?",opts:["Exigir que se identifique según su sexo biológico","Utilizar expresiones irónicas para mantener control del procedimiento","Tratar a la persona con respeto, sin discriminación y reconociendo su identidad de género","Remitirla inmediatamente a la estación para verificación"],src:"Test de Competencias",tp:"Derechos Humanos",c:0},
@@ -617,12 +746,12 @@ const QS=[
   {q:"¿Cuál es la guia practica del sistema táctico básico policial?",opts:["1PR-GU-0004","3EC-GU-0001","1CS-GU-0004","2PC-FR-0001"],src:"Test de Competencias",tp:"Uso de la Fuerza",c:0},
   {q:"85.Según la Guia práctica del sistema táctico básico policial. ¿La correcta manera de colocar las manos al momento de colocar las esposas metalicas en una persona es?",opts:["Se encuentra la palma de una mano y el dorso de la otra con los dedos cruzados","Se colocan en la parta de atras de la espalda, encontrandose los dorsos de las manos, con los pulgares hacia arriba","Se colocan las manos alfrente, encontrandosen las palmas de las manos y los pulgares hacia arriba","Se colocan en la parte de atras de la espalda, encontrandose las palmas de las manos y los pulgares hacia abajo"],src:"Test de Competencias",tp:"Uso de la Fuerza",c:0},
   {q:"¿Cuáles son los principios fundamentales para la DEFENSA PERSONAL?",opts:["Necesidad, Proporcionalidad, Legalidad y diferenciado","Necesidad, Porporcionalidad, racional y Legalidad","Respiración, relajación, movimiento y estructura corporal","Buena fe, efectividad, compromiso y valoración"],src:"Test de Competencias",tp:"Procedimientos Policiales",c:0},
-  {q:"Según el decreto 1231 del 2024, para poder controlar a una persona que ofrece resistencia activa, donde tenemos una percepción del riego leves a moderadas, podemos utilizar una respuesta razonable: Golpes y sujeciones fuertes policiales",opts:["Llaves y agarres policiales","Técnicas y tácticas de control de contacto y control físico","Valoración táctica de amenazas y riesgos"],src:"Test de Competencias",tp:"Procedimientos Policiales",c:0},
-  {q:"¿Cuáles son los principios básicos para el uso diferenciado de la fuerza según el reglamento para el uso de la fuerza Decreta 1231 del 03-10-2024?",opts:["Respiración, relajación, movimiento y estructura","Necesidad, Proporcionalidad, Legalidad y constitucionalidad y Diferenciación","Legalidad, Necesidad, Proporcionalidad y Racionalidad","Necesidad, de buena fe, legalidad, diferenciado"],src:"Test de Competencias",tp:"Uso de la Fuerza",c:0},
+  {q:"Según el decreto 1231 del 2024, para poder controlar a una persona que ofrece resistencia activa, donde tenemos una percepción del riego leves a moderadas, podemos utilizar una respuesta razonable: Golpes y sujeciones fuertes policiales",opts:["Llaves y agarres policiales","Técnicas y tácticas de control de contacto y control físico","Valoración táctica de amenazas y riesgos"],src:"Test de Competencias",tp:"Procedimientos Policiales",c:1},
+  {q:"¿Cuáles son los principios básicos para el uso diferenciado de la fuerza según el reglamento para el uso de la fuerza Decreta 1231 del 03-10-2024?",opts:["Respiración, relajación, movimiento y estructura","Necesidad, Proporcionalidad, Legalidad y constitucionalidad y Diferenciación","Legalidad, Necesidad, Proporcionalidad y Racionalidad","Necesidad, de buena fe, legalidad, diferenciado"],src:"Test de Competencias",tp:"Uso de la Fuerza",c:1},
   {q:"89.Según los principios básicos para el uso de la fuerza y el empleo de las armas de fuego para los F.E.H.C.L. ¿Qué principio dice: los FEHCL no emplearán las armas de fuego contra las personas, Salvo en defensa propia o de otras, ¿en caso de peligro inminente de muerte o de lesiones graves?",opts:["Principio 4","Principio 5","Principio 10","Principio 9"],src:"Test de Competencias",tp:"Uso de la Fuerza",c:0},
   {q:"90.En el uso de las armas de fuego, cuando sea inevitable, se debe procurar: Ejercer la fuerza lo más mínimo posible con la igualdad. Ejercer moderación y proporción a la gravedad del delito y el objetivo que se persiga",opts:["Causar un control más preciso al comportamiento","No brindar asistencia médica"],src:"Test de Competencias",tp:"Uso de la Fuerza",c:0},
   {q:"Dentro de la utilización del bastón policial tonfa, se pueden encontrar unas aplicaciones ¿Cuáles son?",opts:["Aplicación de golpe y Punta","Aplicación de punta, activa","Aplicación de Empuje, sujetación","Aplicación de punta, contacto y empuje"],src:"Test de Competencias",tp:"Uso de la Fuerza",c:0},
-  {q:"En el modelo para el uso de la fuerza en la policía nacional, según el decreto 1231 del 03 de octubre del 2024 ¿Cuáles son las respuestas razonables del policía?",opts:["Agresión letal, Agresión no letal, Resistencia Activa y Resistencia Pasiva","Leve, Leves a moderadas, Lesiones moderadas a graves y Lesiones graves a letales","Necesidad, proporcionalidad y legalidad","Técnicas y tácticas comunicativas, Técnicas y tácticas de control de contacto y control físico, técnicas y tácticas defensivas y fuerza potencialmente letal"],src:"Test de Competencias",tp:"Uso de la Fuerza",c:0},
+  {q:"En el modelo para el uso de la fuerza en la policía nacional, según el decreto 1231 del 03 de octubre del 2024 ¿Cuáles son las respuestas razonables del policía?",opts:["Agresión letal, Agresión no letal, Resistencia Activa y Resistencia Pasiva","Leve, Leves a moderadas, Lesiones moderadas a graves y Lesiones graves a letales","Necesidad, proporcionalidad y legalidad","Técnicas y tácticas comunicativas, Técnicas y tácticas de control de contacto y control físico, técnicas y tácticas defensivas y fuerza potencialmente letal"],src:"Test de Competencias",tp:"Uso de la Fuerza",c:3},
   {q:"Carácter público de las actividades de Policía. Todo procedimiento policivo podrá ser grabado mediante cualquier medio de las tecnologías de información y comunicación, por lo que le está prohibido a cualquier persona, salvo las restricciones expresas de ley, impedir que Departamento Administrativo de la Función Pública Ley 1801 de 2016 6 EVA - Gestor Normativo sean realizadas dichas grabaciones",opts:["Lo anterior hace referencia a que articulo: 22","20","21","154"],src:"Test de Competencias",tp:"Uso de la Fuerza",c:0},
   {q:"En casos en que esté en riesgo inminente la vida e integridad de una persona, el personal uniformado de la Policía Nacional, podría solicitar y exigir el apoyo de los particulares a las funciones y actividades de Policía y hacer uso inmediato de sus bienes para atender la necesidad requerida. Las personas sólo podrán excusar su apoyo cuando su vida e integridad quede en inminente riesgo",opts:["Lo anterior hace referencia a: Asistencia Militar","Aprehensión con fin judicial","Apoyo urgente de los particulares","Ninguna de las anteriores"],src:"Test de Competencias",tp:"Procedimientos Policiales",c:0},
   {q:"Según la ley 1801 del 2016. ¿Cuáles son las medidas correctivas del personal uniformado de la policía nacional?",opts:["Orden de policía, registró a personas, retiro del sitio, mediación policial y traslado por protección","Multas generales 1, 2, 3, 4, multas especiales por metro cuadrado","Amonestación, participación en programa comunitario y/o actividad pedagógica, inutilización de bienes, remoción de bienes y destrucción del bien","uso de la fuerza, multa general tipo 4, multa general tipo 3, multas especiales y encerramiento"],src:"Test de Competencias",tp:"Uso de la Fuerza",c:0},
@@ -723,7 +852,7 @@ const QS=[
   {q:"En caso de ser necesaria la práctica de un allanamiento a la propiedad del diplomático se debe comunicar al Ministerio de Relaciones Exteriores, para los trámites respectivos",opts:["falso","verdadero"],src:"Nivelacion Mandatorios",tp:"Procedimientos Policiales",c:0},
   {q:"Son diplomáticos: Los delegados, nuncios, internuncios, embajadores, enviados ordinarios y extraordinarios, ministros plenipotenciarios encargados de negocios con carta de gabinete, consejeros, auditores, consejeros, primer secretario, segundo secretario, adjuntos, agregados militares y de policía y agregados civiles especializados",opts:["verdadero","falso"],src:"Nivelacion Mandatorios",tp:"Procedimientos Policiales",c:0},
   {q:"Es la capacidad de identificar y priorizar riesgos frente a un procedimiento policial o un ambiente físico a intervenir. ¿Esta definición hace referencia a?",opts:["Control de la Situación","Proceso de Pensamiento","Valoración Táctica de zona Problema, Amenazas y Riesgos","Componente Comunicativo"],src:"Nivelacion Mandatorios",tp:"Procedimientos Policiales",c:0},
-  {q:"De acuerdo a los Estándares Internacionales, los Principios que regulan el Uso de la Fuerza en situaciones diferentes a conflictos armados son: Proporcionalidad, legalidad, limitación, necesidad y distinción",opts:["Legalidad, proporcionalidad, distinción y limitación","Dignidad, igualdad y legalidad","Legalidad, necesidad, proporcionalidad, razonabilidad"],src:"Nivelacion Mandatorios",tp:"Uso de la Fuerza",c:0},
+  {q:"De acuerdo a los Estándares Internacionales, los Principios que regulan el Uso de la Fuerza en situaciones diferentes a conflictos armados son: Proporcionalidad, legalidad, limitación, necesidad y distinción",opts:["Legalidad, proporcionalidad, distinción y limitación","Dignidad, igualdad y legalidad","Legalidad, necesidad, proporcionalidad, razonabilidad"],src:"Nivelacion Mandatorios",tp:"Uso de la Fuerza",c:2},
   {q:"Facultad de hacer cumplir las disposiciones dictadas en ejercicio del poder de Policía, mediante la expedición de reglamentos generales y de acciones apropiadas para garantizar la convivencia",opts:["Orden de Policía","Función de Policía","Actividad de Policía","Poder de Policía"],src:"Nivelacion Mandatorios",tp:"Procedimientos Policiales",c:0},
   {q:"¿Cuál es una función principal de la Policía Nacional?",opts:["Vender productos","Dar clases","Realizar investigaciones privadas","Mantener el orden público"],src:"Mandatorios Educaplay",tp:"Procedimientos Policiales",c:0},
   {q:"¿Qué documento debe portar un policía en servicio?",opts:["Tarjeta de crédito","Identificación oficial","Permiso de conducir","Pasaporte"],src:"Mandatorios Educaplay",tp:"Procedimientos Policiales",c:0},
@@ -814,7 +943,7 @@ const QS=[
   {q:"De acuerdo con la guía 3EC-GU-0001 practica del sistema táctico básico policial, entre los elementos de servicio ubicado en el cinturón multipropósito se encuentra el: Navaja multipropósito",opts:["Bolso multipropósito","Porta celular","Bastón policial"],src:"Validacion 4",tp:"Uso de la Fuerza",c:0},
   {q:"De acuerdo al portafolio de servicio son dependencias desconcentradas del área de resolución de conficto de la inspección general de la policía nacional, cuya misión es la operacionalización del procedimiento de conciliación ejecutada en el derecho y mediación como mecanismo alternativo de desacuerdo y conflictos, este servicio corresponde a los centros de: Reflexión policial",opts:["Conciliación y mediación policial","Entrenamiento y conciliación","Dialogo policial"],src:"Validacion 4",tp:"Procedimientos Policiales",c:0},
   {q:"Es un derecho que garantiza a todas las personas la liberta de de expresar y difundir sus pensamientos y opiniones, esta descripción se refiere al derecho a la: Libertad de expresión y pensamiento",opts:["Libertad personal y a circular libremente","Dignidad humana, al honor y a la intimidad","Vida, la supervivencia y al desarrollo"],src:"Validacion 4",tp:"Derechos Humanos",c:0},
-  {q:"De acuerdo con la guía 3EC-GU-0001 practica del sistema táctico básico policial, en el modelo para el uso diferenciado y proporcionado para el uso de la fuerza \"que le permite al policía tener un criterio valorativo de actuación frente a los procedimientos policiales\" los principios básicos diferenciado para el uso de la fuerza corresponden a la: Racionalidad, legalidad, necesidad, y uso de la fuerza",opts:["Proporcionalidad, resistencia, racionalidad, necesidad","Necesidad, legalidad, proporcionalidad, racionalidad","Necesidad, proporcionalidad, temporalidad, legalidad"],src:"Validacion 4",tp:"Uso de la Fuerza",c:0},
+  {q:"De acuerdo con la guía 3EC-GU-0001 practica del sistema táctico básico policial, en el modelo para el uso diferenciado y proporcionado para el uso de la fuerza \"que le permite al policía tener un criterio valorativo de actuación frente a los procedimientos policiales\" los principios básicos diferenciado para el uso de la fuerza corresponden a la: Racionalidad, legalidad, necesidad, y uso de la fuerza",opts:["Proporcionalidad, resistencia, racionalidad, necesidad","Necesidad, legalidad, proporcionalidad, racionalidad","Necesidad, proporcionalidad, temporalidad, legalidad"],src:"Validacion 4",tp:"Uso de la Fuerza",c:1},
   {q:"Conforme a la atención preferencial, a las personas que presenten deficiencia física, mental y sensoriales a largo plazo, cuya participación plena y efectiva en la sociedad se ven intimidada el derecho se denomina: Ciudadanos con diversidad funcional",opts:["Individuos con talentos especiales","Personas con deterioros funcionales","Personas con condición de discapacidad"],src:"Validacion 4",tp:"Procedimientos Policiales",c:0},
   {q:"un uniformado realiza una captura en flagrancia, uno de los formatos que el funcionario de policía debe diligenciar es el: formato fpj21 acta de reconocimiento a personas",opts:["formato fpj02 único de noticia criminal","formato fpj6 acta de derechos del capturado","formato fpj11 informe de investigación del campo"],src:"Validacion 4",tp:"Uso de la Fuerza",c:0},
   {q:"un integrante de patrulla de vigilancia conoció un caso de violencia intrafamiliar, uno de los formatos que el funcionario de policía debe llenar es: formato fpj25 inventario de pertenencias",opts:["formato fpj15 declaración jurada","formato fpj4 actuación del primer respondiente","formato fpj24 vigilancia y seguimiento"],src:"Validacion 4",tp:"Procedimientos Policiales",c:0},
@@ -843,212 +972,265 @@ const QS=[
   {q:"Según las regulaciones expedidas por el Ministerio de Relaciones Exteriores en aplicación a los tratados Internacionales y convenios suscritos por el Gobierno Nacional, los ciudadanos extranjeros durante su ingreso o Permanencia en el país deberán identificarse de acuerdo a los siguientes documentos, así:",opts:["Pasaporte","Visa","Cédula Extranjería","Todas las anteriores"],src:"Repositorio Mandatorios",tp:"Procedimientos Policiales",c:0},
   {q:"Cuáles de estos instrumentos no son vinculantes por parte del (DIDH - Derecho Internacional de los Derechos Humanos) a los estados pero regulan el comportamiento Y la conducta de los funcionarios encargados de hacer cumplir la ley -FEHCL en situaciones diferentes a conflicto Armado son :",opts:["Convenios de Ginebra de 1949 y protocolos adicionales de 1977","El código de conducta y principios básicos sobre el empleo de la fuerza y de las armas de fuego para los FEHCL","Pacto Internacional de los Derechos Civiles y Políticos y Pacto Internacional de los Derechos Sociales, Económicos y Culturales ONU","Dos y tres son verdaderos"],src:"Repositorio Mandatorios",tp:"Derechos Humanos",c:0},
   {q:"100. Para tener un criterio fundamentado sobre el uso de la fuerza, las armas de fuego y las armas no letales en el Desarrollo de los procedimientos policiales, debo leer, analizar y adoptar la siguiente resolución",opts:["Resolución. No. 00911 del 01-04-2009","Resolución 00912 del 01-04-2009","Resolución 02903 del 23 de Junio de 2017","Resolución 04048 del 23 de Junio de 2016"],src:"Repositorio Mandatorios",tp:"Uso de la Fuerza",c:0},
-  {q:"Se define como el respeto a las opiniones, ideas, creencias o actitudes de los demás, aunque sean diferentes o contrarias a las propias.",opts:["Persuasión.","Amabilidad y cortesía.","Tolerancia.","Ninguna de las anteriores."],src:"RESPUESTAS_MANDATORIO",tp:"Atencion al Ciudadano",c:0},
-  {q:"Idoneidad del uniformado para brindar el apoyo necesario a una persona, una vez se ha logrado la comprensión de su situación particular, generando una respuesta positiva frente a su requerimiento.",opts:["Capacidad para escuchar.","Capacidad para asesorar y orientar.","Autocontrol.","Ninguna de las anteriores."],src:"RESPUESTAS_MANDATORIO",tp:"Atencion al Ciudadano",c:0},
+  {q:"Se define como el respeto a las opiniones, ideas, creencias o actitudes de los demás, aunque sean diferentes o contrarias a las propias.",opts:["Persuasión.","Amabilidad y cortesía.","Tolerancia.","Ninguna de las anteriores."],src:"RESPUESTAS_MANDATORIO",tp:"Atencion al Ciudadano",c:1},
+  {q:"Idoneidad del uniformado para brindar el apoyo necesario a una persona, una vez se ha logrado la comprensión de su situación particular, generando una respuesta positiva frente a su requerimiento.",opts:["Capacidad para escuchar.","Capacidad para asesorar y orientar.","Autocontrol.","Ninguna de las anteriores."],src:"RESPUESTAS_MANDATORIO",tp:"Atencion al Ciudadano",c:3},
   {q:"es un comportamiento inmerso en el ser humano que se debe poner en práctica cada día. Ser agradable y servicial con los demás es una forma de mostrar interés por tener buenas relaciones.",opts:["Amabilidad y cortesía.","Persuasión.","Autocontrol.","Capacidad para escuchar"],src:"RESPUESTAS_MANDATORIO",tp:"Atencion al Ciudadano",c:0},
   {q:"A través de la Línea de Emergencia “123”, se atienden los diferentes motivos de policía con el fin de dar respuesta oportuna y satisfactoria al requerimiento ciudadano, frente acciones delincuenciales, contravencionales y comportamientos contrarios a la convivencia.",opts:["Verdadero","Falso"],src:"RESPUESTAS_MANDATORIO",tp:"Atencion al Ciudadano",c:0},
-  {q:"A través de la Línea de Emergencia , se atienden los diferentes motivos de policía con el fin de dar respuesta oportuna y satisfactoria al requerimiento ciudadano.",opts:["122","611","123","Ninguna de las anteriores"],src:"RESPUESTAS_MANDATORIO",tp:"Atencion al Ciudadano",c:0},
+  {q:"A través de la Línea de Emergencia , se atienden los diferentes motivos de policía con el fin de dar respuesta oportuna y satisfactoria al requerimiento ciudadano.",opts:["122","611","123","Ninguna de las anteriores"],src:"RESPUESTAS_MANDATORIO",tp:"Atencion al Ciudadano",c:3},
   {q:"Que es una Red de Apoyo y Solidaridad (Es una alianza estratégica entre la Policía Nacional con empresas, oficinas principales, sucursales de vigilancia, seguridad privada, donde se permite la integración de una serie de sistemas de comunicación que contribuyen al fortalecimiento de las condiciones de seguridad en determinadas áreas o entornos del territorio nacional).",opts:["Verdadero","Falso."],src:"RESPUESTAS_MANDATORIO",tp:"Atencion al Ciudadano",c:0},
-  {q:"Es una alianza estratégica entre la Policía Nacional y los diferentes gremios, empresas públicas y privadas, para el mejoramiento de la seguridad ciudadana.",opts:["Red de Apoyo y Solidaridad","Frentes de seguridad","Red de Apoyo y Comunicaciones","Ninguna de las anteriores"],src:"RESPUESTAS_MANDATORIO",tp:"Atencion al Ciudadano",c:0},
+  {q:"Es una alianza estratégica entre la Policía Nacional y los diferentes gremios, empresas públicas y privadas, para el mejoramiento de la seguridad ciudadana.",opts:["Red de Apoyo y Solidaridad","Frentes de seguridad","Red de Apoyo y Comunicaciones","Ninguna de las anteriores"],src:"RESPUESTAS_MANDATORIO",tp:"Atencion al Ciudadano",c:3},
   {q:"El correo lineadirecta@policia.gov.co, es el único destinado para la recepción de Peticiones, Quejas, Reclamos, Reconocimientos del Servicio Policial y Sugerencias, el cual es operado por el Grupo Cultura del Servicio al Ciudadano de la Inspección General y Responsabilidad Profesional.",opts:["Verdadero","Falso."],src:"RESPUESTAS_MANDATORIO",tp:"Atencion al Ciudadano",c:0},
   {q:"son el rasgo esencial de la comunicación no verbal, pues revelan todas las emociones del interlocutor.",opts:["Expresión facial.","Postura.","Gestualidad.","Paralingüística."],src:"RESPUESTAS_MANDATORIO",tp:"Atencion al Ciudadano",c:0},
   {q:"El artículo 4 de la Resolución número 3372 del 26 de octubre de 2009 nos habla del uso del uniforme policial, insignias, condecoraciones y distintivos debe constituirse en un motivo de honor, dignidad personal e identidad institucional; por consiguiente, su porte será impecable y elegante, en todo lugar y ocasión.",opts:["Verdadero","Falso."],src:"RESPUESTAS_MANDATORIO",tp:"Procedimientos Policiales",c:0},
   {q:"El artículo 7 de la Resolución número 3372 del 26 de octubre de 2009 nos habla de: Son obligaciones del personal de la Policía Nacional durante el uso del uniforme.",opts:["Verdadero","Falso."],src:"RESPUESTAS_MANDATORIO",tp:"Procedimientos Policiales",c:0},
   {q:"Según el artículo 7 obligaciones de la Resolución número 3372 del 26 de octubre de 2009, el personal de la Policía Nacional durante el uso del uniforme deberá:",opts:["Portar en toda ocasión el uniforme con esmerada pulcritud y elegancia.","Portar en toda ocasión el uniforme bien atalajado y con perfume.","Las mujeres podrán portar mínimo 3 pares de aretes por oreja.","Llevar siempre las uñas largas y pintadas del color que tenga a bien."],src:"RESPUESTAS_MANDATORIO",tp:"Procedimientos Policiales",c:0},
-  {q:"Según el artículo 7 obligaciones de la Resolución número 3372 del 26 de octubre de 2009, el personal de la Policía Nacional durante el uso del uniforme podrá:",opts:["portar dos anillo o argolla en cada mano para el personal femenino, los cuales estarán elaborados en oro de 18 K","portar un anillo o argolla en cada mano para el personal femenino, los cuales estarán enmarcados dentro del contraste de la sencillez y la elegancia. Para el personal masculino solo se portará la argolla de matrimonio o el anillo de grado.","Para el personal masculino NO podrá portar la argolla de matrimonio","Ninguna de las anteriores."],src:"RESPUESTAS_MANDATORIO",tp:"Procedimientos Policiales",c:0},
-  {q:"Según el artículo 7 obligaciones de la Resolución número 3372 del 26 de octubre de 2009, el personal de la Policía Nacional que cumpla funciones de escolta podrá:",opts:["Estar en traje deportivo para las diferentes actividades.","Utilizar solamente trajes de marcas reconocidas.","Estar en traje civil y utilizará en el cuello de la camisa o del saco el escudo metálico dorado de la Policía Nacional de manera permanente.","No podrán estar en traje civil por ningún motivo."],src:"RESPUESTAS_MANDATORIO",tp:"Procedimientos Policiales",c:0},
-  {q:"Según el artículo 8 Prohibiciones de la Resolución número 3372 del 26 de octubre de 2009, el personal de la Policía Nacional no podrá:",opts:["Hacer modificaciones a los uniformes, accesorios, insignias, condecoraciones y distintivos establecidos en el presente reglamento.","exigir al personal subalterno el uso correcto del uniforme, insignias, condecoraciones y distintivos.","Portar en toda ocasión el uniforme con esmerada pulcritud y elegancia.","Ninguna de Las anteriores."],src:"RESPUESTAS_MANDATORIO",tp:"Procedimientos Policiales",c:0},
+  {q:"Según el artículo 7 obligaciones de la Resolución número 3372 del 26 de octubre de 2009, el personal de la Policía Nacional durante el uso del uniforme podrá:",opts:["portar dos anillo o argolla en cada mano para el personal femenino, los cuales estarán elaborados en oro de 18 K","portar un anillo o argolla en cada mano para el personal femenino, los cuales estarán enmarcados dentro del contraste de la sencillez y la elegancia. Para el personal masculino solo se portará la argolla de matrimonio o el anillo de grado.","Para el personal masculino NO podrá portar la argolla de matrimonio","Ninguna de las anteriores."],src:"RESPUESTAS_MANDATORIO",tp:"Procedimientos Policiales",c:1},
+  {q:"Según el artículo 7 obligaciones de la Resolución número 3372 del 26 de octubre de 2009, el personal de la Policía Nacional que cumpla funciones de escolta podrá:",opts:["Estar en traje deportivo para las diferentes actividades.","Utilizar solamente trajes de marcas reconocidas.","Estar en traje civil y utilizará en el cuello de la camisa o del saco el escudo metálico dorado de la Policía Nacional de manera permanente.","No podrán estar en traje civil por ningún motivo."],src:"RESPUESTAS_MANDATORIO",tp:"Procedimientos Policiales",c:1},
+  {q:"Según el artículo 8 Prohibiciones de la Resolución número 3372 del 26 de octubre de 2009, el personal de la Policía Nacional no podrá:",opts:["Hacer modificaciones a los uniformes, accesorios, insignias, condecoraciones y distintivos establecidos en el presente reglamento.","exigir al personal subalterno el uso correcto del uniforme, insignias, condecoraciones y distintivos.","Portar en toda ocasión el uniforme con esmerada pulcritud y elegancia.","Ninguna de Las anteriores."],src:"RESPUESTAS_MANDATORIO",tp:"Procedimientos Policiales",c:3},
   {q:"¿Es una prohibición usar prendas, insignias, distintivos o condecoraciones no contemplados en el presente reglamento?",opts:["Verdadero","Falso."],src:"RESPUESTAS_MANDATORIO",tp:"Derechos Humanos",c:0},
   {q:"¿Es una prohibición Donar, vender, alquilar, dar en calidad de prenda o facilitar en préstamo uniformes, insignias, distintivos y condecoraciones, aun cuando se encuentren en mal estado o en desuso?",opts:["Verdadero","Falso."],src:"RESPUESTAS_MANDATORIO",tp:"Derechos Humanos",c:0},
   {q:"Los elementos para el servicio de Policía Se clasifican en principales y complementarios.",opts:["Verdadero","Falso."],src:"RESPUESTAS_MANDATORIO",tp:"Atencion al Ciudadano",c:0},
   {q:"Para evitar lesiones ante una posible caída hacia atrás, el funcionario de policía evitará colocar elementos en la parte posterior del mismo.",opts:["Verdadero","Falso."],src:"RESPUESTAS_MANDATORIO",tp:"Procedimientos Policiales",c:0},
-  {q:"Cuál de los siguientes elementos principales son los que debe utilizar el policía para la prestación del servicio.",opts:["Uniforme reglamentario","Placa de identificación policial","Radio portátil.","Todas las anteriores"],src:"RESPUESTAS_MANDATORIO",tp:"Procedimientos Policiales",c:0},
-  {q:"Cuál de los siguientes elementos no hacen parte de los elementos principales que debe utilizar el policía para la prestación del servicio.",opts:["Linterna, esposas, pito, reloj, bolígrafo de tinta negra.","Guía de teléfonos de emergencia.","Arma de dotación y su respectiva munición.","Pinzas"],src:"RESPUESTAS_MANDATORIO",tp:"Atencion al Ciudadano",c:0},
-  {q:"¿De acuerdo a la Resolución 00911 de 2008 en su Capítulo IV Numeral 1, cuáles son los elementos básicos para el desarrollo del patrullaje?",opts:["Uniforme reglamentario","Armamento y su respectiva munición","Documentos de identidad personal e identificación policial","Todas las anteriores"],src:"RESPUESTAS_MANDATORIO",tp:"Procedimientos Policiales",c:0},
+  {q:"Cuál de los siguientes elementos principales son los que debe utilizar el policía para la prestación del servicio.",opts:["Uniforme reglamentario","Placa de identificación policial","Radio portátil.","Todas las anteriores"],src:"RESPUESTAS_MANDATORIO",tp:"Procedimientos Policiales",c:3},
+  {q:"Cuál de los siguientes elementos no hacen parte de los elementos principales que debe utilizar el policía para la prestación del servicio.",opts:["Linterna, esposas, pito, reloj, bolígrafo de tinta negra.","Guía de teléfonos de emergencia.","Arma de dotación y su respectiva munición.","Pinzas"],src:"RESPUESTAS_MANDATORIO",tp:"Atencion al Ciudadano",c:2},
+  {q:"¿De acuerdo a la Resolución 00911 de 2008 en su Capítulo IV Numeral 1, cuáles son los elementos básicos para el desarrollo del patrullaje?",opts:["Uniforme reglamentario","Armamento y su respectiva munición","Documentos de identidad personal e identificación policial","Todas las anteriores"],src:"RESPUESTAS_MANDATORIO",tp:"Procedimientos Policiales",c:3},
   {q:"¿Según la ubicación de los elementos del servicio en el cinturón multipropósito, La funda de extracción rápida y arma de fuego se ubicará en?",opts:["al lado de la mano ágil, como arma principal.","se ubicará en la parte delantera al otro costado del porta esposas.","se ubicarán en la parte de atrás del porta-bastón.","se ubicará al lado izquierdo, detrás de la linterna"],src:"RESPUESTAS_MANDATORIO",tp:"Procedimientos Policiales",c:0},
   {q:"Según la ubicación de los elementos del servicio en el cinturón multipropósito, el Porta bastón y bastón policial se ubicarán en:",opts:["se ubicarán al lado contrario de la funda de extracción rápida","se ubicarán al lado de la mano ágil, como arma principal.","se ubicarán en la parte de atrás de la funda de extracción rápida","en el costado derecho de la motocicleta uniformada"],src:"RESPUESTAS_MANDATORIO",tp:"Atencion al Ciudadano",c:0},
-  {q:"¿Cuántas categorías jurídicas tiene el presente código?",opts:["3.","6","5","4"],src:"RESPUESTAS_MANDATORIO",tp:"Procedimientos Policiales",c:0},
+  {q:"¿Cuántas categorías jurídicas tiene el presente código?",opts:["3.","6","5","4"],src:"RESPUESTAS_MANDATORIO",tp:"Procedimientos Policiales",c:1},
   {q:"¿La finalidad de la actividad de policía es preservar la convivencia y restablecer todos los comportamientos que la alteren?",opts:["Verdadero","Falso."],src:"RESPUESTAS_MANDATORIO",tp:"Procedimientos Policiales",c:0},
-  {q:"¿Cuántas medidas correctivas son de atribución del personal de la policía nacional?",opts:["10.","6","5","4"],src:"RESPUESTAS_MANDATORIO",tp:"Procedimientos Policiales",c:0},
+  {q:"¿Cuántas medidas correctivas son de atribución del personal de la policía nacional?",opts:["10.","6","5","4"],src:"RESPUESTAS_MANDATORIO",tp:"Procedimientos Policiales",c:1},
   {q:"Es un deber de las autoridades de policía: ¿Conocer, aplicar y capacitarse en mecanismos alternativos de solución de conflictos y en rutas de acceso a la justicia?",opts:["Verdadero","Falso."],src:"RESPUESTAS_MANDATORIO",tp:"Procedimientos Policiales",c:0},
   {q:"¿El objeto de la ley 1801 es de carácter preventivo y establece condiciones para la convivencia?",opts:["Verdadero","Falso."],src:"RESPUESTAS_MANDATORIO",tp:"Procedimientos Policiales",c:0},
   {q:"“la interacción pacífica, respetuosa y armónica entre las personas, con los bienes, y con el ambiente, en el marco del ordenamiento jurídico”, la definición anterior hacer referencia a:",opts:["Tolerancia","medidas correctivas","medios de policía","convivencia"],src:"RESPUESTAS_MANDATORIO",tp:"Procedimientos Policiales",c:0},
-  {q:"¿cuántas categorías jurídicas existen en la ley 1801?",opts:["5","6","3","4"],src:"RESPUESTAS_MANDATORIO",tp:"Procedimientos Policiales",c:0},
+  {q:"¿cuántas categorías jurídicas existen en la ley 1801?",opts:["5","6","3","4"],src:"RESPUESTAS_MANDATORIO",tp:"Procedimientos Policiales",c:1},
   {q:"son los instrumentos jurídicos con que cuentan las autoridades competentes para el cumplimiento efectivo de la función y actividad de Policía, lo anterior define:",opts:["medios de policía","comportamientos contrarios a la convivencia","atribuciones","medidas correctivas"],src:"RESPUESTAS_MANDATORIO",tp:"Procedimientos Policiales",c:0},
   {q:"¿Qué es la mediación policial?",opts:["Es el instrumento que nace de la naturaleza de la función policial, cuyas principales cualidades son la comunitariedad y la proximidad, a través del cual la autoridad es el canal para que las personas en conflicto decidan voluntariamente resolver sus desacuerdos armónicamente”.","Consiste en la facultad de hacer cumplir las disposiciones dictadas en ejercicio del poder de policía, mediante la expedición de reglamentos generales y de acciones apropiadas para garantizar la convivencia. Esta función se cumple por medio de órdenes de policía.","Conjunto de instrumentos utilizados para el desarrollo de la función y actividad de Policía.","La mediación permite que el mediador escuche a las personas que se encuentran en situación de conflicto de convivencia y facilite un camino para encontrar una solución equitativa. De realizarse el acuerdo, se suscribirá el acta de mediación, donde se consignarán las obligaciones a cargo de cada uno de los interesados, la cual hará tránsito a cosa juzgada y prestará mérito ejecutivo."],src:"RESPUESTAS_MANDATORIO",tp:"Procedimientos Policiales",c:0},
-  {q:"¿Cuáles son las habilidades del mediador policial?",opts:["Hablar en voz alta, imponiendo su autoridad.","Comunicación estratégica, regulación y auto regulación, creatividad para formular y establecer acuerdos.","Realizar buenos comentarios e inclinarse a favor por una sola persona.","Ninguna de las anteriores."],src:"RESPUESTAS_MANDATORIO",tp:"Derechos Humanos",c:0},
+  {q:"¿Cuáles son las habilidades del mediador policial?",opts:["Hablar en voz alta, imponiendo su autoridad.","Comunicación estratégica, regulación y auto regulación, creatividad para formular y establecer acuerdos.","Realizar buenos comentarios e inclinarse a favor por una sola persona.","Ninguna de las anteriores."],src:"RESPUESTAS_MANDATORIO",tp:"Derechos Humanos",c:3},
   {q:"¿Qué rol cumple el mediador policial?",opts:["Actúa de forma preventiva frente a comportamientos que ponen en riesgo la vida e integridad de los ciudadanos.","Actúa de forma parcial frente al problema","Todas son correctas","Ninguna es correcta."],src:"RESPUESTAS_MANDATORIO",tp:"Derechos Humanos",c:0},
-  {q:"Esta técnica supone escuchar con atención a las partes y descubrir los sentimientos, emociones, deseos y necesidades que están inmersas en el conflicto que se narra. Ejemplo: ¿Quiere decir que…? ¿Lo que usted quiere exponer es que…?",opts:["La indagación","El parafraseo","La formulación","Ninguna de las anteriores"],src:"RESPUESTAS_MANDATORIO",tp:"Atencion al Ciudadano",c:0},
-  {q:"Si el policía vigilancia Recepcióna denuncia en municipios o zonas rurales donde no hay policía judicial, deberá expedir una remisión para valoración forense como parte de los actos urgentes, dirigida a la entidad competente de la jurisdicción. Deberá solicitar entregar de copia del dictamen a la víctima y el original anexarlo a la denuncia.",opts:["Falso","Verdadero"],src:"RESPUESTAS_MANDATORIO",tp:"Atencion al Ciudadano",c:0},
-  {q:"Si la víctima es menor de dieciocho (18) años de edad, el funcionario de policía deberá informar y tramitar de inmediato el caso a través de la Policía de Infancia y Adolescencia, para que aplique los procedimientos y lineamientos preestablecidos.",opts:["Falso","Verdadero"],src:"RESPUESTAS_MANDATORIO",tp:"Procedimientos Policiales",c:0},
-  {q:"Hace parte de las medidas de protección (Decreto 4799 de 2011).",opts:["Ordenar al agresor el desalojo de la casa de habitación. (Decreto 4799 de 2011, Art 3, numeral competencia de la Policía Nacional).","Decidir provisionalmente el régimen de visitas, guarda y custodia de los hijos e hijas si los hubiere. (Ley 1257 de 2008, Art. 17, literal h).","Ordenar al agresor el pago de los gastos de orientación y asesoría jurídica, médicos y psicológicos que requiera la víctima.","Todas las anteriores."],src:"RESPUESTAS_MANDATORIO",tp:"Uso de la Fuerza",c:0},
-  {q:"Una medida de Protección que debe garantizar la Policía Nacional en torno a las (VBG) es: Suspender al agresor la tenencia, porte y uso de armas, en caso de que estas sean indispensables para el ejercicio de su profesión u oficio. (Decisión motivada por autoridad competente). (Decreto 4799/11, Art. 3º, numeral 6).",opts:["Falso","Verdadero"],src:"RESPUESTAS_MANDATORIO",tp:"Uso de la Fuerza",c:0},
+  {q:"Esta técnica supone escuchar con atención a las partes y descubrir los sentimientos, emociones, deseos y necesidades que están inmersas en el conflicto que se narra. Ejemplo: ¿Quiere decir que…? ¿Lo que usted quiere exponer es que…?",opts:["La indagación","El parafraseo","La formulación","Ninguna de las anteriores"],src:"RESPUESTAS_MANDATORIO",tp:"Atencion al Ciudadano",c:3},
+  {q:"Si el policía vigilancia Recepcióna denuncia en municipios o zonas rurales donde no hay policía judicial, deberá expedir una remisión para valoración forense como parte de los actos urgentes, dirigida a la entidad competente de la jurisdicción. Deberá solicitar entregar de copia del dictamen a la víctima y el original anexarlo a la denuncia.",opts:["Falso","Verdadero"],src:"RESPUESTAS_MANDATORIO",tp:"Atencion al Ciudadano",c:1},
+  {q:"Si la víctima es menor de dieciocho (18) años de edad, el funcionario de policía deberá informar y tramitar de inmediato el caso a través de la Policía de Infancia y Adolescencia, para que aplique los procedimientos y lineamientos preestablecidos.",opts:["Falso","Verdadero"],src:"RESPUESTAS_MANDATORIO",tp:"Procedimientos Policiales",c:1},
+  {q:"Hace parte de las medidas de protección (Decreto 4799 de 2011).",opts:["Ordenar al agresor el desalojo de la casa de habitación. (Decreto 4799 de 2011, Art 3, numeral competencia de la Policía Nacional).","Decidir provisionalmente el régimen de visitas, guarda y custodia de los hijos e hijas si los hubiere. (Ley 1257 de 2008, Art. 17, literal h).","Ordenar al agresor el pago de los gastos de orientación y asesoría jurídica, médicos y psicológicos que requiera la víctima.","Todas las anteriores."],src:"RESPUESTAS_MANDATORIO",tp:"Uso de la Fuerza",c:3},
+  {q:"Una medida de Protección que debe garantizar la Policía Nacional en torno a las (VBG) es: Suspender al agresor la tenencia, porte y uso de armas, en caso de que estas sean indispensables para el ejercicio de su profesión u oficio. (Decisión motivada por autoridad competente). (Decreto 4799/11, Art. 3º, numeral 6).",opts:["Falso","Verdadero"],src:"RESPUESTAS_MANDATORIO",tp:"Uso de la Fuerza",c:1},
   {q:"La Policía Nacional establece lineamientos a su personal mediante el acto administrativo, que orienta al desarrollo de las actividades de vigilancia y control, establecidas en la Ley 1098 de 2006 “Por la cual se expide el Código de la Infancia y la Adolescencia”.",opts:["Ley 1098 del 08/05/2006","Guía 2PC-GU-0001 del 29/10/2019","Ley 1801 del 29/07/2016","Instructivo Nº 012 DIPON-DIPRO de 2023"],src:"RESPUESTAS_MANDATORIO",tp:"Procedimientos Policiales",c:0},
   {q:"Es el sistema de información mediante el cual se registran las acciones preventivas y de control desarrollados por los integrantes de la Policía Nacional en la atención de los motivos de policía.",opts:["SPOA - Sistema Penal Oral Acusatorio","SIEDCO - Sistema de Información Estadístico, Delincuencial, Contravencional y Operativo de la Policía Nacional.","SICSE - Sistema de Información de Protección y Servicios Especiales.","CSIRT-PONAL - Equipo de Respuesta a Incidentes de Seguridad Informática de la Policía Nacional."],src:"RESPUESTAS_MANDATORIO",tp:"Procedimientos Policiales",c:0},
   {q:"De acuerdo a la guía 2PC-GU-0001 “ACCIONES DE VIGILANCIA Y CONTROL EN MATERIA DE INFANCIA Y ADOLESCENCIA”, el siguiente punto de control: (QUÉ: Dejar a disposición al NNA ante autoridad competente de restablecimiento de derechos. QUIÉN: Personal de la Policía Nacional. CUANDO: Cuando se presenten situaciones de vulneración de derechos de NNA o se evidencien mediante actividades de vigilancia y control. CÓMO: Entrega del documento escrito (comunicado oficial) a la autoridad administrativa. EVIDENCIA: Informe Dejando a Disposición NNA ante Autoridad competente o GINAD), corresponde, a:",opts:["Atender niños, niñas y adolescentes que requieren protección.","Apoyar diligencias de rescate y restablecimiento de derechos de niños, niñas o adolescentes.","Vigilancia a fin de controlar el ingreso de niños, niñas y adolescentes en lugares donde se desarrollan actividades económicas.","Vigilancia y control a la entrada y alrededores de los establecimientos educativos."],src:"RESPUESTAS_MANDATORIO",tp:"Derechos Humanos",c:0},
-  {q:"Indique la norma que integra el siguiente apartado: Artículo 7º. “Protección integral. Se entiende por protección integral de los niños, niñas y adolescentes el reconocimiento como sujetos de derechos, la garantía y cumplimiento de los mismos, la prevención de su amenaza o vulneración y la seguridad de su restablecimiento inmediato en desarrollo del principio del interés superior. La protección integral se materializa en el conjunto de políticas, planes, programas y acciones que se ejecuten en los ámbitos nacional, departamental, distrital y municipal con la correspondiente asignación de recursos financieros, físicos y humanos”.",opts:["Ley 599 del 24/07/2000","Ley 1620 del 15/03/2013","Ley 679 del 03/08/2001","Ley 1098 del 08/05/2006"],src:"RESPUESTAS_MANDATORIO",tp:"Derechos Humanos",c:0},
-  {q:"En el desligue de las acciones de vigilancia y control en materia de infancia y adolescencia, para la atención de NNA que requieren protección, al identificar cualquier situación de vulneración de derechos, las siguientes actividades; (Recepcionar el requerimiento, despliegue de acciones inmediatas o brindar orientación al ciudadano, articular y coordinar autoridades administrativas competentes…Defensor de Familia, Comisario de Familia, Inspector de Policía según sea el caso., y documentar las acciones y procedimientos bajo el principio de legalidad), corresponden, a:",opts:["El antes","El durante","El después","Ninguna de las anteriores"],src:"RESPUESTAS_MANDATORIO",tp:"Uso de la Fuerza",c:0},
-  {q:"En el desligue de las acciones de vigilancia y control en materia de infancia y adolescencia, para la atención de NNA que requieren protección, al identificar cualquier situación de vulneración de derechos, las siguientes actividades; (El funcionario de policía deberá garantizar la protección del NNA durante todo el procedimiento, en situación de vulnerabilidad y/o riesgo ingresar sin mandamiento escrito, establecer un lenguaje claro con el NNA, realizar el retiro inmediato, en caso de requerir asistencia médica realizar traslado a la entidad prestadora de servicio de salud, ubicación de los padres de familia y/o representante legal, tomar contacto para poner en conocimiento a la autoridad competente para el procedimiento de verificación y restablecimiento de derechos., y documentar las acciones y procedimientos bajo el principio de legalidad), corresponden, a:",opts:["El antes","El durante","El después","Ninguna de las anteriores"],src:"RESPUESTAS_MANDATORIO",tp:"Uso de la Fuerza",c:0},
-  {q:"En el desligue de las acciones de vigilancia y control en materia de infancia y adolescencia, para la atención de NNA que requieren protección, al identificar cualquier situación de vulneración de derechos, las siguientes actividades; (Informar al Sistema Integrado de Emergencias y Seguridad SIES las actividades adelantadas para el restablecimiento de derechos y las autoridades administrativas competentes… Defensor de Familia, Comisario de Familia, Inspector de Policía según sea el caso., y documentar las acciones y procedimientos bajo el principio de legalidad), corresponden, a:",opts:["El antes","El durante","El después","Ninguna de las anteriores"],src:"RESPUESTAS_MANDATORIO",tp:"Uso de la Fuerza",c:0},
-  {q:"De acuerdo a la guía 2PC-GU-0001 “ACCIONES DE VIGILANCIA Y CONTROL EN MATERIA DE INFANCIA Y ADOLESCENCIA”, en lo referente a la vigilancia y control a la entrada y alrededores de los establecimientos educativos, indique cual es la finalidad.",opts:["De acuerdo al artículo 44 numeral 7 de la Ley 1098 de 2006, a solicitud de las directivas y docentes del establecimiento educativo, se podrán realizar acciones efectivas alrededor de la institución educativa, contra el tráfico, venta y consumo de todo tipo de sustancias psicoactivas y/o prohibidas","Dando aplicabilidad al medio de policía “Registro a Personas” tipificado en la Ley 1801 de 2016 artículo 159 y la sentencia C-789 de 20 de SEP de 2006, a fin de controlar el porte de armas de fuego o cortopunzantes, bebidas embriagantes, estupefacientes, material pornográfico y demás elementos que puedan atentar contra la integridad de los NNA.","Este procedimiento tiene como fin prevenir y disuadir cualquier situación de vulneración de derechos de un NNA a la entrada y alrededores de los establecimientos educativos, para garantizar la protección integral de esta población.","En caso de presentarse un comportamiento contrario a la convivencia, aplicar lo establecido en la Ley 1801 de 2016."],src:"RESPUESTAS_MANDATORIO",tp:"Uso de la Fuerza",c:0},
+  {q:"Indique la norma que integra el siguiente apartado: Artículo 7º. “Protección integral. Se entiende por protección integral de los niños, niñas y adolescentes el reconocimiento como sujetos de derechos, la garantía y cumplimiento de los mismos, la prevención de su amenaza o vulneración y la seguridad de su restablecimiento inmediato en desarrollo del principio del interés superior. La protección integral se materializa en el conjunto de políticas, planes, programas y acciones que se ejecuten en los ámbitos nacional, departamental, distrital y municipal con la correspondiente asignación de recursos financieros, físicos y humanos”.",opts:["Ley 599 del 24/07/2000","Ley 1620 del 15/03/2013","Ley 679 del 03/08/2001","Ley 1098 del 08/05/2006"],src:"RESPUESTAS_MANDATORIO",tp:"Derechos Humanos",c:1},
+  {q:"En el desligue de las acciones de vigilancia y control en materia de infancia y adolescencia, para la atención de NNA que requieren protección, al identificar cualquier situación de vulneración de derechos, las siguientes actividades; (Recepcionar el requerimiento, despliegue de acciones inmediatas o brindar orientación al ciudadano, articular y coordinar autoridades administrativas competentes…Defensor de Familia, Comisario de Familia, Inspector de Policía según sea el caso., y documentar las acciones y procedimientos bajo el principio de legalidad), corresponden, a:",opts:["El antes","El durante","El después","Ninguna de las anteriores"],src:"RESPUESTAS_MANDATORIO",tp:"Uso de la Fuerza",c:3},
+  {q:"En el desligue de las acciones de vigilancia y control en materia de infancia y adolescencia, para la atención de NNA que requieren protección, al identificar cualquier situación de vulneración de derechos, las siguientes actividades; (El funcionario de policía deberá garantizar la protección del NNA durante todo el procedimiento, en situación de vulnerabilidad y/o riesgo ingresar sin mandamiento escrito, establecer un lenguaje claro con el NNA, realizar el retiro inmediato, en caso de requerir asistencia médica realizar traslado a la entidad prestadora de servicio de salud, ubicación de los padres de familia y/o representante legal, tomar contacto para poner en conocimiento a la autoridad competente para el procedimiento de verificación y restablecimiento de derechos., y documentar las acciones y procedimientos bajo el principio de legalidad), corresponden, a:",opts:["El antes","El durante","El después","Ninguna de las anteriores"],src:"RESPUESTAS_MANDATORIO",tp:"Uso de la Fuerza",c:3},
+  {q:"En el desligue de las acciones de vigilancia y control en materia de infancia y adolescencia, para la atención de NNA que requieren protección, al identificar cualquier situación de vulneración de derechos, las siguientes actividades; (Informar al Sistema Integrado de Emergencias y Seguridad SIES las actividades adelantadas para el restablecimiento de derechos y las autoridades administrativas competentes… Defensor de Familia, Comisario de Familia, Inspector de Policía según sea el caso., y documentar las acciones y procedimientos bajo el principio de legalidad), corresponden, a:",opts:["El antes","El durante","El después","Ninguna de las anteriores"],src:"RESPUESTAS_MANDATORIO",tp:"Uso de la Fuerza",c:3},
+  {q:"De acuerdo a la guía 2PC-GU-0001 “ACCIONES DE VIGILANCIA Y CONTROL EN MATERIA DE INFANCIA Y ADOLESCENCIA”, en lo referente a la vigilancia y control a la entrada y alrededores de los establecimientos educativos, indique cual es la finalidad.",opts:["De acuerdo al artículo 44 numeral 7 de la Ley 1098 de 2006, a solicitud de las directivas y docentes del establecimiento educativo, se podrán realizar acciones efectivas alrededor de la institución educativa, contra el tráfico, venta y consumo de todo tipo de sustancias psicoactivas y/o prohibidas","Dando aplicabilidad al medio de policía “Registro a Personas” tipificado en la Ley 1801 de 2016 artículo 159 y la sentencia C-789 de 20 de SEP de 2006, a fin de controlar el porte de armas de fuego o cortopunzantes, bebidas embriagantes, estupefacientes, material pornográfico y demás elementos que puedan atentar contra la integridad de los NNA.","Este procedimiento tiene como fin prevenir y disuadir cualquier situación de vulneración de derechos de un NNA a la entrada y alrededores de los establecimientos educativos, para garantizar la protección integral de esta población.","En caso de presentarse un comportamiento contrario a la convivencia, aplicar lo establecido en la Ley 1801 de 2016."],src:"RESPUESTAS_MANDATORIO",tp:"Uso de la Fuerza",c:1},
   {q:"De acuerdo a la guía 2PC-GU-0001 “ACCIONES DE VIGILANCIA Y CONTROL EN MATERIA DE INFANCIA Y ADOLESCENCIA”, el siguiente punto de control: (QUÉ: El ingreso al inmueble se realice con previa autorización de la autoridad competente. CÓMO: La autoridad competente documenta la diligencia a través de un acta. QUIÉN: Autoridad que solicita el apoyo a la diligencia. CUANDO: Se requiera ingresar en un inmueble y la persona permita o no el ingreso. EVIDENCIA: Copia del acta), corresponde, a:",opts:["Atender niños, niñas y adolescentes que requieren protección.","Apoyar diligencias de rescate y restablecimiento de derechos de niños, niñas o adolescentes.","Vigilancia a fin de controlar el ingreso de niños, niñas y adolescentes en lugares donde se desarrollan actividades económicas.","Vigilancia y control a la entrada y alrededores de los establecimientos educativos."],src:"RESPUESTAS_MANDATORIO",tp:"Derechos Humanos",c:0},
   {q:"De acuerdo al acto administrativo 2PC-GU-0001 “ACCIONES DE VIGILANCIA Y CONTROL EN MATERIA DE INFANCIA Y ADOLESCENCIA”, son afectaciones contra la integridad física del NNA y que requiere atención inmediata por parte de especialistas en la salud: (Accidentes de tránsito, Heridos por arma de fuego, Heridas con armas corto punzante, Violencia intrafamiliar con lesiones personales Intento de suicidio, Intoxicación, Desnutrición o en riesgos de desnutrición, Víctimas de lesiones personales, NNA bajo los efectos de sustancia prohibidas, Lesiones personales, Delitos contra la libertad, integridad y formación sexual de NNA y Manipulación de juegos pirotécnicos).",opts:["De acuerdo","En desacuerdo","Son eventos, pero no afectan a los NNA","No son eventos de vulneración a la integridad física"],src:"RESPUESTAS_MANDATORIO",tp:"Derechos Humanos",c:0},
-  {q:"La Policía Nacional No podrán capturar a quienes ostenten la calidad de diplomáticos en nuestro país, ni allanar su domicilio, registrar sus vehículos ni interceptar las comunicaciones y la correspondencia oficial o privada.",opts:["Falso","Verdadero"],src:"RESPUESTAS_MANDATORIO",tp:"Procedimientos Policiales",c:0},
-  {q:"En caso de ser necesaria la práctica de un allanamiento a la propiedad del diplomático se debe comunicar al Ministerio de Relaciones Exteriores, para los trámites respectivos.",opts:["Falso","Verdadero"],src:"RESPUESTAS_MANDATORIO",tp:"Derechos Humanos",c:0},
-  {q:"Son diplomáticos: Los delegados, nuncios, internuncios, embajadores, enviados ordinarios y extraordinarios, ministros plenipotenciarios encargados de negocios con carta de gabinete, consejeros, auditores, consejeros, primer secretario, segundo secretario, adjuntos, agregados militares y de policía y agregados civiles especializados.",opts:["Falso","Verdadero"],src:"RESPUESTAS_MANDATORIO",tp:"Derechos Humanos",c:0},
-  {q:"De acuerdo a los Estándares Internacionales, los Principios que regulan el Uso de la Fuerza en situaciones diferentes a conflictos armados son:",opts:["Proporcionalidad, legalidad, limitación, necesidad y distinción.","Legalidad, proporcionalidad, distinción y limitación.","Dignidad, igualdad y legalidad.","Legalidad, necesidad, proporcionalidad."],src:"RESPUESTAS_MANDATORIO",tp:"Uso de la Fuerza",c:0},
+  {q:"La Policía Nacional No podrán capturar a quienes ostenten la calidad de diplomáticos en nuestro país, ni allanar su domicilio, registrar sus vehículos ni interceptar las comunicaciones y la correspondencia oficial o privada.",opts:["Falso","Verdadero"],src:"RESPUESTAS_MANDATORIO",tp:"Procedimientos Policiales",c:1},
+  {q:"En caso de ser necesaria la práctica de un allanamiento a la propiedad del diplomático se debe comunicar al Ministerio de Relaciones Exteriores, para los trámites respectivos.",opts:["Falso","Verdadero"],src:"RESPUESTAS_MANDATORIO",tp:"Derechos Humanos",c:1},
+  {q:"Son diplomáticos: Los delegados, nuncios, internuncios, embajadores, enviados ordinarios y extraordinarios, ministros plenipotenciarios encargados de negocios con carta de gabinete, consejeros, auditores, consejeros, primer secretario, segundo secretario, adjuntos, agregados militares y de policía y agregados civiles especializados.",opts:["Falso","Verdadero"],src:"RESPUESTAS_MANDATORIO",tp:"Derechos Humanos",c:1},
+  {q:"De acuerdo a los Estándares Internacionales, los Principios que regulan el Uso de la Fuerza en situaciones diferentes a conflictos armados son:",opts:["Proporcionalidad, legalidad, limitación, necesidad y distinción.","Legalidad, proporcionalidad, distinción y limitación.","Dignidad, igualdad y legalidad.","Legalidad, necesidad, proporcionalidad."],src:"RESPUESTAS_MANDATORIO",tp:"Uso de la Fuerza",c:3},
   {q:"Cuáles de estos instrumentos no son vinculantes por parte del DIDH a los estados pero regulan el comportamiento y la conducta de los funcionarios encargados de hacer cumplir la ley -FEHCL en situaciones diferentes a conflicto armado son :",opts:["Convenios de Ginebra de 1949 y protocolos adicionales de 1977.","El código de conducta y principios básicos sobre el empleo de la fuerza y de las armas de fuego para los FEHCL","Pacto Internacional de los Derechos Civiles y Políticos y Pacto Internacional de los Derechos Sociales, Económicos y Culturales ONU.","Dos y tres son verdaderos."],src:"RESPUESTAS_MANDATORIO",tp:"Derechos Humanos",c:0},
-  {q:"Para tener un criterio fundamentado sobre el uso de la fuerza, las armas de fuego y las armas no letales en el desarrollo de los procedimientos policiales, debo leer, analizar y adoptar la siguiente resolución.",opts:["Resolución. No. 00911 del 01-04-2009.","Resolución 00912 del 01-04-2009","Resolución 02903 del 23 de Junio de 2017.","Resolución 04048 del 23 de Junio de 2016."],src:"RESPUESTAS_MANDATORIO",tp:"Uso de la Fuerza",c:0}
+  {q:"Para tener un criterio fundamentado sobre el uso de la fuerza, las armas de fuego y las armas no letales en el desarrollo de los procedimientos policiales, debo leer, analizar y adoptar la siguiente resolución.",opts:["Resolución. No. 00911 del 01-04-2009.","Resolución 00912 del 01-04-2009","Resolución 02903 del 23 de Junio de 2017.","Resolución 04048 del 23 de Junio de 2016."],src:"RESPUESTAS_MANDATORIO",tp:"Uso de la Fuerza",c:2}
 ];
 
-const TOPICS = ["Atencion al Ciudadano","Derechos Humanos","Procedimientos Policiales","Uso de la Fuerza"];
-const TOPIC_COLORS = {"Atencion al Ciudadano":"#1565c0","Derechos Humanos":"#6a1b9a","Procedimientos Policiales":"#00695c","Uso de la Fuerza":"#b71c1c"};
-const TOPIC_ICONS  = {"Atencion al Ciudadano":"[AC]","Derechos Humanos":"[DH]","Procedimientos Policiales":"[PP]","Uso de la Fuerza":"[UF]"};
+const TOPICS=["Atencion al Ciudadano","Derechos Humanos","Procedimientos Policiales","Uso de la Fuerza"];
+const TOPIC_COLORS={"Atencion al Ciudadano":"#1565c0","Derechos Humanos":"#6a1b9a","Procedimientos Policiales":"#00695c","Uso de la Fuerza":"#b71c1c"};
+const TOPIC_ICONS={"Atencion al Ciudadano":"[AC]","Derechos Humanos":"[DH]","Procedimientos Policiales":"[PP]","Uso de la Fuerza":"[UF]"};
+const TOPIC_COUNTS={"Atencion al Ciudadano":111,"Derechos Humanos":60,"Procedimientos Policiales":239,"Uso de la Fuerza":144};
 
-let sdCache={}, fIdx=[], pos=0, ans={}, okN=0, failN=0, currentMode='';
+let sdCache={},fIdx=[],pos=0,ans={},okN=0,failN=0,currentMode='';
+let bTopicFilter='',bSearchTerm='';
 
 function shuffle(a){
   const r=[...a];
-  for(let i=r.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[r[i],r[j]]=[r[j],r[i]];}
+  for(let i=r.length-1;i>0;i--){
+    const j=Math.floor(Math.random()*(i+1));[r[i],r[j]]=[r[j],r[i]];
+  }
   return r;
 }
-
 function prepQ(qi){
-  if(sdCache[qi]) return;
+  if(sdCache[qi])return;
   const q=QS[qi];
   const ord=shuffle(q.opts.map((_,i)=>i));
-  sdCache[qi]={ord, ci:ord.indexOf(q.c)};
+  sdCache[qi]={ord,ci:ord.indexOf(q.c)};
 }
 
-// ===== HOME =====
+// ── HOME ──
 function goHome(){
   document.getElementById('homescreen').classList.remove('hidden');
   document.getElementById('qwrap').classList.add('hidden');
+  document.getElementById('banco').classList.add('hidden');
   document.getElementById('statsbar').style.display='none';
   document.getElementById('bottombar').style.display='none';
   document.getElementById('hbtnshuffle').style.display='none';
   document.getElementById('hbtnreset').style.display='none';
-  document.getElementById('hbtnres').style.display='none';
   document.getElementById('mov').classList.remove('show');
 }
 
-// ===== START MODES =====
+// ── BANCO ──
+function showBanco(){
+  document.getElementById('homescreen').classList.add('hidden');
+  document.getElementById('qwrap').classList.add('hidden');
+  document.getElementById('banco').classList.remove('hidden');
+  document.getElementById('statsbar').style.display='none';
+  document.getElementById('bottombar').style.display='none';
+  bTopicFilter=''; bSearchTerm='';
+  document.getElementById('searchInp').value='';
+  renderBanco();
+}
+
+function renderBanco(){
+  const list=document.getElementById('bancoList');
+  const term=bSearchTerm.toLowerCase().trim();
+  let items=QS.map((q,i)=>{return{...q,_i:i};});
+  if(bTopicFilter) items=items.filter(q=>q.tp===bTopicFilter);
+  if(term) items=items.filter(q=>
+    q.q.toLowerCase().includes(term)||
+    q.opts.some(o=>o.toLowerCase().includes(term))
+  );
+  document.getElementById('bancoCount').textContent=items.length+' preguntas encontradas';
+  const labels=['A','B','C','D'];
+  list.innerHTML=items.map((q,n)=>{
+    const col=TOPIC_COLORS[q.tp]||'#555';
+    const corr=q.opts[q.c]||'';
+    const optsHtml=q.opts.map((o,i)=>{
+      const isCor=i===q.c;
+      return `<div class="bq-opt${isCor?' cor':''}">
+        <span class="bq-opt-lbl">${labels[i]||i+1}.</span>
+        <span>${o}</span>
+      </div>`;
+    }).join('');
+    return `<div class="bq" style="border-left-color:${col}">
+      <div class="bq-num">#${n+1}
+        <span class="bq-topic" style="background:${col}">${q.tp}</span>
+      </div>
+      <div class="bq-text">${q.q}</div>
+      <div class="bq-opts">${optsHtml}</div>
+      <div class="bq-answer correct">
+        <span class="bq-chk">&#x2713;</span>
+        <span><strong>Respuesta correcta:</strong> ${corr}</span>
+      </div>
+    </div>`;
+  }).join('');
+  if(items.length===0)list.innerHTML='<div style="text-align:center;padding:40px;color:var(--g500);font-size:14px;">No se encontraron preguntas</div>';
+}
+
+function filterBanco(){
+  bSearchTerm=document.getElementById('searchInp').value;
+  renderBanco();
+}
+
+function setBFilter(el,topic){
+  bTopicFilter=topic;
+  document.querySelectorAll('.bfilter').forEach(b=>{
+    b.classList.remove('active');
+    b.style.background='';
+    b.style.color=b.dataset.topic?TOPIC_COLORS[b.dataset.topic]||'':'var(--navy)';
+    b.style.borderColor=b.dataset.topic?TOPIC_COLORS[b.dataset.topic]||'var(--g200)':'var(--g200)';
+  });
+  el.classList.add('active');
+  const col=topic?TOPIC_COLORS[topic]:'var(--navy)';
+  el.style.background=col; el.style.color='#fff'; el.style.borderColor=col;
+  renderBanco();
+}
+
+// ── START MODES ──
 function startMode(mode){
-  currentMode=mode; ans={}; okN=0; failN=0; sdCache={};
+  currentMode=mode;ans={};okN=0;failN=0;sdCache={};
   if(mode==='general'){
     fIdx=shuffle(QS.map((_,i)=>i));
-    document.getElementById('modelabel').textContent='&#x1F4DA; Test General ('+fIdx.length+' preguntas)';
+    document.getElementById('modelabel').textContent='&#x1F4DA; Test General ('+fIdx.length+')';
     document.getElementById('progbar').style.display='none';
-  } else if(mode==='final'){
+    document.getElementById('hbtnshuffle').style.display='';
+  }else if(mode==='final'){
     fIdx=[];
     TOPICS.forEach(t=>{
       const pool=shuffle(QS.map((_,i)=>i).filter(i=>QS[i].tp===t));
       fIdx.push(...pool.slice(0,9));
     });
     fIdx=shuffle(fIdx);
-    document.getElementById('modelabel').textContent='&#x1F3AF; Prueba Final (36 preguntas - 9 por tema)';
+    document.getElementById('modelabel').textContent='&#x1F3AF; Prueba Final (36)';
     document.getElementById('progbar').style.display='block';
+    document.getElementById('hbtnshuffle').style.display='none';
   }
-  updateStats(); buildSB(); showQView(); showQ(0);
+  updateStats();buildSB();showQView();showQ(0);
 }
 
 function startTopicMode(topic){
-  currentMode=topic; ans={}; okN=0; failN=0; sdCache={};
+  currentMode=topic;ans={};okN=0;failN=0;sdCache={};
   const pool=shuffle(QS.map((_,i)=>i).filter(i=>QS[i].tp===topic));
   fIdx=pool.slice(0,36);
-  const icon=TOPIC_ICONS[topic]||'';
-  document.getElementById('modelabel').textContent=icon+' '+topic+' (36 preguntas)';
+  document.getElementById('modelabel').textContent=TOPIC_ICONS[topic]+' '+topic+' (36)';
   document.getElementById('progbar').style.display='block';
-  updateStats(); buildSB(); showQView(); showQ(0);
+  document.getElementById('hbtnshuffle').style.display='none';
+  updateStats();buildSB();showQView();showQ(0);
 }
 
 function showQView(){
   document.getElementById('homescreen').classList.add('hidden');
+  document.getElementById('banco').classList.add('hidden');
   document.getElementById('qwrap').classList.remove('hidden');
   document.getElementById('statsbar').style.display='flex';
   document.getElementById('bottombar').style.display='flex';
-  document.getElementById('hbtnshuffle').style.display=currentMode==='general'?'':'none';
   document.getElementById('hbtnreset').style.display='';
-  document.getElementById('hbtnres').style.display='';
 }
 
-// ===== SHOW QUESTION =====
+// ── SHOW QUESTION ──
 function showQ(p){
-  if(p<0||p>=fIdx.length) return;
+  if(p<0||p>=fIdx.length)return;
   pos=p;
-  const qi=fIdx[p], q=QS[qi];
+  const qi=fIdx[p],q=QS[qi];
   prepQ(qi);
-  const sd=sdCache[qi], st=ans[qi];
-  const color=TOPIC_COLORS[q.tp]||'#0a1628';
-
-  // Source + topic badge
+  const sd=sdCache[qi],st=ans[qi];
+  const col=TOPIC_COLORS[q.tp]||'#0a1628';
   document.getElementById('qsrc').innerHTML=
     '&#x1F4CB; '+q.src+
-    '<span class="qtopicbadge" style="background:'+color+'">'+
+    '<span class="qtbadge" style="background:'+col+'">'+
     (TOPIC_ICONS[q.tp]||'')+'&nbsp;'+q.tp+'</span>';
-
   document.getElementById('qtext').textContent=q.q;
-
-  // Reset overlay
-  const ro=document.getElementById('ro');
-  ro.className='roverlay';
+  document.getElementById('ro').className='roverlay';
   document.getElementById('cbox').innerHTML='';
-
-  // Build options
   const od=document.getElementById('qopts');
   od.innerHTML='';
-  const answered=!!st;
   sd.ord.forEach((origIdx,di)=>{
     const d=document.createElement('div');
     let cls='opt';
-    if(answered){
+    if(st){
       const sel=ans[qi+'_s'];
-      if(di===sd.ci)      cls=(di===sel&&st==='ok')?'opt correct':'opt wascorrect';
-      else if(di===sel&&st==='fail') cls='opt incorrect';
-      cls+=' answered';
+      if(di===sd.ci) cls=(di===sel&&st==='ok')?'opt correct answered':'opt wascorrect answered';
+      else if(di===sel&&st==='fail') cls='opt incorrect answered';
+      else cls='opt answered';
     }
     d.className=cls;
     d.innerHTML='<div class="ocirc"></div><div class="otxt">'+q.opts[origIdx]+'</div>';
-    if(!answered) d.onclick=()=>pick(qi,di,sd);
+    if(!st) d.onclick=()=>pick(qi,di,sd);
     od.appendChild(d);
   });
-
-  // Stats + progress
   document.getElementById('scur').textContent=p+1;
   document.getElementById('stot').textContent=fIdx.length;
   if(document.getElementById('progbar').style.display!=='none'){
     const done=Object.keys(ans).filter(k=>!k.endsWith('_s')).length;
-    const pct=Math.round((done/fIdx.length)*100);
+    const pct=Math.round(done/fIdx.length*100);
     document.getElementById('progfill').style.width=pct+'%';
-    document.getElementById('proglabel').textContent=done+' de '+fIdx.length+' respondidas ('+pct+'%)';
+    document.getElementById('proglbl').textContent=done+'/'+fIdx.length+' respondidas ('+pct+'%)';
   }
-
-  // Sidebar highlight
   document.querySelectorAll('.sbi').forEach((el,i)=>el.classList.toggle('active',i===p));
   const ae=document.querySelector('.sbi.active');
-  if(ae) ae.scrollIntoView({block:'nearest'});
+  if(ae)ae.scrollIntoView({block:'nearest'});
+  document.getElementById('qpanel').scrollTop=0;
 }
 
-// ===== PICK = IMMEDIATE AUTO-CORRECTION =====
+// ── PICK = AUTO CORRECTION ──
 function pick(qi,di,sd){
-  // Already answered?
-  if(ans[qi]) return;
+  if(ans[qi])return;
   ans[qi+'_s']=di;
   const ok=(di===sd.ci);
-  if(ok){ ans[qi]='ok'; okN++; }
-  else   { ans[qi]='fail'; failN++; }
+  if(ok){ans[qi]='ok';okN++;}else{ans[qi]='fail';failN++;}
   updateStats();
-
-  // Update option styles
   const opts=document.querySelectorAll('.opt');
   sd.ord.forEach((origIdx,oi)=>{
     opts[oi].onclick=null;
     opts[oi].classList.add('answered');
-    if(oi===sd.ci)      opts[oi].className=(ok&&oi===di)?'opt correct answered':'opt wascorrect answered';
-    if(oi===di&&!ok)    opts[oi].className='opt incorrect answered';
+    if(oi===sd.ci) opts[oi].className=(ok&&oi===di)?'opt correct answered':'opt wascorrect answered';
+    if(oi===di&&!ok) opts[oi].className='opt incorrect answered';
   });
-
-  // Result overlay
   const ro=document.getElementById('ro');
   if(ok){
     ro.className='roverlay show rcorrect';
@@ -1057,7 +1239,7 @@ function pick(qi,di,sd){
     document.getElementById('rtxt').textContent='\xA1CORRECTO!';
     document.getElementById('rsub').textContent='+1 Punto';
     spawnConfetti();
-  } else {
+  }else{
     ro.className='roverlay show rincorrect';
     document.getElementById('rico').innerHTML='&#x274C;';
     document.getElementById('rtxt').className='rtxt rr';
@@ -1065,12 +1247,10 @@ function pick(qi,di,sd){
     document.getElementById('rsub').textContent='Revisa el tema';
   }
   updSBI(pos);
-
-  // Auto-advance
   setTimeout(()=>{
     ro.className='roverlay';
     document.getElementById('cbox').innerHTML='';
-    if(pos<fIdx.length-1) showQ(pos+1);
+    if(pos<fIdx.length-1)showQ(pos+1);
     else setTimeout(showResults,500);
   },1800);
 }
@@ -1079,7 +1259,7 @@ function spawnConfetti(){
   const box=document.getElementById('cbox');
   box.innerHTML='';
   const cols=['#39ff14','#00e676','#ffeb3b','#00bcd4','#e040fb','#ff9800','#76ff03','#ffffff'];
-  for(let i=0;i<60;i++){
+  for(let i=0;i<55;i++){
     const c=document.createElement('div');
     c.className='conf';
     c.style.left=Math.random()*100+'%';
@@ -1093,8 +1273,8 @@ function spawnConfetti(){
   }
 }
 
-function nextQ(){if(pos<fIdx.length-1) showQ(pos+1);}
-function prevQ(){if(pos>0) showQ(pos-1);}
+function nextQ(){if(pos<fIdx.length-1)showQ(pos+1);}
+function prevQ(){if(pos>0)showQ(pos-1);}
 
 function updateStats(){
   document.getElementById('sok').textContent=okN;
@@ -1117,62 +1297,59 @@ function buildSB(){
 }
 
 function updSBI(p){
-  const qi=fIdx[p], d=document.getElementById('sb'+p);
-  if(!d) return;
+  const qi=fIdx[p],d=document.getElementById('sb'+p);
+  if(!d)return;
   const st=ans[qi];
-  const isActive=p===pos;
-  d.className='sbi'+(isActive?' active':'')+(st==='ok'?' ok':st==='fail'?' fail':'');
+  d.className='sbi'+(p===pos?' active':'')+(st==='ok'?' ok':st==='fail'?' fail':'');
   d.querySelector('.sbico').textContent=st==='ok'?'\u2713':st==='fail'?'\u2717':'';
 }
 
 function toggleSB(){
   const s=document.getElementById('sb'),t=document.getElementById('tog');
-  s.classList.toggle('collapsed'); t.classList.toggle('collapsed');
+  s.classList.toggle('collapsed');t.classList.toggle('collapsed');
   t.innerHTML=s.classList.contains('collapsed')?'&#x25B6;':'&#x25C0;';
 }
 
 function shuffleQs(){
-  if(currentMode!=='general') return;
+  if(currentMode!=='general')return;
   fIdx=shuffle(QS.map((_,i)=>i));
-  sdCache={}; buildSB(); showQ(0);
+  sdCache={};buildSB();showQ(0);
 }
 
 function resetAll(){
-  ans={}; okN=0; failN=0; sdCache={};
+  ans={};okN=0;failN=0;sdCache={};
   updateStats();
   document.getElementById('mov').classList.remove('show');
   startMode(currentMode);
 }
 
 function showResults(){
-  const tot=fIdx.length, resp=okN+failN;
-  const pct=resp>0?Math.round((okN/resp)*100):0;
+  const tot=fIdx.length,resp=okN+failN;
+  const pct=resp>0?Math.round(okN/resp*100):0;
   const sc=document.getElementById('rscore');
   sc.textContent=pct+'%';
   sc.className='bscore '+(pct>=60?'pass':'fail');
   document.getElementById('rtitle').textContent=
     currentMode==='final'?'Resultados Prueba Final':
-    currentMode==='general'?'Resultados Test General':
-    'Resultados: '+currentMode;
+    currentMode==='general'?'Resultados Test General':'Resultados: '+currentMode;
   document.getElementById('rdet').textContent=
-    'Respondidas: '+resp+' de '+tot+' | Aciertos: '+okN+' | Fallos: '+failN;
+    'Respondidas: '+resp+'/'+tot+' | Aciertos: '+okN+' | Fallos: '+failN;
   const tRes={};
   TOPICS.forEach(t=>{tRes[t]={ok:0,fail:0,total:0};});
   fIdx.forEach(qi=>{
     const q=QS[qi],t=q.tp;
-    if(!tRes[t]) tRes[t]={ok:0,fail:0,total:0};
+    if(!tRes[t])tRes[t]={ok:0,fail:0,total:0};
     tRes[t].total++;
-    if(ans[qi]==='ok')   tRes[t].ok++;
-    else if(ans[qi]==='fail') tRes[t].fail++;
+    if(ans[qi]==='ok')tRes[t].ok++;
+    else if(ans[qi]==='fail')tRes[t].fail++;
   });
   let tHtml='';
   Object.entries(tRes).forEach(([t,r])=>{
-    if(!r.total) return;
+    if(!r.total)return;
     const pct2=r.ok+r.fail>0?Math.round(r.ok/(r.ok+r.fail)*100):0;
     const col=TOPIC_COLORS[t]||'#555';
-    const icon=TOPIC_ICONS[t]||'';
     tHtml+=`<div class="topic-row" style="background:${col}18">
-      <span style="color:${col}">${icon} ${t}</span>
+      <span style="color:${col};font-weight:600">${TOPIC_ICONS[t]} ${t}</span>
       <span style="color:${col};font-weight:700">${r.ok}/${r.total} (${pct2}%)</span>
     </div>`;
   });
@@ -1181,18 +1358,24 @@ function showResults(){
 }
 function closeR(){document.getElementById('mov').classList.remove('show');}
 
-// Keyboard shortcuts
+// Keyboard shortcuts (desktop)
 document.addEventListener('keydown',e=>{
   const inQ=!document.getElementById('qwrap').classList.contains('hidden');
-  if(!inQ) return;
+  if(!inQ)return;
   if(e.key==='ArrowRight'||e.key==='ArrowDown'){e.preventDefault();nextQ();}
   else if(e.key==='ArrowLeft'||e.key==='ArrowUp'){e.preventDefault();prevQ();}
   else if(e.key>='1'&&e.key<='4'){
     const oi=parseInt(e.key)-1;
     const qi=fIdx[pos];
-    if(!ans[qi]&&sdCache[qi]&&oi<QS[qi].opts.length){
-      pick(qi,oi,sdCache[qi]);
-    }
+    if(!ans[qi]&&sdCache[qi]&&oi<QS[qi].opts.length)pick(qi,oi,sdCache[qi]);
+  }
+});
+
+// Init filter btn styles
+document.querySelectorAll('.bfilter').forEach(b=>{
+  if(b.dataset.topic){
+    b.style.borderColor=TOPIC_COLORS[b.dataset.topic]||'var(--g200)';
+    b.style.color=TOPIC_COLORS[b.dataset.topic]||'var(--navy)';
   }
 });
 
