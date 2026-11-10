@@ -28,22 +28,26 @@ body{font-family:'Source Sans 3','Segoe UI',sans-serif;background:var(--g100);
 /* ── HEADER ── */
 .hdr{background:linear-gradient(135deg,var(--navy),var(--navy-mid) 60%,var(--navy-light));
   color:#fff;display:flex;align-items:center;justify-content:space-between;
-  padding:0 16px;height:52px;flex-shrink:0;
-  box-shadow:0 3px 12px rgba(0,0,0,.35);position:relative;z-index:20;}
-.hdr::after{content:'';position:absolute;bottom:0;left:0;right:0;height:3px;
+  padding:0 20px;height:68px;flex-shrink:0;
+  box-shadow:0 4px 16px rgba(0,0,0,.4);position:relative;z-index:20;}
+.hdr::after{content:'';position:absolute;bottom:0;left:0;right:0;height:4px;
   background:linear-gradient(90deg,var(--gold),var(--gold-b),var(--gold));}
-.hbrand{display:flex;align-items:center;gap:10px;min-width:0;}
-.htitle{font-family:'Barlow Condensed',sans-serif;font-size:18px;font-weight:700;
-  letter-spacing:1.5px;text-transform:uppercase;white-space:nowrap;}
-.hsub{font-size:10px;opacity:.65;letter-spacing:.8px;text-transform:uppercase;
-  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:220px;}
-.hctrl{display:flex;gap:4px;align-items:center;flex-shrink:0;}
-.hbtn{background:rgba(255,255,255,.1);border:1px solid rgba(201,168,76,.4);
-  color:var(--gold-b);padding:5px 10px;border-radius:6px;cursor:pointer;
-  font-size:11px;font-weight:600;letter-spacing:.3px;transition:all .2s;
+.hbrand{display:flex;align-items:center;gap:12px;min-width:0;flex:1;}
+.htitle{font-family:'Plus Jakarta Sans','Inter',sans-serif;font-size:21px;font-weight:800;
+  letter-spacing:.5px;text-transform:uppercase;white-space:nowrap;}
+.hsub{font-size:12px;opacity:.75;letter-spacing:.5px;text-transform:uppercase;
+  white-space:nowrap;}
+.hctrl{display:flex;gap:8px;align-items:center;flex-shrink:0;}
+.hbtn{background:rgba(255,255,255,.12);border:1px solid rgba(201,168,76,.5);
+  color:var(--gold-b);padding:7px 14px;border-radius:8px;cursor:pointer;
+  font-size:13px;font-weight:700;letter-spacing:.3px;transition:all .2s;
   text-transform:uppercase;white-space:nowrap;}
-.hbtn:hover{background:rgba(201,168,76,.2);}
-.hmenu{font-size:22px;cursor:pointer;padding:4px 6px;color:var(--gold-b);
+.hbtn:hover{background:rgba(201,168,76,.25);}
+.hdev{font-size:11px;color:rgba(228,195,90,.7);font-weight:600;
+  letter-spacing:.3px;white-space:nowrap;padding:5px 10px;
+  border:1px solid rgba(201,168,76,.25);border-radius:6px;
+  background:rgba(255,255,255,.05);}
+.hmenu{font-size:24px;cursor:pointer;padding:4px 8px;color:var(--gold-b);
   user-select:none;line-height:1;}
 
 /* ── STATS BAR ── */
@@ -303,8 +307,9 @@ body{font-family:'Source Sans 3','Segoe UI',sans-serif;background:var(--g100);
 @media(max-width:480px){
   .home-cards{grid-template-columns:1fr;}
   .topic-grid{grid-template-columns:1fr;}
-  .htitle{font-size:15px;letter-spacing:1px;}
+  .htitle{font-size:17px;letter-spacing:.3px;}
   .hsub{display:none;}
+  .hdev{display:none;}
   .hbtn{font-size:10px;padding:4px 8px;}
   .stat{padding:7px 10px;}
   .sv{font-size:18px;}
@@ -337,6 +342,7 @@ body{font-family:'Source Sans 3','Segoe UI',sans-serif;background:var(--g100);
   </div>
   <div class="hctrl">
     <button class="hbtn" id="hbtnhome" onclick="goHome()">&#x1F3E0; Inicio</button>
+    <span class="hdev">Developer: Stid Garc&#xE9;s</span>
     <button class="hbtn" id="hbtnshuffle" onclick="shuffleQs()" style="display:none">&#x1F500;</button>
     <button class="hbtn" id="hbtnreset"   onclick="resetAll()"  style="display:none">&#x21BB;</button>
     <span class="hmenu" onclick="toggleSB()">&#x2630;</span>
