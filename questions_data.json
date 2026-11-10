@@ -566,10 +566,10 @@
   {
     "question": "14.Se consulta que la IFR-GU-0004 para realizar la mediación policial en Colombia, la postura del funcionario policial durante la mediación debe ser:",
     "options": [
-      "indiferente y distante",
-      "insensible y rígida",
-      "pasiva y sumisa",
-      "flexible y colaboradora"
+      "Confrontativa y autoritaria",
+      "Insensible y rígida",
+      "Pasiva y sumisa",
+      "Imparcial y neutral (flexible y colaboradora para facilitar el diálogo)"
     ],
     "correct": 3,
     "source": "Test Validacion N1",
@@ -640,10 +640,10 @@
     "options": [
       "generar una solución",
       "crear las diferencias",
-      "resolver las relaciones mutuas",
+      "reestablecer las relaciones mutuas",
       "lograr situaciones complejas"
     ],
-    "correct": 0,
+    "correct": 2,
     "source": "Test Validacion N1",
     "topic": "Atencion al Ciudadano"
   },
@@ -720,7 +720,7 @@
     "topic": "Uso de la Fuerza"
   },
   {
-    "question": "Un policía realizando labores de patrullaje y se percata de la presencia de una persona que se encuentra realizando conductas fisiológicas en el espacio público, el procedimiento que realiza es la aplicación de la ley 1801 del 2016 en el artículo 160 numeral 11, el formato que debe diligenciar es el:",
+    "question": "Un policía realizando labores de patrullaje y se percata de la presencia de una persona que se encuentra realizando conductas fisiológicas en el espacio público, el procedimiento que realiza es la aplicación de la ley 1801 del 2016 en el artículo 140 numeral 11, el formato que debe diligenciar es el:",
     "options": [
       "formato de conocimiento de notificación de infracción",
       "formato de convivencia y orden de comparendo",
@@ -1231,7 +1231,7 @@
       "Establecer reglas para poder dar inicio al encuentro de mediación policial",
       "Buscar un lugar adecuado y exponer la finalidad de la mediación policia"
     ],
-    "correct": 0,
+    "correct": 2,
     "source": "Mandatorios 7",
     "topic": "Atencion al Ciudadano"
   },
@@ -1279,7 +1279,7 @@
       "Establecer la competencia",
       "Promover acuerdos preliminares"
     ],
-    "correct": 0,
+    "correct": 3,
     "source": "Mandatorios 7",
     "topic": "Procedimientos Policiales"
   },
@@ -1590,7 +1590,7 @@
   {
     "question": "Según la resolución 02903 del 23/06/2017 por la cual se expide el reglamento para el uso de la fuerza, el uso de la fuerza preventiva hace referencia a:",
     "options": [
-      "Mediación Policial – Presencia Policial",
+      "Presencia Policial – Comunicación y Disuasión (Mediación Policial)",
       "Mediación Policial – Comunicación y Disuasión",
       "Mediación Policial – Proceso Verbal",
       "Mediación Policial – Uso de la fuerza"
@@ -1951,7 +1951,7 @@
     "question": "Al realizar un registro a personas, ¿Qué aspectos que debo tener en cuenta para ejecutar el procedimiento?",
     "options": [
       "Lo capturo por no presentar la cedula de ciudadanía física",
-      "Cuando exista duda sobre la fiabilidad de la identidad",
+      "Cuando exista duda sobre la fiabilidad de la identidad o para establecer si porta un bien hurtado o elementos de riesgo (Art. 159 Ley 1801)",
       "Para establecer si la persona tiene en su poder un bien hurtado",
       "Por omitir una orden de policía"
     ],
@@ -2131,7 +2131,7 @@
     "question": "Para brindar respuesta el funcionario público de Policía a las Quejas, Reclamos, Sugerencias y Peticiones, tienen hasta:",
     "options": [
       "10 días hábiles siguientes a la recepción",
-      "15 días siguientes a la recepción",
+      "15 días hábiles siguientes a la recepción",
       "20 días hábiles siguientes a la recepción",
       "25 días hábiles partir del día de la recepción"
     ],
@@ -2195,7 +2195,7 @@
       "Sistema de garantías",
       "Portal de Servicios Internos"
     ],
-    "correct": 0,
+    "correct": 2,
     "source": "Mandatorios",
     "topic": "Procedimientos Policiales"
   },
@@ -3599,7 +3599,7 @@
   {
     "question": "¿Por medio de que aplicativo de la Policía Nacional, se puede realizar la consulta de antecedentes judiciales?",
     "options": [
-      "Portal Web de la Policía Nacional (Consulta de Antecedentes)",
+      "PSI / Portal Web de la Policía Nacional (Consulta de Antecedentes)",
       "YAMMER",
       "GEPOL",
       "SIATH"
@@ -5600,7 +5600,7 @@
       "establecer la competencia",
       "promover acuerdos preliminares"
     ],
-    "correct": 0,
+    "correct": 3,
     "source": "Validacion 4",
     "topic": "Procedimientos Policiales"
   },
@@ -5918,7 +5918,7 @@
       "Red de Apoyo y Comunicaciones",
       "Ninguna de las anteriores"
     ],
-    "correct": 0,
+    "correct": 2,
     "source": "RESPUESTAS_MANDATORIO",
     "topic": "Atencion al Ciudadano"
   },
@@ -6448,7 +6448,7 @@
       "Proporcionalidad, legalidad, limitación, necesidad y distinción.",
       "Legalidad, proporcionalidad, distinción y limitación.",
       "Dignidad, igualdad y legalidad.",
-      "Legalidad, necesidad, proporcionalidad."
+      "Legalidad, necesidad, proporcionalidad, razonabilidad."
     ],
     "correct": 3,
     "source": "RESPUESTAS_MANDATORIO",
