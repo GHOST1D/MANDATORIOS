@@ -1627,19 +1627,7 @@ goHome();
     cv.width=W; cv.height=H;
   }
 
-  /* Get the bounding box of the cards/content area relative to canvas */
-  function getContentBounds(){
-    var cvR=cv.getBoundingClientRect();
-    var title=document.querySelector('.home-title');
-    var banco=document.querySelector('.banco-btn');
-    if(!title||!banco) return null;
-    var t=title.getBoundingClientRect();
-    var b=banco.getBoundingClientRect();
-    return {
-      y: t.top - cvR.top - 10,
-      h: b.bottom - t.top + 20
-    };
-  }
+
 
   /* ── REALISTIC POLICE CAR (side view) ── */
   function drawCar(x,y){
@@ -1881,26 +1869,17 @@ goHome();
     siren++; if(siren>20){siren=0;sirenPhase^=1;}
     carX+=speed; if(carX>W+440) carX=-440;
 
-    /* particles (exhaust smoke) */
+    /* Draw car first */
+    drawCar(carX, H*0.44);
+
+    /* exhaust smoke on top of car (more realistic) */
     for(var i=particles.length-1;i>=0;i--){
       var p=particles[i];
       p.x+=p.vx; p.y+=p.vy; p.life-=0.025;
       if(p.life<=0){particles.splice(i,1);continue;}
       ctx.beginPath(); ctx.arc(p.x,p.y,p.sz*p.life,0,Math.PI*2);
-      ctx.fillStyle='rgba(100,100,100,'+(p.life*0.25)+')'; ctx.fill();
+      ctx.fillStyle='rgba(100,100,100,'+(p.life*0.22)+')'; ctx.fill();
     }
-
-    /* CLIP so car disappears behind content area */
-    var bounds=getContentBounds();
-    ctx.save();
-    if(bounds){
-      ctx.beginPath();
-      ctx.rect(0,0,W,H);
-      ctx.rect(0, bounds.y, W, bounds.h);
-      ctx.clip('evenodd');
-    }
-    drawCar(carX, H*0.44);
-    ctx.restore();
 
     frame++;
   }
