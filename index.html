@@ -66,7 +66,7 @@ body{font-family:'Source Sans 3','Segoe UI',sans-serif;background:var(--g100);
 .main{flex:1;display:flex;overflow:hidden;position:relative;}
 
 /* ── HOME SCREEN MODERNO ── */
-.homescreen{flex:1;overflow-y:auto;padding:36px 20px 48px;
+.homescreen{flex:1;overflow-y:auto;padding:36px 20px 48px;position:relative;
   background:radial-gradient(circle at top, #ffffff 0%, #eef2f6 100%);
   display:flex;flex-direction:column;align-items:center;gap:24px;}
 .homescreen.hidden{display:none;}
@@ -327,6 +327,8 @@ body{font-family:'Source Sans 3','Segoe UI',sans-serif;background:var(--g100);
   .qtext{font-size:16px;}
   .otxt{font-size:15px;}
 }
+
+.hs-content{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;gap:24px;width:100%;}
 </style>
 </head>
 <body>
@@ -334,7 +336,7 @@ body{font-family:'Source Sans 3','Segoe UI',sans-serif;background:var(--g100);
 <!-- HEADER -->
 <div class="hdr">
   <div class="hbrand">
-    <img src="skull.jpg" alt="GHOST1D" style="height:56px;width:56px;object-fit:cover;border-radius:10px;mix-blend-mode:screen;filter:brightness(1.15) saturate(1.2);flex-shrink:0;">
+    <img src="skull.jpg" alt="GHOST1D" style="height:60px;width:60px;object-fit:contain;border-radius:12px;flex-shrink:0;background:transparent;">
     <div>
       <div class="htitle">Evaluacion Integral Policial</div>
       <div class="hsub">Mediacion &bull; Mandatorios &bull; Competencias &bull; Desarrollado por <strong>GHOST1D</strong></div>
@@ -362,7 +364,9 @@ body{font-family:'Source Sans 3','Segoe UI',sans-serif;background:var(--g100);
 
   <!-- HOME -->
   <div class="homescreen" id="homescreen">
-    <div class="home-title">&#x1F6E1; Centro de Estudios Policial</div>
+  <canvas id="patrolCv" style="position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0;"></canvas>
+  <div class="hs-content">
+  <div class="home-title">&#x1F6E1; Centro de Estudios Policial</div>
     <div class="home-sub">554 preguntas &bull; Cursos mandatorios &bull; Selecciona el modo</div>
 
     <div class="home-cards">
@@ -414,7 +418,8 @@ body{font-family:'Source Sans 3','Segoe UI',sans-serif;background:var(--g100);
         <div class="banco-btn-sub">Busca cualquier pregunta con su respuesta correcta</div>
       </div>
     </button>
-  </div>
+  
+  </div></div>
 
   <!-- QUESTION WRAPPER -->
   <div class="qwrap hidden" id="qwrap">
@@ -1600,6 +1605,149 @@ document.querySelectorAll('.bfilter').forEach(b=>{
 });
 
 goHome();
+
+/* PATROL ANIMATION */
+(function(){
+  var hs=document.getElementById('homescreen');
+  if(!hs)return;
+  var cv=document.getElementById('patrolCv');
+  if(!cv){cv=document.createElement('canvas');cv.id='patrolCv';cv.style.cssText='position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0;';hs.insertBefore(cv,hs.firstChild);}
+  var ctx=cv.getContext('2d');
+  var W=0,H=0,carX=-360,speed=1.8,siren=0,sirenPhase=0,frame=0;
+  var particles=[];
+
+  function resize(){
+    W=cv.offsetWidth||hs.offsetWidth||window.innerWidth;
+    H=cv.offsetHeight||hs.offsetHeight||400;
+    cv.width=W;cv.height=H;
+  }
+
+  function rr(c,x,y,w,h,r){
+    c.beginPath();c.moveTo(x+r,y);c.lineTo(x+w-r,y);
+    c.quadraticCurveTo(x+w,y,x+w,y+r);c.lineTo(x+w,y+h-r);
+    c.quadraticCurveTo(x+w,y+h,x+w-r,y+h);c.lineTo(x+r,y+h);
+    c.quadraticCurveTo(x,y+h,x,y+h-r);c.lineTo(x,y+r);
+    c.quadraticCurveTo(x,y,x+r,y);c.closePath();
+  }
+
+  function drawCar(x,y){
+    var sc=Math.min(W/900,1.0)*1.05;
+    var cw=200*sc,ch=78*sc;
+
+    if(frame%3===0){
+      particles.push({x:x,y:y+ch*0.65+Math.random()*6-3,
+        vx:-Math.random()*1.8-0.5,vy:(Math.random()-0.5)*0.6,
+        life:1,sz:Math.random()*6+3});
+    }
+
+    var gc=ctx.createRadialGradient(x+cw*0.5,y+ch,0,x+cw*0.5,y+ch,cw*0.9);
+    var rgb=sirenPhase===0?'244,67,54':'33,150,243';
+    gc.addColorStop(0,'rgba('+rgb+',.22)');gc.addColorStop(1,'rgba('+rgb+',0)');
+    ctx.fillStyle=gc;ctx.fillRect(x-40,y-30,cw+80,ch+70);
+
+    var sg=ctx.createLinearGradient(x,y+ch*0.9,x,y+ch*1.2);
+    sg.addColorStop(0,'rgba(0,0,0,.18)');sg.addColorStop(1,'rgba(0,0,0,0)');
+    ctx.fillStyle=sg;ctx.fillRect(x+cw*0.1,y+ch*0.88,cw*0.8,ch*0.3);
+
+    ctx.fillStyle='#0d2060';rr(ctx,x,y+ch*0.28,cw,ch*0.57,10*sc);ctx.fill();
+    ctx.fillStyle='#162d7a';rr(ctx,x,y+ch*0.56,cw,ch*0.29,0);ctx.fill();
+    ctx.fillStyle='#1a2e8a';rr(ctx,x+cw*0.17,y+ch*0.03,cw*0.6,ch*0.3,8*sc);ctx.fill();
+
+    ctx.fillStyle='rgba(135,205,255,.88)';
+    var wins=[[0.19,0.06,0.15,0.22],[0.37,0.06,0.16,0.22],[0.56,0.06,0.13,0.22]];
+    for(var i=0;i<wins.length;i++){
+      var w2=wins[i];rr(ctx,x+cw*w2[0],y+ch*w2[1],cw*w2[2],ch*w2[3],3*sc);ctx.fill();
+    }
+    ctx.fillStyle='rgba(255,255,255,.18)';
+    for(var i=0;i<wins.length;i++){
+      var w2=wins[i];ctx.fillRect(x+cw*w2[0],y+ch*w2[1],cw*w2[2]*0.4,ch*w2[3]*0.3);
+    }
+
+    var sc2=sirenPhase===0?'rgba(220,50,50,.75)':'rgba(30,130,220,.75)';
+    ctx.fillStyle=sc2;ctx.fillRect(x,y+ch*0.5,cw,Math.max(2,4*sc));
+
+    ctx.strokeStyle='rgba(255,255,255,.12)';ctx.lineWidth=1;
+    ctx.beginPath();ctx.moveTo(x+cw*0.35,y+ch*0.28);ctx.lineTo(x+cw*0.35,y+ch*0.85);ctx.stroke();
+    ctx.beginPath();ctx.moveTo(x+cw*0.57,y+ch*0.28);ctx.lineTo(x+cw*0.57,y+ch*0.85);ctx.stroke();
+
+    ctx.fillStyle='#0a0a0a';rr(ctx,x+cw*0.21,y-ch*0.02,cw*0.58,ch*0.13,5*sc);ctx.fill();
+
+    var redOn=sirenPhase===0;
+    ctx.shadowBlur=redOn?30*sc:5;ctx.shadowColor='#ff1744';
+    ctx.fillStyle=redOn?'#ff1744':'#5c0000';
+    rr(ctx,x+cw*0.22,y-ch*0.01,cw*0.27,ch*0.11,3*sc);ctx.fill();
+
+    var blueOn=sirenPhase===1;
+    ctx.shadowBlur=blueOn?30*sc:5;ctx.shadowColor='#2196f3';
+    ctx.fillStyle=blueOn?'#2196f3':'#003070';
+    rr(ctx,x+cw*0.51,y-ch*0.01,cw*0.27,ch*0.11,3*sc);ctx.fill();
+    ctx.shadowBlur=0;
+
+    var wheels=[[0.17,0.86],[0.79,0.86]];
+    for(var i=0;i<wheels.length;i++){
+      var wx=wheels[i][0],wy=wheels[i][1],wr=ch*0.21;
+      ctx.fillStyle='#111';ctx.beginPath();ctx.arc(x+cw*wx,y+ch*wy,wr,0,Math.PI*2);ctx.fill();
+      ctx.strokeStyle='#333';ctx.lineWidth=Math.max(1,2*sc);ctx.stroke();
+      ctx.fillStyle='#444';ctx.beginPath();ctx.arc(x+cw*wx,y+ch*wy,wr*0.5,0,Math.PI*2);ctx.fill();
+      ctx.fillStyle='#777';ctx.beginPath();ctx.arc(x+cw*wx,y+ch*wy,wr*0.18,0,Math.PI*2);ctx.fill();
+    }
+
+    ctx.strokeStyle='rgba(255,255,255,.08)';ctx.lineWidth=Math.max(1,3*sc);
+    for(var i=0;i<wheels.length;i++){
+      ctx.beginPath();ctx.arc(x+cw*wheels[i][0],y+ch*wheels[i][1],ch*0.26,Math.PI,0);ctx.stroke();
+    }
+
+    ctx.shadowBlur=25*sc;ctx.shadowColor='rgba(255,255,160,.9)';
+    ctx.fillStyle='rgba(255,255,200,.95)';
+    ctx.fillRect(x+cw*0.9,y+ch*0.37,cw*0.08,ch*0.18);
+    ctx.shadowBlur=0;
+
+    ctx.fillStyle='#0a0a20';rr(ctx,x+cw*0.88,y+ch*0.56,cw*0.12,ch*0.22,3*sc);ctx.fill();
+    ctx.fillStyle='#0a0a20';rr(ctx,x,y+ch*0.56,cw*0.1,ch*0.22,3*sc);ctx.fill();
+
+    ctx.shadowBlur=0;
+    ctx.fillStyle='rgba(255,255,255,.92)';
+    var fs=Math.max(8,ch*0.12);
+    ctx.font='bold '+fs+'px Inter,sans-serif';
+    ctx.textAlign='center';
+    ctx.fillText('POLICIA',x+cw*0.49,y+ch*0.75);
+
+    ctx.fillStyle=sirenPhase===0?'#ffd700':'#c8a000';
+    ctx.font='bold '+(Math.max(6,ch*0.1))+'px sans-serif';
+    ctx.fillText('\u2605',x+cw*0.49,y+ch*0.46);
+  }
+
+  function loop(){
+    requestAnimationFrame(loop);
+    var hsEl=document.getElementById('homescreen');
+    if(!hsEl||hsEl.classList.contains('hidden')){ctx.clearRect(0,0,W,H);return;}
+    if(W!==cv.offsetWidth||H!==cv.offsetHeight)resize();
+    ctx.clearRect(0,0,W,H);
+
+    siren++;if(siren>18){siren=0;sirenPhase^=1;}
+    carX+=speed;if(carX>W+380)carX=-380;
+
+    for(var i=particles.length-1;i>=0;i--){
+      var p=particles[i];
+      p.x+=p.vx;p.y+=p.vy;p.life-=0.022;
+      if(p.life<=0){particles.splice(i,1);continue;}
+      ctx.beginPath();ctx.arc(p.x,p.y,p.sz*p.life,0,Math.PI*2);
+      ctx.fillStyle='rgba(90,90,90,'+(p.life*0.3)+')';ctx.fill();
+    }
+
+    drawCar(carX,H*0.42);
+    frame++;
+  }
+
+  window.addEventListener('load',function(){resize();loop();});
+  window.addEventListener('resize',function(){
+    W=cv.offsetWidth||hs.offsetWidth||window.innerWidth;
+    H=cv.offsetHeight||hs.offsetHeight||400;
+    cv.width=W;cv.height=H;
+  });
+  setTimeout(function(){resize();},300);
+})();
+
 </script>
 </body>
 </html>
