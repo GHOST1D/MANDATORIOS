@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>Evaluacion Integral Policial | 554 Preguntas</title>
-<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800&family=Source+Sans+3:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@700;800&display=swap" rel="stylesheet">
 <style>
 :root{
   --navy:#0a1628;--navy-mid:#132340;--navy-light:#1c3258;
@@ -61,46 +61,58 @@ body{font-family:'Source Sans 3','Segoe UI',sans-serif;background:var(--g100);
 /* ── MAIN CONTAINER ── */
 .main{flex:1;display:flex;overflow:hidden;position:relative;}
 
-/* ── HOME SCREEN ── */
-.homescreen{flex:1;overflow-y:auto;padding:20px 16px 32px;background:var(--g100);
-  display:flex;flex-direction:column;align-items:center;gap:20px;}
+/* ── HOME SCREEN MODERNO ── */
+.homescreen{flex:1;overflow-y:auto;padding:36px 20px 48px;
+  background:radial-gradient(circle at top, #ffffff 0%, #eef2f6 100%);
+  display:flex;flex-direction:column;align-items:center;gap:24px;}
 .homescreen.hidden{display:none;}
-.home-title{font-family:'Barlow Condensed',sans-serif;font-size:24px;font-weight:800;
-  color:var(--navy);text-align:center;letter-spacing:1px;text-transform:uppercase;}
-.home-sub{font-size:13px;color:var(--g500);text-align:center;line-height:1.5;}
-.home-cards{display:grid;grid-template-columns:1fr 1fr;gap:12px;width:100%;max-width:800px;}
-.home-card{background:#fff;border-radius:12px;padding:20px 14px;cursor:pointer;
-  transition:all .2s;border:2px solid var(--g200);text-align:center;
-  box-shadow:0 2px 8px rgba(0,0,0,.07);active-color:var(--navy);}
-.home-card:active{transform:scale(.97);}
-.home-card:hover{transform:translateY(-3px);box-shadow:0 6px 20px rgba(0,0,0,.12);border-color:var(--gold);}
-.home-card.featured{border-color:var(--gold);background:linear-gradient(135deg,#fffdf0,#fff9e6);}
-.hcard-icon{font-size:36px;margin-bottom:8px;}
-.hcard-title{font-family:'Barlow Condensed',sans-serif;font-size:17px;font-weight:800;
-  color:var(--navy);text-transform:uppercase;letter-spacing:.8px;margin-bottom:5px;}
-.hcard-desc{font-size:11px;color:var(--g500);line-height:1.4;margin-bottom:10px;}
-.hcard-badge{display:inline-block;padding:3px 10px;border-radius:16px;font-size:11px;
-  font-weight:700;background:var(--navy);color:var(--gold-b);}
+.home-title{font-family:'Plus Jakarta Sans',sans-serif;font-size:28px;font-weight:800;
+  color:var(--navy);text-align:center;letter-spacing:-0.5px;text-transform:uppercase;}
+.home-sub{font-size:14px;color:var(--g500);text-align:center;margin-top:-12px;font-weight:500;}
 
-/* TOPIC GRID 2x2 */
-.topic-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;width:100%;max-width:800px;}
-.tbtn{background:#fff;border:2px solid;border-radius:10px;padding:14px 12px;cursor:pointer;
-  transition:all .2s;display:flex;align-items:center;gap:10px;text-align:left;
-  box-shadow:0 2px 6px rgba(0,0,0,.06);}
-.tbtn:active{transform:scale(.97);}
-.tbtn-icon{font-size:24px;flex-shrink:0;}
-.tbtn-name{font-family:'Barlow Condensed',sans-serif;font-size:14px;font-weight:700;
-  text-transform:uppercase;letter-spacing:.4px;flex:1;line-height:1.2;}
-.tbtn-count{font-size:10px;color:var(--g500);font-weight:600;white-space:nowrap;}
+/* TARJETAS PRINCIPALES */
+.home-cards{display:grid;grid-template-columns:1fr 1fr;gap:18px;width:100%;max-width:780px;}
+.home-card{background:#fff;border-radius:16px;padding:26px 20px;cursor:pointer;
+  transition:all .25s cubic-bezier(.4,0,.2,1);border:1px solid rgba(10,22,40,.08);text-align:center;
+  box-shadow:0 4px 20px -2px rgba(10,22,40,.06);position:relative;overflow:hidden;}
+.home-card:hover{transform:translateY(-4px);box-shadow:0 12px 28px -4px rgba(10,22,40,.14);border-color:var(--gold);}
+.home-card.featured{background:linear-gradient(135deg, var(--navy) 0%, var(--navy-light) 100%);
+  border:none;color:#fff;box-shadow:0 10px 25px -4px rgba(10,22,40,.28);}
+.home-card.featured .hcard-title{color:#fff;}
+.home-card.featured .hcard-desc{color:rgba(255,255,255,.78);}
+.home-card.featured .hcard-badge{background:var(--gold);color:var(--navy);}
+.hcard-icon{font-size:38px;margin-bottom:12px;display:inline-block;
+  background:rgba(255,255,255,.12);padding:10px 14px;border-radius:14px;}
+.home-card:not(.featured) .hcard-icon{background:#f1f5f9;}
+.hcard-title{font-family:'Plus Jakarta Sans',sans-serif;font-size:18px;font-weight:800;
+  color:var(--navy);text-transform:uppercase;letter-spacing:.3px;margin-bottom:6px;}
+.hcard-desc{font-size:13px;color:var(--g500);line-height:1.45;margin-bottom:14px;}
+.hcard-badge{display:inline-block;padding:5px 14px;border-radius:20px;font-size:11px;
+  font-weight:700;background:var(--navy);color:var(--gold-b);letter-spacing:.4px;}
 
-/* BANCO button on home */
-.banco-btn{width:100%;max-width:800px;background:#fff;border:2px solid var(--navy);
-  border-radius:10px;padding:14px 20px;cursor:pointer;display:flex;align-items:center;
-  gap:12px;transition:all .2s;box-shadow:0 2px 6px rgba(0,0,0,.07);}
-.banco-btn:active{transform:scale(.98);}
-.banco-btn-text{font-family:'Barlow Condensed',sans-serif;font-size:16px;font-weight:700;
-  color:var(--navy);text-transform:uppercase;letter-spacing:.5px;}
-.banco-btn-sub{font-size:12px;color:var(--g500);}
+/* CUADRICULA DE TEMAS */
+.topic-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;width:100%;max-width:780px;}
+.tbtn{background:#fff;border:1px solid #e2e8f0 !important;border-left:5px solid !important;
+  border-radius:12px;padding:16px 18px;cursor:pointer;
+  transition:all .2s ease;display:flex;align-items:center;gap:14px;text-align:left;
+  box-shadow:0 2px 10px rgba(0,0,0,.04);}
+.tbtn:hover{transform:translateY(-2px);box-shadow:0 8px 20px rgba(0,0,0,.09);background:#fafbfc;}
+.tbtn-icon{font-size:24px;flex-shrink:0;background:#f8fafc;width:44px;height:44px;
+  display:flex;align-items:center;justify-content:center;border-radius:10px;}
+.tbtn-name{font-family:'Plus Jakarta Sans',sans-serif;font-size:13.5px;font-weight:700;
+  color:var(--navy) !important;text-transform:uppercase;letter-spacing:.2px;flex:1;line-height:1.3;}
+.tbtn-count{font-size:11px;color:var(--g500);font-weight:600;background:#f1f5f9;
+  padding:4px 9px;border-radius:12px;white-space:nowrap;}
+
+/* BOTON BANCO DE PREGUNTAS */
+.banco-btn{width:100%;max-width:780px;background:#fff;border:1px solid #cbd5e1;
+  border-radius:14px;padding:18px 24px;cursor:pointer;display:flex;align-items:center;
+  justify-content:space-between;gap:14px;transition:all .2s ease;
+  box-shadow:0 4px 14px rgba(0,0,0,.05);}
+.banco-btn:hover{border-color:var(--navy);box-shadow:0 8px 22px rgba(10,22,40,.1);transform:translateY(-2px);}
+.banco-btn-text{font-family:'Plus Jakarta Sans',sans-serif;font-size:16px;font-weight:800;
+  color:var(--navy);text-transform:uppercase;letter-spacing:.3px;text-align:left;}
+.banco-btn-sub{font-size:13px;color:var(--g500);text-align:left;margin-top:2px;}
 
 /* ── QUESTION WRAPPER ── */
 .qwrap{flex:1;display:flex;flex-direction:column;overflow:hidden;}
@@ -466,11 +478,12 @@ body{font-family:'Source Sans 3','Segoe UI',sans-serif;background:var(--g100);
   </div>
 
   <!-- SIDEBAR -->
-  <div class="toggle" id="tog" onclick="toggleSB()">&#x25C0;</div>
-  <div class="sidebar" id="sb">
+  <!-- SIDEBAR -->
+  <div class="toggle collapsed" id="tog" onclick="toggleSB()" style="display:none">&#x25C0;</div>
+  <div class="sidebar collapsed" id="sb">
     <div class="sbhead">
       <span>Cuestiones</span>
-      <span style="opacity:.6;font-size:11px;cursor:default">?</span>
+      <span style="cursor:pointer;font-size:14px" onclick="toggleSB()">&#x2715;</span>
     </div>
     <div class="sbbody" id="sblist"></div>
   </div>
@@ -1090,6 +1103,9 @@ function goHome(){
   document.getElementById('hbtnshuffle').style.display='none';
   document.getElementById('hbtnreset').style.display='none';
   document.getElementById('mov').classList.remove('show');
+  document.getElementById('sb').classList.add('collapsed');
+  document.getElementById('tog').classList.add('collapsed');
+  document.getElementById('tog').style.display='none';
 }
 
 // ── BANCO ──
@@ -1099,6 +1115,9 @@ function showBanco(){
   document.getElementById('banco').classList.remove('hidden');
   document.getElementById('statsbar').style.display='none';
   document.getElementById('bottombar').style.display='none';
+  document.getElementById('sb').classList.add('collapsed');
+  document.getElementById('tog').classList.add('collapsed');
+  document.getElementById('tog').style.display='none';
   bTopicFilter=''; bSearchTerm='';
   document.getElementById('searchInp').value='';
   renderBanco();
@@ -1360,6 +1379,10 @@ function showQView(){
   document.getElementById('statsbar').style.display='flex';
   document.getElementById('bottombar').style.display='flex';
   document.getElementById('hbtnreset').style.display='';
+  document.getElementById('sb').classList.add('collapsed');
+  document.getElementById('tog').classList.add('collapsed');
+  document.getElementById('tog').style.display='flex';
+  document.getElementById('tog').innerHTML='&#x25C0;';
 }
 
 // ── SHOW QUESTION ──
@@ -1495,9 +1518,10 @@ function updSBI(p){
 }
 
 function toggleSB(){
+  if(document.getElementById('qwrap').classList.contains('hidden')) return;
   const s=document.getElementById('sb'),t=document.getElementById('tog');
   s.classList.toggle('collapsed');t.classList.toggle('collapsed');
-  t.innerHTML=s.classList.contains('collapsed')?'&#x25B6;':'&#x25C0;';
+  t.innerHTML=s.classList.contains('collapsed')?'&#x25C0;':'&#x25B6;';
 }
 
 function shuffleQs(){
