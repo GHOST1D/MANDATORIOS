@@ -329,6 +329,42 @@ body{font-family:'Source Sans 3','Segoe UI',sans-serif;background:var(--g100);
 }
 
 .hs-content{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;gap:24px;width:100%;}
+
+/* ── HOME FOOTER WIDGET ── */
+.home-footer{
+  width:100%;max-width:780px;
+  display:flex;align-items:center;justify-content:space-between;
+  flex-wrap:wrap;gap:12px;
+  background:#fff;border:1px solid #e2e8f0;border-radius:14px;
+  padding:14px 22px;
+  box-shadow:0 4px 14px rgba(0,0,0,.05);
+  margin-top:4px;
+}
+.hf-visits{display:flex;align-items:center;gap:8px;font-size:13px;color:#4a5568;}
+.hf-visit-icon{font-size:18px;}
+.hf-count{font-family:'Plus Jakarta Sans',sans-serif;font-size:16px;font-weight:800;
+  color:#0a1628;min-width:40px;}
+.hf-label{font-size:11px;color:#718096;text-transform:uppercase;letter-spacing:.5px;font-weight:600;}
+
+.hf-rating{display:flex;flex-direction:column;align-items:center;gap:4px;}
+.hf-stars{display:flex;gap:4px;cursor:pointer;}
+.hf-star{font-size:26px;color:#cbd5e0;transition:color .15s,transform .15s;line-height:1;}
+.hf-star.active{color:#f6ad55;}
+.hf-star:hover,.hf-star.hover{color:#f6ad55;transform:scale(1.15);}
+.hf-star-label{font-size:11px;color:#718096;text-align:center;font-weight:600;}
+
+.hf-telegram{
+  display:flex;align-items:center;gap:8px;
+  background:#0d2b6e;color:#fff;
+  border-radius:10px;padding:9px 16px;
+  text-decoration:none;font-size:13px;font-weight:700;
+  transition:all .2s ease;white-space:nowrap;
+  font-family:'Plus Jakarta Sans',sans-serif;
+}
+.hf-telegram:hover{background:#1a3d8f;transform:translateY(-2px);
+  box-shadow:0 6px 16px rgba(13,43,110,.3);}
+.hf-telegram-icon{font-size:17px;}
+
 </style>
 </head>
 <body>
@@ -418,6 +454,35 @@ body{font-family:'Source Sans 3','Segoe UI',sans-serif;background:var(--g100);
         <div class="banco-btn-sub">Busca cualquier pregunta con su respuesta correcta</div>
       </div>
     </button>
+  <!-- FOOTER WIDGET: visitas + rating + telegram -->
+  <div class="home-footer">
+    <!-- Contador de visitas -->
+    <div class="hf-visits">
+      <span class="hf-visit-icon">&#128065;</span>
+      <div>
+        <div class="hf-count" id="visitCount">&#8230;</div>
+        <div class="hf-label">Visitas</div>
+      </div>
+    </div>
+
+    <!-- Rating estrellas -->
+    <div class="hf-rating">
+      <div class="hf-stars" id="starRow">
+        <span class="hf-star" data-v="1">&#9733;</span>
+        <span class="hf-star" data-v="2">&#9733;</span>
+        <span class="hf-star" data-v="3">&#9733;</span>
+        <span class="hf-star" data-v="4">&#9733;</span>
+        <span class="hf-star" data-v="5">&#9733;</span>
+      </div>
+      <div class="hf-star-label" id="starLabel">&#161;Val&#243;ranos!</div>
+    </div>
+
+    <!-- Soporte Telegram -->
+    <a class="hf-telegram" href="https://t.me/st1dg4r" target="_blank" rel="noopener">
+      <span class="hf-telegram-icon">&#9992;</span>
+      Soporte Telegram
+    </a>
+  </div>
   
   </div></div>
 
@@ -1891,6 +1956,93 @@ goHome();
     cv.width=W; cv.height=H;
   });
   setTimeout(function(){resize();},300);
+})();
+
+
+/* ── VISIT COUNTER + STAR RATING ── */
+(function(){
+  /* --- Visit Counter via CounterAPI --- */
+  var vcEl = document.getElementById('visitCount');
+  if(vcEl){
+    fetch('https://api.counterapi.dev/v1/mandatorios-ghost1d/visitas/up')
+      .then(function(r){return r.json();})
+      .then(function(d){
+        if(d && d.count !== undefined){
+          vcEl.textContent = Number(d.count).toLocaleString('es-CO');
+        } else { vcEl.textContent = '—'; }
+      })
+      .catch(function(){
+        /* Fallback: localStorage pseudo-counter */
+        var lv = parseInt(localStorage.getItem('_visits')||'0')+1;
+        localStorage.setItem('_visits', lv);
+        vcEl.textContent = lv.toLocaleString('es-CO')+'*';
+      });
+  }
+
+  /* --- Star Rating (localStorage) --- */
+  var stars = document.querySelectorAll('.hf-star');
+  var labelEl = document.getElementById('starLabel');
+  if(!stars.length || !labelEl) return;
+
+  var SKEY_TOTAL = 'mg_total';
+  var SKEY_VOTES = 'mg_votes';
+  var SKEY_MINE  = 'mg_mine';
+
+  function getAvg(){
+    var t = parseFloat(localStorage.getItem(SKEY_TOTAL)||'0');
+    var v = parseInt(localStorage.getItem(SKEY_VOTES)||'0');
+    return v > 0 ? (t/v) : 0;
+  }
+
+  function paintStars(val, activeClass){
+    stars.forEach(function(s){
+      s.classList.remove('active','hover');
+      if(parseFloat(s.dataset.v) <= val) s.classList.add(activeClass||'active');
+    });
+  }
+
+  function updateLabel(){
+    var mine = localStorage.getItem(SKEY_MINE);
+    var avg  = getAvg();
+    var votes = parseInt(localStorage.getItem(SKEY_VOTES)||'0');
+    if(mine){
+      labelEl.textContent = 'Tu voto: '+mine+'/5  |  Promedio: '+(avg>0?avg.toFixed(1):'—')+' ('+votes+(votes===1?' voto':' votos')+')';
+      paintStars(parseFloat(mine));
+    } else if(avg > 0){
+      labelEl.textContent = 'Promedio: '+avg.toFixed(1)+'/5 ('+votes+(votes===1?' voto':' votos')+')';
+      paintStars(avg);
+    } else {
+      labelEl.textContent = '\u00a1Val\u00f3ranos!';
+    }
+  }
+
+  /* hover effect */
+  stars.forEach(function(s){
+    s.addEventListener('mouseenter', function(){
+      var v = parseFloat(s.dataset.v);
+      stars.forEach(function(x){ x.classList.remove('hover'); if(parseFloat(x.dataset.v)<=v) x.classList.add('hover'); });
+    });
+    s.addEventListener('mouseleave', function(){
+      stars.forEach(function(x){ x.classList.remove('hover'); });
+    });
+    s.addEventListener('click', function(){
+      if(localStorage.getItem(SKEY_MINE)){
+        labelEl.textContent = 'Ya votaste \u2764 Tu voto: '+localStorage.getItem(SKEY_MINE)+'/5';
+        return;
+      }
+      var v = parseFloat(s.dataset.v);
+      var newTotal = parseFloat(localStorage.getItem(SKEY_TOTAL)||'0') + v;
+      var newVotes = parseInt(localStorage.getItem(SKEY_VOTES)||'0') + 1;
+      localStorage.setItem(SKEY_TOTAL, newTotal);
+      localStorage.setItem(SKEY_VOTES, newVotes);
+      localStorage.setItem(SKEY_MINE, v);
+      paintStars(v);
+      labelEl.textContent = '\u00a1Gracias! Votaste '+v+'/5 \u2b50';
+      setTimeout(updateLabel, 1800);
+    });
+  });
+
+  updateLabel();
 })();
 
 </script>
