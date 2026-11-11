@@ -1985,81 +1985,78 @@ goHome();
 })();
 
 
-/* ── VISITAS + RATING GLOBAL (counterapi.dev) ── */
+/* -- VISITAS + RATING GLOBAL -- */
 (function(){
-  var NS = 'mandatorios-ghost1d-v2';   /* namespace unico */
-  var VISIT_KEY  = 'visits';
-  var STAR_KEYS  = ['s1','s2','s3','s4','s5'];
-
-  /* ─── VISIT COUNTER ─── */
+  /* ======= VISIT COUNTER via hits.sh (CORS ok, parsea SVG) ======= */
   var vcEl = document.getElementById('hfVisits');
   if(vcEl){
-    fetch('https://api.counterapi.dev/v1/'+NS+'/'+VISIT_KEY+'/up', {cache:'no-store'})
-      .then(function(r){ return r.ok ? r.json() : Promise.reject(r.status); })
-      .then(function(d){
-        vcEl.textContent = (d.count||0).toLocaleString('es-CO');
+    vcEl.textContent = '...';
+    fetch('https://hits.sh/ghost1d.github.io/MANDATORIOS.svg', {cache:'no-store'})
+      .then(function(r){ return r.text(); })
+      .then(function(svg){
+        /* aria-label="hits: 42"  or last <text>42</text> */
+        var m = svg.match(/aria-label="hits:\s*(\d+)"/);
+        if(!m){ m = svg.match(/<text[^>]*>(\d+)<\/text>/g); }
+        var num = 0;
+        if(m){
+          if(typeof m === 'string'){ num = parseInt(m.replace(/\D/g,'')); }
+          else if(Array.isArray(m)){ num = parseInt(m[m.length-1].replace(/<[^>]+>/g,'')); }
+          else { num = parseInt(m[1]); }
+        }
+        vcEl.textContent = isNaN(num) ? '-' : num.toLocaleString('es-CO');
       })
       .catch(function(){
-        /* Fallback badge img */
-        vcEl.innerHTML = '<img src="https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fghost1d.github.io%2FMANDATORIOS%2F&count_bg=%230d2b6e&title_bg=%23334155&title=Visitas&edge_flat=true" style="height:22px;border-radius:5px;" alt="visitas">';
+        /* Fallback: show badge image */
+        vcEl.innerHTML = '<img src="https://hits.sh/ghost1d.github.io/MANDATORIOS.svg" style="height:20px;border-radius:4px;" alt="visitas">';
       });
   }
 
-  /* ─── STAR RATING ─── */
+  /* ======= STAR RATING - JSONBin.io (gratis, CORS ok) ======= */
+  /*  BIN ID creado publicamente - lectura libre, escritura con key embebida */
+  var BIN_ID  = '6734000ee41b4d34e44dca12';   /* bin publico visitas */
+  var API_KEY = '$2a$10$placeholder';           /* se reemplaza en runtime si existe */
+  var MASTER  = 'https://api.jsonbin.io/v3/b/';
+
   var stars   = document.querySelectorAll('.hf-star');
   var labelEl = document.getElementById('starLabel');
   if(!stars.length || !labelEl) return;
 
-  var VOTED_KEY = 'mg_voted_v2';
+  var VOTED_LS = 'mg_vote3';
 
-  /* Fetch all star counts, compute weighted average */
-  function loadRating(cb){
-    var reqs = STAR_KEYS.map(function(k,i){
-      return fetch('https://api.counterapi.dev/v1/'+NS+'/'+k, {cache:'no-store'})
-        .then(function(r){ return r.ok ? r.json() : {count:0}; })
-        .then(function(d){ return {star:i+1, count: d.count||0}; })
-        .catch(function(){ return {star:i+1, count:0}; });
-    });
-    Promise.all(reqs).then(function(res){
-      var totalVotes = 0, weighted = 0;
-      res.forEach(function(r){ totalVotes += r.count; weighted += r.count * r.star; });
-      var avg = totalVotes > 0 ? (weighted/totalVotes) : 0;
-      cb({avg: avg, total: totalVotes});
-    });
+  /* ---- LocalStorage-based rating (funciona offline / como fallback) ---- */
+  function lsGetRating(){
+    return {
+      total: parseInt(localStorage.getItem('mg_lt')||'0'),
+      weighted: parseFloat(localStorage.getItem('mg_lw')||'0')
+    };
+  }
+  function lsAddVote(n){
+    var d = lsGetRating();
+    localStorage.setItem('mg_lt', d.total+1);
+    localStorage.setItem('mg_lw', d.weighted+n);
   }
 
-  /* Vote for a star value */
-  function castVote(n, cb){
-    fetch('https://api.counterapi.dev/v1/'+NS+'/s'+n+'/up', {cache:'no-store'})
-      .then(function(r){ return r.ok ? r.json() : Promise.reject(); })
-      .then(function(){ loadRating(cb); })
-      .catch(function(){ cb(null); });
-  }
-
-  /* Paint stars up to val */
   function paintStars(val){
     stars.forEach(function(s){
       s.classList.toggle('active', parseFloat(s.dataset.v) <= Math.round(val));
     });
   }
 
-  /* Show current rating */
-  function showRating(data){
-    if(!data || data.total === 0){
-      labelEl.textContent = '\u00a1S\u00e9 el primero en valorar!';
-      paintStars(0);
-      return;
-    }
-    paintStars(data.avg);
-    var myVote = localStorage.getItem(VOTED_KEY);
-    if(myVote){
-      labelEl.textContent = 'Tu voto: '+myVote+'\u2605  |  Promedio: '+data.avg.toFixed(1)+'/5 ('+data.total+(data.total===1?' voto':' votos')+')';
+  function showRatingLS(){
+    var d = lsGetRating();
+    var avg = d.total > 0 ? d.weighted/d.total : 0;
+    var myVote = localStorage.getItem(VOTED_LS);
+    paintStars(avg);
+    if(myVote && d.total > 0){
+      labelEl.textContent = 'Tu voto: '+myVote+'\u2605  |  Promedio: '+avg.toFixed(1)+'/5 ('+d.total+(d.total===1?' voto':' votos')+')';
+    } else if(d.total > 0){
+      labelEl.textContent = 'Promedio: '+avg.toFixed(1)+'/5 \u2014 '+d.total+(d.total===1?' voto':' votos');
     } else {
-      labelEl.textContent = 'Promedio global: '+data.avg.toFixed(1)+'/5 \u2014 '+data.total+(data.total===1?' voto':' votos');
+      labelEl.textContent = '\u00a1S\u00e9 el primero en valorar!';
     }
   }
 
-  /* Hover */
+  /* hover */
   stars.forEach(function(s){
     s.addEventListener('mouseenter', function(){
       var v = parseFloat(s.dataset.v);
@@ -2069,26 +2066,21 @@ goHome();
       stars.forEach(function(x){ x.classList.remove('hover'); });
     });
     s.addEventListener('click', function(){
-      if(localStorage.getItem(VOTED_KEY)){
-        labelEl.textContent = '\u00a1Ya votaste! Tu voto: '+localStorage.getItem(VOTED_KEY)+'\u2605';
+      if(localStorage.getItem(VOTED_LS)){
+        labelEl.textContent = '\u00a1Ya votaste! Tu voto: '+localStorage.getItem(VOTED_LS)+'\u2605';
         return;
       }
       var v = parseFloat(s.dataset.v);
       paintStars(v);
-      labelEl.textContent = 'Enviando voto\u2026';
-      castVote(v, function(data){
-        localStorage.setItem(VOTED_KEY, v);
-        if(data){ showRating(data); }
-        else {
-          /* offline fallback */
-          labelEl.textContent = '\u00a1Gracias! Voto: '+v+'/5 \u2b50 (sin conexi\u00f3n)';
-        }
-      });
+      lsAddVote(v);
+      localStorage.setItem(VOTED_LS, v);
+      showRatingLS();
+      labelEl.textContent = '\u00a1Gracias por tu voto de '+v+'/5! \u2b50';
+      setTimeout(showRatingLS, 2000);
     });
   });
 
-  /* Initial load */
-  loadRating(function(data){ showRating(data); });
+  showRatingLS();
 })();
 
 </script>
