@@ -476,19 +476,17 @@ body{font-family:'Source Sans 3','Segoe UI',sans-serif;background:var(--g100);
     </button>
   <!-- FOOTER WIDGET: visitas + rating + telegram -->
   <div class="home-footer">
-    <!-- Contador de visitas (hits.seeyoufarm.com - siempre confiable) -->
+
+    <!-- VISITAS -->
     <div class="hf-visits">
       <span class="hf-visit-icon">&#128065;</span>
       <div>
-        <img src="https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fghost1d.github.io%2FMANDATORIOS%2F&count_bg=%230d2b6e&title_bg=%23475569&icon=shieldcheck.svg&icon_color=%23ffffff&title=Visitas&edge_flat=true"
-             alt="Visitas" id="visitBadge"
-             style="height:24px;border-radius:6px;vertical-align:middle;"
-             onerror="this.style.display='none';document.getElementById('visitFallback').style.display='block';">
-        <span id="visitFallback" style="display:none;font-family:'Plus Jakarta Sans',sans-serif;font-size:14px;font-weight:800;color:#0a1628;">&#8212;</span>
+        <div class="hf-count" id="hfVisits">&#8230;</div>
+        <div class="hf-label">Visitas totales</div>
       </div>
     </div>
 
-    <!-- Rating estrellas -->
+    <!-- RATING ESTRELLAS -->
     <div class="hf-rating">
       <div class="hf-stars" id="starRow">
         <span class="hf-star" data-v="1">&#9733;</span>
@@ -497,14 +495,15 @@ body{font-family:'Source Sans 3','Segoe UI',sans-serif;background:var(--g100);
         <span class="hf-star" data-v="4">&#9733;</span>
         <span class="hf-star" data-v="5">&#9733;</span>
       </div>
-      <div class="hf-star-label" id="starLabel">&#161;Val&#243;ranos!</div>
+      <div class="hf-star-label" id="starLabel">Cargando valoraci&#243;n&#8230;</div>
     </div>
 
-    <!-- Soporte Telegram -->
+    <!-- SOPORTE TELEGRAM -->
     <a class="hf-telegram" href="https://t.me/st1dg4r" target="_blank" rel="noopener">
       <span class="hf-telegram-icon">&#9992;</span>
       Soporte Telegram
     </a>
+
   </div>
   
   </div></div>
@@ -1986,74 +1985,110 @@ goHome();
 })();
 
 
-/* ── VISIT COUNTER + STAR RATING ── */
+/* ── VISITAS + RATING GLOBAL (counterapi.dev) ── */
 (function(){
-    /* Visit counter: handled by hits.seeyoufarm.com img badge */
+  var NS = 'mandatorios-ghost1d-v2';   /* namespace unico */
+  var VISIT_KEY  = 'visits';
+  var STAR_KEYS  = ['s1','s2','s3','s4','s5'];
 
-  /* --- Star Rating (localStorage) --- */
-  var stars = document.querySelectorAll('.hf-star');
+  /* ─── VISIT COUNTER ─── */
+  var vcEl = document.getElementById('hfVisits');
+  if(vcEl){
+    fetch('https://api.counterapi.dev/v1/'+NS+'/'+VISIT_KEY+'/up', {cache:'no-store'})
+      .then(function(r){ return r.ok ? r.json() : Promise.reject(r.status); })
+      .then(function(d){
+        vcEl.textContent = (d.count||0).toLocaleString('es-CO');
+      })
+      .catch(function(){
+        /* Fallback badge img */
+        vcEl.innerHTML = '<img src="https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fghost1d.github.io%2FMANDATORIOS%2F&count_bg=%230d2b6e&title_bg=%23334155&title=Visitas&edge_flat=true" style="height:22px;border-radius:5px;" alt="visitas">';
+      });
+  }
+
+  /* ─── STAR RATING ─── */
+  var stars   = document.querySelectorAll('.hf-star');
   var labelEl = document.getElementById('starLabel');
   if(!stars.length || !labelEl) return;
 
-  var SKEY_TOTAL = 'mg_total';
-  var SKEY_VOTES = 'mg_votes';
-  var SKEY_MINE  = 'mg_mine';
+  var VOTED_KEY = 'mg_voted_v2';
 
-  function getAvg(){
-    var t = parseFloat(localStorage.getItem(SKEY_TOTAL)||'0');
-    var v = parseInt(localStorage.getItem(SKEY_VOTES)||'0');
-    return v > 0 ? (t/v) : 0;
-  }
-
-  function paintStars(val, activeClass){
-    stars.forEach(function(s){
-      s.classList.remove('active','hover');
-      if(parseFloat(s.dataset.v) <= val) s.classList.add(activeClass||'active');
+  /* Fetch all star counts, compute weighted average */
+  function loadRating(cb){
+    var reqs = STAR_KEYS.map(function(k,i){
+      return fetch('https://api.counterapi.dev/v1/'+NS+'/'+k, {cache:'no-store'})
+        .then(function(r){ return r.ok ? r.json() : {count:0}; })
+        .then(function(d){ return {star:i+1, count: d.count||0}; })
+        .catch(function(){ return {star:i+1, count:0}; });
+    });
+    Promise.all(reqs).then(function(res){
+      var totalVotes = 0, weighted = 0;
+      res.forEach(function(r){ totalVotes += r.count; weighted += r.count * r.star; });
+      var avg = totalVotes > 0 ? (weighted/totalVotes) : 0;
+      cb({avg: avg, total: totalVotes});
     });
   }
 
-  function updateLabel(){
-    var mine = localStorage.getItem(SKEY_MINE);
-    var avg  = getAvg();
-    var votes = parseInt(localStorage.getItem(SKEY_VOTES)||'0');
-    if(mine){
-      labelEl.textContent = 'Tu voto: '+mine+'/5  |  Promedio: '+(avg>0?avg.toFixed(1):'—')+' ('+votes+(votes===1?' voto':' votos')+')';
-      paintStars(parseFloat(mine));
-    } else if(avg > 0){
-      labelEl.textContent = 'Promedio: '+avg.toFixed(1)+'/5 ('+votes+(votes===1?' voto':' votos')+')';
-      paintStars(avg);
+  /* Vote for a star value */
+  function castVote(n, cb){
+    fetch('https://api.counterapi.dev/v1/'+NS+'/s'+n+'/up', {cache:'no-store'})
+      .then(function(r){ return r.ok ? r.json() : Promise.reject(); })
+      .then(function(){ loadRating(cb); })
+      .catch(function(){ cb(null); });
+  }
+
+  /* Paint stars up to val */
+  function paintStars(val){
+    stars.forEach(function(s){
+      s.classList.toggle('active', parseFloat(s.dataset.v) <= Math.round(val));
+    });
+  }
+
+  /* Show current rating */
+  function showRating(data){
+    if(!data || data.total === 0){
+      labelEl.textContent = '\u00a1S\u00e9 el primero en valorar!';
+      paintStars(0);
+      return;
+    }
+    paintStars(data.avg);
+    var myVote = localStorage.getItem(VOTED_KEY);
+    if(myVote){
+      labelEl.textContent = 'Tu voto: '+myVote+'\u2605  |  Promedio: '+data.avg.toFixed(1)+'/5 ('+data.total+(data.total===1?' voto':' votos')+')';
     } else {
-      labelEl.textContent = '\u00a1Val\u00f3ranos!';
+      labelEl.textContent = 'Promedio global: '+data.avg.toFixed(1)+'/5 \u2014 '+data.total+(data.total===1?' voto':' votos');
     }
   }
 
-  /* hover effect */
+  /* Hover */
   stars.forEach(function(s){
     s.addEventListener('mouseenter', function(){
       var v = parseFloat(s.dataset.v);
-      stars.forEach(function(x){ x.classList.remove('hover'); if(parseFloat(x.dataset.v)<=v) x.classList.add('hover'); });
+      stars.forEach(function(x){ x.classList.toggle('hover', parseFloat(x.dataset.v)<=v); });
     });
     s.addEventListener('mouseleave', function(){
       stars.forEach(function(x){ x.classList.remove('hover'); });
     });
     s.addEventListener('click', function(){
-      if(localStorage.getItem(SKEY_MINE)){
-        labelEl.textContent = 'Ya votaste \u2764 Tu voto: '+localStorage.getItem(SKEY_MINE)+'/5';
+      if(localStorage.getItem(VOTED_KEY)){
+        labelEl.textContent = '\u00a1Ya votaste! Tu voto: '+localStorage.getItem(VOTED_KEY)+'\u2605';
         return;
       }
       var v = parseFloat(s.dataset.v);
-      var newTotal = parseFloat(localStorage.getItem(SKEY_TOTAL)||'0') + v;
-      var newVotes = parseInt(localStorage.getItem(SKEY_VOTES)||'0') + 1;
-      localStorage.setItem(SKEY_TOTAL, newTotal);
-      localStorage.setItem(SKEY_VOTES, newVotes);
-      localStorage.setItem(SKEY_MINE, v);
       paintStars(v);
-      labelEl.textContent = '\u00a1Gracias! Votaste '+v+'/5 \u2b50';
-      setTimeout(updateLabel, 1800);
+      labelEl.textContent = 'Enviando voto\u2026';
+      castVote(v, function(data){
+        localStorage.setItem(VOTED_KEY, v);
+        if(data){ showRating(data); }
+        else {
+          /* offline fallback */
+          labelEl.textContent = '\u00a1Gracias! Voto: '+v+'/5 \u2b50 (sin conexi\u00f3n)';
+        }
+      });
     });
   });
 
-  updateLabel();
+  /* Initial load */
+  loadRating(function(data){ showRating(data); });
 })();
 
 </script>
