@@ -4043,10 +4043,10 @@
   {
     "question": "¿la mediación policial es exclusiva del personal uniformado de la policía nacional?",
     "options": [
-      "verdadero",
-      "falso"
+      "Verdadero",
+      "Falso"
     ],
-    "correct": 1,
+    "correct": 0,
     "source": "Nivelacion Mandatorios",
     "topic": "Atencion al Ciudadano"
   },
@@ -4446,7 +4446,7 @@
       "Proporcionalidad, legalidad, limitación, necesidad y distinción",
       "Legalidad, proporcionalidad, distinción y limitación",
       "Dignidad, igualdad y legalidad",
-      "Legalidad, necesidad, proporcionalidad, razonabilidad"
+      "Legalidad, necesidad, proporcionalidad"
     ],
     "correct": 3,
     "source": "Nivelacion Mandatorios",
@@ -5783,12 +5783,12 @@
     "topic": "Derechos Humanos"
   },
   {
-    "question": "La Ley 1257 de 2008 (y marco normativo contra VBG) / Ley 1336 de 2009 hace referencia a:",
+    "question": "La Ley 1336 de 2009 hace referencia a:",
     "options": [
-      "Por la cual se dictan normas de sensibilización, prevención y sanción de formas de violencia y discriminación contra las mujeres (Ley 1257/2008)",
-      "Prevención y atención de la violencia sexual en niños, niñas y adolescentes",
-      "Por la cual se adiciona y robustece la Ley 679 de 2001, de lucha contra la explotación, la pornografía y el turismo sexual con niños, niñas y adolescentes (Ley 1336/2009)",
-      "Medidas para garantizar el acceso a la justicia de las víctimas de violencia sexual"
+      "Por la cual se dictan normas de sensibilización, prevención y sanción de las formas de violencia y discriminación contra las mujeres.",
+      "Prevención y atención de la violencia sexual en niños, niñas y adolescentes.",
+      "Explotación sexual contra niños, niñas y adolescentes",
+      "Medidas para garantizar el acceso a la justicia de las víctimas de violencia sexual."
     ],
     "correct": 2,
     "source": "Repositorio Mandatorios",
@@ -6448,7 +6448,7 @@
       "Proporcionalidad, legalidad, limitación, necesidad y distinción.",
       "Legalidad, proporcionalidad, distinción y limitación.",
       "Dignidad, igualdad y legalidad.",
-      "Legalidad, necesidad, proporcionalidad, razonabilidad."
+      "Legalidad, necesidad, proporcionalidad"
     ],
     "correct": 3,
     "source": "RESPUESTAS_MANDATORIO",
@@ -6477,5 +6477,29 @@
     "correct": 2,
     "source": "RESPUESTAS_MANDATORIO",
     "topic": "Uso de la Fuerza"
+  },
+  {
+    "question": "Según el artículo 7 obligaciones de la Resolución número 3372 del 26 de octubre de 2009, el personal de la Policía Nacional durante el uso del uniforme deberá:",
+    "options": [
+      "El largo de la falda para el uniforme del personal femenino deberá cubrir la rodilla",
+      "El largo de la falda para el uniforme del personal femenino deberá estar por encima de la rodilla.",
+      "El largo de la falda para el uniforme del personal femenino deberá estar 5 cm por encima de la rodilla.",
+      "El largo de la falda para el uniforme del personal femenino estará a potestad de la uniformada."
+    ],
+    "correct": 0,
+    "source": "Repositorio Mandatorios",
+    "topic": "Procedimientos Policiales"
+  },
+  {
+    "question": "En la RUTA 1: en el momento nro. 3 cuando la víctima busca ayuda directamente en la policía nacional lo primero que debe realizar el funcionario de policía es?",
+    "options": [
+      "Si la víctima refiere que convive con el victimario y esto representa un riesgo, el funcionario de policía deberá informar inmediatamente esta condición a la autoridad competente (Fiscales, Comisarías de Familia, Jueces o Juez Promiscuo Municipal)",
+      "Cuando el policía conoce el caso le debe informar a la posible víctima cuáles son los mecanismos de atención a los que tiene derecho.",
+      "En caso de presentarse algún tipo de violencia contra la víctima garantice la protección de su integridad.",
+      "Ninguna de las anteriores."
+    ],
+    "correct": 0,
+    "source": "Repositorio Mandatorios",
+    "topic": "Procedimientos Policiales"
   }
 ]
