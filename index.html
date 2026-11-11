@@ -364,6 +364,7 @@ body{font-family:'Source Sans 3','Segoe UI',sans-serif;background:var(--g100);
 .hf-count{font-family:'Plus Jakarta Sans',sans-serif;font-size:16px;font-weight:800;
   color:#0a1628;min-width:40px;}
 .hf-label{font-size:11px;color:#718096;text-transform:uppercase;letter-spacing:.5px;font-weight:600;}
+#visitBadge{image-rendering:auto;max-width:160px;}
 
 .hf-rating{display:flex;flex-direction:column;align-items:center;gap:4px;}
 .hf-stars{display:flex;gap:4px;cursor:pointer;}
@@ -475,12 +476,15 @@ body{font-family:'Source Sans 3','Segoe UI',sans-serif;background:var(--g100);
     </button>
   <!-- FOOTER WIDGET: visitas + rating + telegram -->
   <div class="home-footer">
-    <!-- Contador de visitas -->
+    <!-- Contador de visitas (hits.seeyoufarm.com - siempre confiable) -->
     <div class="hf-visits">
       <span class="hf-visit-icon">&#128065;</span>
       <div>
-        <div class="hf-count" id="visitCount">&#8230;</div>
-        <div class="hf-label">Visitas</div>
+        <img src="https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fghost1d.github.io%2FMANDATORIOS%2F&count_bg=%230d2b6e&title_bg=%23475569&icon=shieldcheck.svg&icon_color=%23ffffff&title=Visitas&edge_flat=true"
+             alt="Visitas" id="visitBadge"
+             style="height:24px;border-radius:6px;vertical-align:middle;"
+             onerror="this.style.display='none';document.getElementById('visitFallback').style.display='block';">
+        <span id="visitFallback" style="display:none;font-family:'Plus Jakarta Sans',sans-serif;font-size:14px;font-weight:800;color:#0a1628;">&#8212;</span>
       </div>
     </div>
 
@@ -1984,23 +1988,7 @@ goHome();
 
 /* ── VISIT COUNTER + STAR RATING ── */
 (function(){
-  /* --- Visit Counter via CounterAPI --- */
-  var vcEl = document.getElementById('visitCount');
-  if(vcEl){
-    fetch('https://api.counterapi.dev/v1/mandatorios-ghost1d/visitas/up')
-      .then(function(r){return r.json();})
-      .then(function(d){
-        if(d && d.count !== undefined){
-          vcEl.textContent = Number(d.count).toLocaleString('es-CO');
-        } else { vcEl.textContent = '—'; }
-      })
-      .catch(function(){
-        /* Fallback: localStorage pseudo-counter */
-        var lv = parseInt(localStorage.getItem('_visits')||'0')+1;
-        localStorage.setItem('_visits', lv);
-        vcEl.textContent = lv.toLocaleString('es-CO')+'*';
-      });
-  }
+    /* Visit counter: handled by hits.seeyoufarm.com img badge */
 
   /* --- Star Rating (localStorage) --- */
   var stars = document.querySelectorAll('.hf-star');
